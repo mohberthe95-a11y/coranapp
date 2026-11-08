@@ -489,7 +489,43 @@
         </div>
     </div>
 
-    
+    <!-- SCRIPT DE GESTION DU PROFIL ET DU BOUTON CONTINUER -->
+    <script>
+        function enregistrerProfil() {
+            const prenom = document.getElementById('userPrenom').value.trim();
+            const nom = document.getElementById('userNom').value.trim();
+
+            if (!prenom) {
+                alert("S'il te plaît, entre ton prénom !");
+                return;
+            }
+
+            localStorage.setItem('coranAppUserPrenom', prenom);
+            localStorage.setItem('coranAppUserNom', nom);
+
+            const dashPrenom = document.getElementById('dashUserPrenom');
+            if (dashPrenom) {
+                dashPrenom.textContent = prenom;
+            }
+
+            const modal = document.getElementById('onboardingModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedPrenom = localStorage.getItem('coranAppUserPrenom');
+            if (savedPrenom) {
+                const dashPrenom = document.getElementById('dashUserPrenom');
+                if (dashPrenom) dashPrenom.textContent = savedPrenom;
+                
+                const modal = document.getElementById('onboardingModal');
+                if (modal) modal.style.display = 'none';
+            }
+        });
+    </script>
+
     <script type="module" src="script.js"></script>
 </body>
 

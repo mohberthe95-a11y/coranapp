@@ -98,17 +98,17 @@
 
         .bismillah-header { font-size: 1.5rem; color: var(--primary-dark); margin-bottom: 10px; font-weight: 700; }
         .onboarding-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
-        .onboarding-subtitle { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 25px; line-height: 1.4; }
+        .onboarding-subtitle { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.4; }
 
         .form-group { text-align: left; margin-bottom: 15px; }
         .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--text-main); }
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%; padding: 12px 14px; border-radius: 12px;
             border: 1px solid var(--border-color); background: var(--bg-main);
             color: var(--text-main); font-size: 0.95rem; box-sizing: border-box; outline: none;
             transition: all 0.2s ease;
         }
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus {
             border-color: var(--primary-accent);
             box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
         }
@@ -275,12 +275,12 @@
 
     <div class="app-wrapper">
 
-        <!-- ÉCRAN D'ACCUEIL / ONBOARDING -->
+        <!-- ÉCRAN D'ACCUEIL / ONBOARDING AVEC CHOIX DU NIVEAU -->
         <div id="onboardingModal" class="onboarding-overlay">
             <div class="onboarding-card">
                 <div class="bismillah-header">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
                 <div class="onboarding-title">Bienvenue ! 👋</div>
-                <div class="onboarding-subtitle">Commence par te présenter pour personnaliser ton parcours d'apprentissage du Coran.</div>
+                <div class="onboarding-subtitle">Entre ton nom et choisis ton niveau pour personnaliser ton parcours.</div>
 
                 <div class="form-group">
                     <label>Prénom *</label>
@@ -292,7 +292,16 @@
                     <input type="text" id="userNom" placeholder="Ex: Berthé">
                 </div>
 
-                <button class="btn-continue" onclick="enregistrerProfil()">Continuer ➔</button>
+                <div class="form-group">
+                    <label>Niveau d'apprentissage *</label>
+                    <select id="userNiveau">
+                        <option value="debutant">🌱 Débutant</option>
+                        <option value="moyen">🌿 Moyen</option>
+                        <option value="professionnel">🌳 Professionnel</option>
+                    </select>
+                </div>
+
+                <button class="btn-continue" onclick="enregistrerProfil()">Commencer ➔</button>
             </div>
         </div>
 
@@ -303,7 +312,7 @@
                 <button id="themeToggleBtn" class="control-btn" onclick="basculerTheme()">🌙 Sombre</button>
             </div>
             <h2 style="margin: 0; font-size: 1.4rem;">Salam, <span id="dashUserPrenom">Apprenant</span> 👋</h2>
-            <p style="margin: 5px 0 0 0; font-size: 0.88rem; opacity: 0.9;">Apprends l'arabe coranique étape par étape</p>
+            <p style="margin: 5px 0 0 0; font-size: 0.88rem; opacity: 0.9;">Niveau : <strong id="dashUserNiveau" style="color: #fde68a; text-transform: uppercase;">Débutant</strong></p>
         </header>
 
         <main class="dashboard-container">
@@ -315,7 +324,7 @@
                 <p style="margin: 0; font-size: 0.82rem; color: #cbd5e1;">Débloque tout le programme et l'audio de ton professeur.</p>
                 
                 <ul class="premium-list">
-                    <li>Les 10 leçons complètes de Tajweed</li>
+                    <li>Les leçons complètes de Tajweed</li>
                     <li>Vrais audios MP3 enregistrés par le professeur</li>
                     <li>Instructions de position de la bouche pour chaque son</li>
                     <li>Grand Test de révision finale</li>
@@ -368,56 +377,14 @@
                 </div>
             </div>
 
-            <!-- SECTION DES LEÇONS -->
+            <!-- SECTION DES LEÇONS (CHANGERA SELON LE NIVEAU) -->
             <div class="section-header">
                 <h3 class="section-title">Leçons de Tajweed</h3>
-                <span id="statutLecons" style="font-size: 0.8rem; color: var(--primary-accent); font-weight: 600;">2 Gratuites / 29</span>
+                <span id="statutLecons" style="font-size: 0.8rem; color: var(--primary-accent); font-weight: 600;">Programme adapté</span>
             </div>
 
-            <div class="leçons-list">
-                <!-- Leçon 1 -->
-                <div class="leçon-card" onclick="ouvrirLecon(1, 'L\'Alphabet Arabe & Les Harakat', [
-                    {arabe: 'أَ', phonetique: 'Alif (A)', conseil: 'Ouvrir la bouche, son du fond de la gorge', audio: 'audio/alif.mp3'},
-                    {arabe: 'بَ', phonetique: 'Ba (B)', conseil: 'Coller les deux lèvres fermement', audio: 'audio/ba.mp3'},
-                    {arabe: 'تَ', phonetique: 'Ta (T)', conseil: 'Toucher le bout de la langue contre les incisives', audio: 'audio/ta.mp3'}
-                ])">
-                    <div class="leçon-info">
-                        <div class="leçon-num">1</div>
-                        <div>
-                            <h4 class="leçon-titre">L'Alphabet Arabe & Les Harakat</h4>
-                            <p class="leçon-sub">Prononciation de base et voyelles courtes</p>
-                        </div>
-                    </div>
-                    <span class="badge-gratuit">Gratuit</span>
-                </div>
-
-                <!-- Leçon 2 -->
-                <div class="leçon-card" onclick="ouvrirLecon(2, 'Le Tanween (تنوين)', [
-                    {arabe: 'أً', phonetique: 'AN', conseil: 'Double fatha, résonance nasale', audio: 'audio/an.mp3'},
-                    {arabe: 'أً', phonetique: 'IN', conseil: 'Double kasra sous la lettre', audio: 'audio/in.mp3'},
-                    {arabe: 'أً', phonetique: 'OUN', conseil: 'Arrondir les lèvres', audio: 'audio/oun.mp3'}
-                ])">
-                    <div class="leçon-info">
-                        <div class="leçon-num">2</div>
-                        <div>
-                            <h4 class="leçon-titre">Le Tanween (Double voyelle)</h4>
-                            <p class="leçon-sub">Les sons An, In, Oun à la fin des mots</p>
-                        </div>
-                    </div>
-                    <span class="badge-gratuit">Gratuit</span>
-                </div>
-
-                <!-- Leçon 3 -->
-                <div class="leçon-card locked" onclick="verifierAccesLecon(3, 'Règles du Noon Sakinah')">
-                    <div class="leçon-info">
-                        <div class="leçon-num">3</div>
-                        <div>
-                            <h4 class="leçon-titre">Règles du Noon Sakinah (الإظهار)</h4>
-                            <p class="leçon-sub">L'Izhar : la clarification du son N</p>
-                        </div>
-                    </div>
-                    <span class="badge-lock">🔒</span>
-                </div>
+            <div id="leconsContainer" class="leçons-list">
+                <!-- Les leçons s'injecteront dynamiquement ici selon le niveau -->
             </div>
 
             <!-- CARTE PARTAGE SADAQA JARIYA -->
@@ -459,7 +426,7 @@
         </div>
     </div>
 
-    <!-- MODALE QUIZ (ÉTAPE 3) -->
+    <!-- MODALE QUIZ -->
     <div id="quizModal" class="quiz-modal-overlay">
         <div class="quiz-modal-card">
             <button class="btn-close-modal" onclick="fermerQuiz()">✕</button>
@@ -489,11 +456,52 @@
         </div>
     </div>
 
-    <!-- SCRIPT DE GESTION DU PROFIL ET DU BOUTON CONTINUER -->
+    <!-- SCRIPT DE GESTION DES NIVEAUX ET DU PROFIL -->
     <script>
+        // Programmes de leçons par niveau
+        const programmesLecons = {
+            debutant: [
+                { num: 1, titre: "L'Alphabet Arabe & Les Harakat", sub: "Prononciation de base et voyelles courtes", statut: "Gratuit", locked: false },
+                { num: 2, titre: "Le Tanween (Double voyelle)", sub: "Les sons An, In, Oun à la fin des mots", statut: "Gratuit", locked: false },
+                { num: 3, titre: "Règles du Noon Sakinah", sub: "L'Izhar : la clarification du son N", statut: "🔒", locked: true }
+            ],
+            moyen: [
+                { num: 1, titre: "Le Madd Tabii (Prolongation naturelle)", sub: "Allonger les voyelles de 2 temps", statut: "Gratuit", locked: false },
+                { num: 2, titre: "Qalqalah (L'écho des lettres)", sub: "Prononciation des lettres Qof, Ta, Ba, Jim, Dal", statut: "Gratuit", locked: false },
+                { num: 3, titre: "Règles du Meem Sakinah", sub: "Idgham, Ikhfa shafawi et Izhar shafawi", statut: "🔒", locked: true }
+            ],
+            professionnel: [
+                { num: 1, titre: "Les Makharij al-Huruf (Points de sortie)", sub: "Étude approfondie de la gorge, langue et lèvres", statut: "Gratuit", locked: false },
+                { num: 2, titre: "Ahkam al-Mad al-Far'i", sub: "Madd Muttasil, Munfasil et Lazim", statut: "Gratuit", locked: false },
+                { num: 3, titre: "Les arrêts (Waqf) et reprises (Ibtida)", sub: "Maîtriser les pauses obligatoires et permises", statut: "🔒", locked: true }
+            ]
+        };
+
+        function chargerLecons(niveau) {
+            const container = document.getElementById('leconsContainer');
+            const elementNiveau = document.getElementById('dashUserNiveau');
+            if (elementNiveau) elementNiveau.textContent = niveau;
+
+            const lecons = programmesLecons[niveau] || programmesLecons.debutant;
+            
+            container.innerHTML = lecons.map(l => `
+                <div class="leçon-card ${l.locked ? 'locked' : ''}" onclick="${l.locked ? `verifierAccesLecon(${l.num}, '${l.titre}')` : `ouvrirLecon(${l.num}, '${l.titre}', [])`}">
+                    <div class="leçon-info">
+                        <div class="leçon-num">${l.num}</div>
+                        <div>
+                            <h4 class="leçon-titre">${l.titre}</h4>
+                            <p class="leçon-sub">${l.sub}</p>
+                        </div>
+                    </div>
+                    <span class="${l.locked ? 'badge-lock' : 'badge-gratuit'}">${l.statut}</span>
+                </div>
+            `).join('');
+        }
+
         function enregistrerProfil() {
             const prenom = document.getElementById('userPrenom').value.trim();
             const nom = document.getElementById('userNom').value.trim();
+            const niveau = document.getElementById('userNiveau').value;
 
             if (!prenom) {
                 alert("S'il te plaît, entre ton prénom !");
@@ -502,26 +510,25 @@
 
             localStorage.setItem('coranAppUserPrenom', prenom);
             localStorage.setItem('coranAppUserNom', nom);
+            localStorage.setItem('coranAppUserNiveau', niveau);
 
-            const dashPrenom = document.getElementById('dashUserPrenom');
-            if (dashPrenom) {
-                dashPrenom.textContent = prenom;
-            }
+            document.getElementById('dashUserPrenom').textContent = prenom;
+            document.getElementById('onboardingModal').style.display = 'none';
 
-            const modal = document.getElementById('onboardingModal');
-            if (modal) {
-                modal.style.display = 'none';
-            }
+            chargerLecons(niveau);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             const savedPrenom = localStorage.getItem('coranAppUserPrenom');
+            const savedNiveau = localStorage.getItem('coranAppUserNiveau') || 'debutant';
+
             if (savedPrenom) {
-                const dashPrenom = document.getElementById('dashUserPrenom');
-                if (dashPrenom) dashPrenom.textContent = savedPrenom;
-                
-                const modal = document.getElementById('onboardingModal');
-                if (modal) modal.style.display = 'none';
+                document.getElementById('dashUserPrenom').textContent = savedPrenom;
+                document.getElementById('onboardingModal').style.display = 'none';
+                document.getElementById('userNiveau').value = savedNiveau;
+                chargerLecons(savedNiveau);
+            } else {
+                chargerLecons('debutant');
             }
         });
     </script>

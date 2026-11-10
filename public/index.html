@@ -1,507 +1,85 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Apprendre le Coran - LE VERIDIQUE A-Z</title>
-    
     <style>
         :root {
-            --primary-dark: #064e3b;     /* Vert émeraude profond spirituel */
-            --primary-accent: #059669;   /* Vert vif moderne */
-            --gold-accent: #d97706;      /* Doré spirituel */
-            --gold-light: #fef3c7;
-            --bg-main: #f8fafc;          /* Fond clair épuré */
+            --primary-dark: #064e3b;
+            --primary-accent: #059669;
+            --gold-accent: #d97706;
+            --bg-main: #f8fafc;
             --card-bg: #ffffff;
-            --card-inner-bg: #edf2f7;
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border-color: #cbd5e1;
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
             --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
-
-        /* Thème Sombre */
-        [data-theme="dark"] {
-            --primary-dark: #10b981;
-            --primary-accent: #34d399;
-            --gold-accent: #fbbf24;
-            --gold-light: rgba(251, 191, 36, 0.15);
-            --bg-main: #060911;
-            --card-bg: #0f172a;
-            --card-inner-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.5);
-        }
-
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-main);
+            background-color: var(--primary-dark);
             color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .app-wrapper {
-            width: 100%;
-            max-width: 480px;
-            background-color: var(--bg-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            box-shadow: 0 0 30px rgba(0,0,0,0.08);
-            padding-bottom: 40px;
-            transition: background-color 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes popIn {
-            from { opacity: 0; transform: scale(0.92); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Modale d'accueil (Onboarding) */
-        .onboarding-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(6, 78, 59, 0.95);
-            backdrop-filter: blur(12px);
-            z-index: 10000;
+            margin: 0; padding: 0;
             display: flex; justify-content: center; align-items: center;
-            padding: 20px; box-sizing: border-box;
-            animation: fadeIn 0.4s ease;
+            min-height: 100vh;
         }
-
         .onboarding-card {
             background: var(--card-bg);
-            border-radius: 24px;
-            padding: 30px 25px;
-            width: 100%; max-width: 380px;
-            text-align: center;
+            border-radius: 24px; padding: 30px 25px;
+            width: 90%; max-width: 380px; text-align: center;
             box-shadow: var(--shadow-lg);
             border: 1px solid rgba(217, 119, 6, 0.3);
-            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
         .bismillah-header { font-size: 1.5rem; color: var(--primary-dark); margin-bottom: 10px; font-weight: 700; }
-        .onboarding-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text-main); }
+        .onboarding-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; }
         .onboarding-subtitle { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.4; }
-
         .form-group { text-align: left; margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; color: var(--text-main); }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
         .form-group input, .form-group select {
             width: 100%; padding: 12px 14px; border-radius: 12px;
             border: 1px solid var(--border-color); background: var(--bg-main);
             color: var(--text-main); font-size: 0.95rem; box-sizing: border-box; outline: none;
-            transition: all 0.2s ease;
         }
-        .form-group input:focus, .form-group select:focus {
-            border-color: var(--primary-accent);
-            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
-        }
-
         .btn-continue {
             width: 100%; padding: 14px;
             background: linear-gradient(135deg, #064e3b, #059669);
             color: white; border: none; border-radius: 12px;
             font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 10px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
         }
-        .btn-continue:active { transform: scale(0.97); }
-
-        /* Dashboard Header */
-        .header-dash {
-            padding: 24px 20px 32px 20px;
-            background: linear-gradient(135deg, #064e3b, #065f46);
-            color: white; border-bottom-left-radius: 28px; border-bottom-right-radius: 28px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .control-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white; padding: 6px 12px; border-radius: 20px;
-            cursor: pointer; font-size: 0.78rem; font-weight: 600;
-            backdrop-filter: blur(5px); transition: all 0.2s ease;
-        }
-        .control-btn:hover { background: rgba(255, 255, 255, 0.25); }
-
-        .dashboard-container { padding: 0 20px; margin-top: -20px; animation: fadeIn 0.4s ease; }
-
-        /* Grille des fonctionnalités */
-        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
-        .feature-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer;
-            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: var(--shadow-sm);
-        }
-        .feature-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--gold-accent);
-            box-shadow: var(--shadow-lg);
-        }
-        .feature-icon {
-            font-size: 1.5rem; width: 42px; height: 42px; border-radius: 14px;
-            background: var(--gold-light); display: flex; align-items: center; justify-content: center;
-        }
-        .feature-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
-
-        /* Carte Ayah du jour */
-        .ayah-card {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white; border-radius: 22px; padding: 22px; margin-bottom: 25px;
-            border: 1px solid rgba(217, 119, 6, 0.35); box-shadow: var(--shadow-lg);
-        }
-        .ayah-arabic { font-family: serif; font-size: 1.4rem; line-height: 2.2; text-align: right; margin: 15px 0; color: #fef3c7; }
-        .ayah-translation { font-size: 0.88rem; color: #cbd5e1; line-height: 1.5; font-style: italic; }
-        .ayah-actions { display: flex; gap: 10px; margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .btn-ayah-action {
-            background: rgba(255,255,255,0.1); color: white; border: none; padding: 8px 14px;
-            border-radius: 10px; font-size: 0.8rem; cursor: pointer; transition: background 0.2s ease;
-        }
-        .btn-ayah-action:hover { background: rgba(255,255,255,0.2); }
-
-        /* Offre Premium Banner */
-        .premium-banner {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border: 2px solid var(--gold-accent);
-            border-radius: 22px; padding: 22px; color: white; margin-bottom: 25px; margin-top: 15px;
-            box-shadow: 0 10px 30px rgba(217, 119, 6, 0.2); position: relative; overflow: hidden;
-        }
-        .premium-badge {
-            background: var(--gold-accent); color: white; font-size: 0.72rem;
-            font-weight: 700; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 10px;
-        }
-        .premium-list { list-style: none; padding: 0; margin: 15px 0; font-size: 0.85rem; color: #cbd5e1; display: flex; flex-direction: column; gap: 8px; }
-        .premium-list li::before { content: "✓ "; color: var(--gold-accent); font-weight: bold; }
-        .btn-premium {
-            width: auto; padding: 10px 22px; background: linear-gradient(135deg, #d97706, #b45309);
-            color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 0.95rem; cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-        .btn-premium:hover { transform: scale(1.03); }
-
-        /* Liste des leçons */
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .section-title { font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin: 0; }
-        
-        .leçons-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
-        .leçon-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 16px; padding: 16px; display: flex; align-items: center;
-            justify-content: space-between; cursor: pointer; transition: all 0.2s ease;
-            box-shadow: var(--shadow-sm);
-        }
-        .leçon-card:hover { transform: translateY(-2px); border-color: var(--primary-accent); }
-        .leçon-card.locked { background: var(--bg-main); border-style: dashed; opacity: 0.8; }
-
-        .leçon-info { display: flex; align-items: center; gap: 12px; }
-        .leçon-num {
-            width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #064e3b, #059669);
-            color: white; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
-        }
-        .leçon-card.locked .leçon-num { background: #94a3b8; }
-        .leçon-titre { font-size: 0.95rem; font-weight: 600; margin: 0; color: var(--text-main); }
-        .leçon-sub { font-size: 0.78rem; color: var(--text-muted); margin: 2px 0 0 0; }
-        .badge-gratuit { background: #dcfce7; color: #15803d; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; }
-        .badge-lock { font-size: 1.1rem; }
-
-        /* Cartes d'actions bas de page */
-        .sadaqa-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 22px; padding: 20px; margin-bottom: 20px; text-align: center; box-shadow: var(--shadow-sm);
-        }
-        .pwa-card {
-            background: linear-gradient(135deg, #064e3b, #047857);
-            color: white; border-radius: 22px; padding: 22px; margin-bottom: 20px; box-shadow: var(--shadow-sm);
-        }
-
-        /* Modales */
-        .audio-modal-overlay, .premium-modal-overlay, .quiz-modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px);
-            z-index: 20000; display: none; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box;
-            animation: fadeIn 0.3s ease;
-        }
-        .audio-modal-card, .premium-modal-card, .quiz-modal-card {
-            background: var(--card-bg); border-radius: 24px; padding: 25px;
-            width: 100%; max-width: 400px; text-align: center; position: relative;
-            box-shadow: var(--shadow-lg); animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .btn-close-modal {
-            position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted);
-        }
-        
-        .audio-grid { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; max-height: 350px; overflow-y: auto; text-align: left; }
-        .audio-item {
-            background: var(--bg-main); border: 1px solid var(--border-color);
-            border-radius: 14px; padding: 12px 15px; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
-            transition: all 0.2s ease;
-        }
-        .audio-item:hover { border-color: var(--primary-accent); background: var(--gold-light); }
-        .audio-item-left { display: flex; align-items: center; gap: 15px; }
-        .audio-item .arabe { font-size: 1.6rem; color: var(--primary-dark); font-weight: bold; }
-        .audio-item .phonetique { font-size: 0.85rem; color: var(--text-main); font-weight: 600; }
-        .audio-conseil { font-size: 0.75rem; color: #d97706; font-weight: 600; margin-top: 3px; }
-        .btn-play-audio { background: var(--primary-dark); color: white; border: none; width: 38px; height: 38px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-
-        /* Styles Quiz */
-        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
-        .quiz-btn {
-            background: var(--bg-main); border: 1px solid var(--border-color);
-            color: var(--text-main); padding: 12px; border-radius: 12px; font-weight: 600; cursor: pointer;
-            transition: all 0.2s ease; text-align: left;
-        }
-        .quiz-btn:hover { border-color: var(--primary-accent); background: var(--gold-light); }
     </style>
 </head>
-
 <body>
+    <div class="onboarding-card">
+        <div class="bismillah-header">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        <div class="onboarding-title">Bienvenue ! 👋</div>
+        <div class="onboarding-subtitle">Entre ton nom et choisis ton niveau pour accéder à ton espace.</div>
 
-    <div class="app-wrapper">
-
-        <!-- ÉCRAN D'ACCUEIL / ONBOARDING AVEC CHOIX DU NIVEAU -->
-        <div id="onboardingModal" class="onboarding-overlay">
-            <div class="onboarding-card">
-                <div class="bismillah-header">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-                <div class="onboarding-title">Bienvenue ! 👋</div>
-                <div class="onboarding-subtitle">Entre ton nom et choisis ton niveau pour personnaliser ton parcours.</div>
-
-                <div class="form-group">
-                    <label>Prénom *</label>
-                    <input type="text" id="userPrenom" placeholder="Ex: Mohamed">
-                </div>
-
-                <div class="form-group">
-                    <label>Nom (optionnel)</label>
-                    <input type="text" id="userNom" placeholder="Ex: Berthé">
-                </div>
-
-                <div class="form-group">
-                    <label>Niveau d'apprentissage *</label>
-                    <select id="userNiveau">
-                        <option value="debutant">🌱 Débutant</option>
-                        <option value="moyen">🌿 Moyen</option>
-                        <option value="professionnel">🌳 Professionnel</option>
-                    </select>
-                </div>
-
-                <button class="btn-continue" onclick="enregistrerProfil()">Commencer ➔</button>
-            </div>
+        <div class="form-group">
+            <label>Prénom *</label>
+            <input type="text" id="userPrenom" placeholder="Ex: Mohamed">
         </div>
 
-        <!-- EN-TÊTE DU DASHBOARD -->
-        <header class="header-dash">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <span style="font-size: 0.75rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #fde68a;">LE VERIDIQUE A-Z 🇲🇱</span>
-                <div style="display: flex; gap: 8px;">
-                    <button class="control-btn" onclick="changerNiveau()">⚙️ Changer niveau</button>
-                    <button id="themeToggleBtn" class="control-btn" onclick="basculerTheme()">🌙 Sombre</button>
-                </div>
-            </div>
-            <h2 style="margin: 0; font-size: 1.4rem;">Salam, <span id="dashUserPrenom">Apprenant</span> 👋</h2>
-            <p style="margin: 5px 0 0 0; font-size: 0.88rem; opacity: 0.9;">Niveau : <strong id="dashUserNiveau" style="color: #fde68a; text-transform: uppercase;">Débutant</strong></p>
-        </header>
-
-        <main class="dashboard-container">
-
-            <!-- CARTE OFFRE PREMIUM -->
-            <div class="premium-banner">
-                <span class="premium-badge">★ OFFRE UNIQUE</span>
-                <h3 style="margin: 0 0 5px 0; font-size: 1.2rem;">Passe à la version Premium</h3>
-                <p style="margin: 0; font-size: 0.82rem; color: #cbd5e1;">Débloque tout le programme et l'audio de ton professeur.</p>
-                
-                <ul class="premium-list">
-                    <li>Les leçons complètes de Tajweed</li>
-                    <li>Vrais audios MP3 enregistrés par le professeur</li>
-                    <li>Instructions de position de la bouche pour chaque son</li>
-                    <li>Grand Test de révision finale</li>
-                </ul>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.15);">
-                    <div>
-                        <span style="font-size: 0.72rem; color: #94a3b8; display: block;">Accès à vie — sans abonnement</span>
-                        <strong style="font-size: 1.2rem; color: #fde68a;">2 000 FCFA</strong>
-                    </div>
-                    <button class="btn-premium" onclick="ouvrirModalPremium()">Débloquer</button>
-                </div>
-            </div>
-
-            <!-- GRILLE DES FONCTIONNALITÉS -->
-            <div class="features-grid">
-                <div class="feature-card" onclick="alert('Assistant IA')">
-                    <div class="feature-icon">🤖</div>
-                    <div class="feature-title">Lire le Coran IA</div>
-                </div>
-                <div class="feature-card" onclick="alert('Sourates')">
-                    <div class="feature-icon">📖</div>
-                    <div class="feature-title">Sourates</div>
-                </div>
-                <div class="feature-card" onclick="alert('Dou\'as')">
-                    <div class="feature-icon">🤲</div>
-                    <div class="feature-title">Dou'as</div>
-                </div>
-                <div class="feature-card" onclick="alert('Calendrier')">
-                    <div class="feature-icon">🗓️</div>
-                    <div class="feature-title">Calendrier</div>
-                </div>
-            </div>
-
-            <!-- CARTE AYAH DU JOUR -->
-            <div class="ayah-card">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 0.75rem; text-transform: uppercase; color: #fbbf24; font-weight: 700; letter-spacing: 1px;">Ayah du jour</span>
-                    <span style="font-size: 0.78rem; color: #94a3b8;">Al-Israa · v.28</span>
-                </div>
-                <div class="ayah-arabic">
-                    وَإِمَّا تُعْرِضَنَّ عَنْهُمُ ٱبْتِغَآءَ رَحْمَةٍۢ مِّن رَّبِّكَ تَرْجُوهَا فَقُل لَّهُمْ قَوْلًۭا مَّيْسُورًۭا
-                </div>
-                <div class="ayah-translation">
-                    « Si tu t'écartes d'eux à la recherche d'une miséricorde de Ton Seigneur, que tu espères, adresse-leur une parole bienveillante. »
-                </div>
-                <div class="ayah-actions">
-                    <button class="btn-ayah-action" onclick="alert('Lecture audio du verset...')">🔊 Écouter</button>
-                    <button class="btn-ayah-action" onclick="copierAyah()">📋 Partager</button>
-                </div>
-            </div>
-
-            <!-- SECTION DES LEÇONS (CHANGERA SELON LE NIVEAU) -->
-            <div class="section-header">
-                <h3 class="section-title">Leçons de Tajweed</h3>
-                <span id="statutLecons" style="font-size: 0.8rem; color: var(--primary-accent); font-weight: 600;">Programme adapté</span>
-            </div>
-
-            <div id="leconsContainer" class="leçons-list">
-                <!-- Les leçons s'injecteront dynamiquement ici selon le niveau -->
-            </div>
-
-            <!-- CARTE PARTAGE SADAQA JARIYA -->
-            <div class="sadaqa-card">
-                <h4 style="margin: 0 0 8px 0; color: var(--primary-dark);">Partage cette app avec tes proches 🤲</h4>
-                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4;">
-                    Chaque personne qui apprend grâce à toi, tu reçois la récompense — même après ta mort.
-                </p>
-                <div style="display: flex; gap: 10px;">
-                    <button class="btn-continue" style="margin: 0; background: #0284c7; box-shadow: none;" onclick="copierLienApp()">🔗 Copier le lien</button>
-                    <button class="btn-continue" style="margin: 0; background: #25d366; box-shadow: none;" onclick="partagerWhatsApp()">💬 WhatsApp</button>
-                </div>
-            </div>
-
-            <!-- CARTE INSTALLATION PWA -->
-            <div class="pwa-card">
-                <h4 style="margin: 0 0 8px 0;">📲 Installe l'application</h4>
-                <p style="font-size: 0.82rem; opacity: 0.9; margin-bottom: 12px;">Accès rapide · Sans App Store · Mode hors ligne</p>
-                <div style="font-size: 0.8rem; background: rgba(0,0,0,0.15); padding: 12px; border-radius: 12px; line-height: 1.5;">
-                    <strong>Instructions Android :</strong><br>
-                    1. Appuie sur les 3 points en haut à droite du navigateur.<br>
-                    2. Sélectionne <em>« Ajouter à l'écran d'accueil »</em>.<br>
-                    3. Appuie sur <em>« Ajouter »</em> pour confirmer.
-                </div>
-            </div>
-
-        </main>
-
-    </div>
-
-    <!-- MODALE AUDIO -->
-    <div id="audioModal" class="audio-modal-overlay">
-        <div class="audio-modal-card">
-            <button class="btn-close-modal" onclick="fermerLecon()">✕</button>
-            <h3 id="modalLeconTitre" style="margin-top: 0; color: var(--primary-dark); font-size: 1.1rem;">Titre</h3>
-            <p style="font-size: 0.78rem; color: var(--text-muted);">Écoute la voix du professeur et observe la position :</p>
-            <div id="modalAudioGrid" class="audio-grid"></div>
-            <button class="btn-continue" onclick="lancerQuiz()">🧠 Passer le Quiz de révision</button>
+        <div class="form-group">
+            <label>Nom (optionnel)</label>
+            <input type="text" id="userNom" placeholder="Ex: Berthé">
         </div>
-    </div>
 
-    <!-- MODALE QUIZ -->
-    <div id="quizModal" class="quiz-modal-overlay">
-        <div class="quiz-modal-card">
-            <button class="btn-close-modal" onclick="fermerQuiz()">✕</button>
-            <h3 style="margin-top: 0; color: var(--primary-dark);">🧠 Test de Révision</h3>
-            <div id="quizQuestion" style="font-weight: 600; font-size: 0.95rem; margin: 15px 0;">Question ici...</div>
-            <div id="quizOptions" class="quiz-options"></div>
-            <div id="quizScore" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 10px;"></div>
+        <div class="form-group">
+            <label>Niveau d'apprentissage *</label>
+            <select id="userNiveau">
+                <option value="debutant">🌱 Débutant</option>
+                <option value="moyen">🌿 Moyen</option>
+                <option value="professionnel">🌳 Professionnel</option>
+            </select>
         </div>
+
+        <button class="btn-continue" onclick="redirigerVersNiveau()">Commencer ➔</button>
     </div>
 
-    <!-- MODALE PREMIUM -->
-    <div id="premiumModal" class="premium-modal-overlay">
-        <div class="premium-modal-card">
-            <button class="btn-close-modal" onclick="fermerModalPremium()">✕</button>
-            <h3 style="margin-top: 0; color: var(--primary-dark);">🌟 Débloquer la Version Premium</h3>
-            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
-                Effectuez un paiement de <strong>2 000 FCFA</strong> via <strong>Orange / Moov Money</strong> au numéro du club, puis entrez le code secret :
-            </p>
-            <div style="background: var(--bg-main); padding: 10px; border-radius: 10px; margin: 12px 0; font-weight: bold; color: var(--gold-accent);">
-                Tél : +223 71 62 15 36
-            </div>
-            <div class="form-group">
-                <label>Code de validation :</label>
-                <input type="text" id="inputCodeSecret" placeholder="Entrez le code (ex: 2026)">
-            </div>
-            <button class="btn-continue" onclick="validerCodePremium()">Valider 🔓</button>
-        </div>
-    </div>
-
-    <!-- SCRIPT DE GESTION DES NIVEAUX ET DU PROFIL -->
     <script>
-        // Programmes de leçons par niveau
-        const programmesLecons = {
-            debutant: [
-                { num: 1, titre: "L'Alphabet Arabe & Les Harakat", sub: "Prononciation de base et voyelles courtes", statut: "Gratuit", locked: false },
-                { num: 2, titre: "Le Tanween (Double voyelle)", sub: "Les sons An, In, Oun à la fin des mots", statut: "Gratuit", locked: false },
-                { num: 3, titre: "Règles du Noon Sakinah", sub: "L'Izhar : la clarification du son N", statut: "🔒", locked: true }
-            ],
-            moyen: [
-                { num: 1, titre: "Le Madd Tabii (Prolongation naturelle)", sub: "Allonger les voyelles de 2 temps", statut: "Gratuit", locked: false },
-                { num: 2, titre: "Qalqalah (L'écho des lettres)", sub: "Prononciation des lettres Qof, Ta, Ba, Jim, Dal", statut: "Gratuit", locked: false },
-                { num: 3, titre: "Règles du Meem Sakinah", sub: "Idgham, Ikhfa shafawi et Izhar shafawi", statut: "🔒", locked: true }
-            ],
-            professionnel: [
-                { num: 1, titre: "Les Makharij al-Huruf (Points de sortie)", sub: "Étude approfondie de la gorge, langue et lèvres", statut: "Gratuit", locked: false },
-                { num: 2, titre: "Ahkam al-Mad al-Far'i", sub: "Madd Muttasil, Munfasil et Lazim", statut: "Gratuit", locked: false },
-                { num: 3, titre: "Les arrêts (Waqf) et reprises (Ibtida)", sub: "Maîtriser les pauses obligatoires et permises", statut: "🔒", locked: true }
-            ]
-        };
-
-        function chargerLecons(niveau) {
-            const container = document.getElementById('leconsContainer');
-            const elementNiveau = document.getElementById('dashUserNiveau');
-            if (elementNiveau) elementNiveau.textContent = niveau;
-
-            const lecons = programmesLecons[niveau] || programmesLecons.debutant;
-            
-            container.innerHTML = lecons.map(l => `
-                <div class="leçon-card ${l.locked ? 'locked' : ''}" onclick="${l.locked ? `verifierAccesLecon(${l.num}, '${l.titre}')` : `ouvrirLecon(${l.num}, '${l.titre}', [])`}">
-                    <div class="leçon-info">
-                        <div class="leçon-num">${l.num}</div>
-                        <div>
-                            <h4 class="leçon-titre">${l.titre}</h4>
-                            <p class="leçon-sub">${l.sub}</p>
-                        </div>
-                    </div>
-                    <span class="${l.locked ? 'badge-lock' : 'badge-gratuit'}">${l.statut}</span>
-                </div>
-            `).join('');
-        }
-
-        function enregistrerProfil() {
+        function redirigerVersNiveau() {
             const prenom = document.getElementById('userPrenom').value.trim();
             const nom = document.getElementById('userNom').value.trim();
             const niveau = document.getElementById('userNiveau').value;
@@ -515,41 +93,15 @@
             localStorage.setItem('coranAppUserNom', nom);
             localStorage.setItem('coranAppUserNiveau', niveau);
 
-            document.getElementById('dashUserPrenom').textContent = prenom;
-            document.getElementById('onboardingModal').style.display = 'none';
-
-            chargerLecons(niveau);
-        }
-
-        // Fonction pour rouvrir la modale et changer de niveau/prénom
-        function changerNiveau() {
-            const savedPrenom = localStorage.getItem('coranAppUserPrenom') || '';
-            const savedNom = localStorage.getItem('coranAppUserNom') || '';
-            const savedNiveau = localStorage.getItem('coranAppUserNiveau') || 'debutant';
-
-            document.getElementById('userPrenom').value = savedPrenom;
-            document.getElementById('userNom').value = savedNom;
-            document.getElementById('userNiveau').value = savedNiveau;
-
-            document.getElementById('onboardingModal').style.display = 'flex';
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedPrenom = localStorage.getItem('coranAppUserPrenom');
-            const savedNiveau = localStorage.getItem('coranAppUserNiveau') || 'debutant';
-
-            if (savedPrenom) {
-                document.getElementById('dashUserPrenom').textContent = savedPrenom;
-                document.getElementById('onboardingModal').style.display = 'none';
-                document.getElementById('userNiveau').value = savedNiveau;
-                chargerLecons(savedNiveau);
-            } else {
-                chargerLecons('debutant');
+            // Redirection automatique vers la bonne page selon le choix
+            if (niveau === 'debutant') {
+                window.location.href = 'debutant.html';
+            } else if (niveau === 'moyen') {
+                window.location.href = 'moyen.html';
+            } else if (niveau === 'professionnel') {
+                window.location.href = 'professionnel.html';
             }
-        });
+        }
     </script>
-
-    <script type="module" src="script.js"></script>
 </body>
-
 </html>

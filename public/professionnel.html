@@ -1,47 +1,62 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Niveau Professionnel - LE VERIDIQUE A-Z</title>
+    
     <style>
         :root {
             --primary-dark: #064e3b; --primary-accent: #059669; --gold-accent: #d97706; --gold-light: #fef3c7;
-            --bg-main: #f8fafc; --card-bg: #ffffff; --text-main: #0f172a; --text-muted: #64748b; --border-color: #cbd5e1;
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05); --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
+            --bg-main: #f8fafc; --card-bg: #ffffff; --card-inner-bg: #edf2f7; --text-main: #0f172a;
+            --text-muted: #64748b; --border-color: #cbd5e1; --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg-main); color: var(--text-main); margin: 0; display: flex; justify-content: center; min-height: 100vh; }
-        .app-wrapper { width: 100%; max-width: 480px; background-color: var(--bg-main); min-height: 100vh; display: flex; flex-direction: column; padding-bottom: 40px; box-shadow: 0 0 30px rgba(0,0,0,0.08); }
-        .header-dash { padding: 24px 20px 32px 20px; background: linear-gradient(135deg, #064e3b, #065f46); color: white; border-bottom-left-radius: 28px; border-bottom-right-radius: 28px; }
+        [data-theme="dark"] {
+            --primary-dark: #10b981; --primary-accent: #34d399; --gold-accent: #fbbf24;
+            --gold-light: rgba(251, 191, 36, 0.15); --bg-main: #060911; --card-bg: #0f172a;
+            --card-inner-bg: #1e293b; --text-main: #f8fafc; --text-muted: #94a3b8; --border-color: #334155;
+        }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg-main); color: var(--text-main); margin: 0; padding: 0; display: flex; justify-content: center; min-height: 100vh; }
+        .app-wrapper { width: 100%; max-width: 480px; background-color: var(--bg-main); min-height: 100vh; display: flex; flex-direction: column; position: relative; padding-bottom: 40px; box-shadow: 0 0 30px rgba(0,0,0,0.08); }
+        .header-dash { padding: 24px 20px 32px 20px; background: linear-gradient(135deg, #064e3b, #065f46); color: white; border-bottom-left-radius: 28px; border-bottom-right-radius: 28px; box-shadow: var(--shadow-sm); }
         .control-btn { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); color: white; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.78rem; font-weight: 600; }
         .dashboard-container { padding: 0 20px; margin-top: -20px; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin: 20px 0 15px 0; }
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+        .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; box-shadow: var(--shadow-sm); }
+        .feature-icon { font-size: 1.5rem; width: 42px; height: 42px; border-radius: 14px; background: var(--gold-light); display: flex; align-items: center; justify-content: center; }
+        .feature-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
+        .ayah-card { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; border-radius: 22px; padding: 22px; margin-bottom: 25px; border: 1px solid rgba(217, 119, 6, 0.35); }
+        .ayah-arabic { font-family: serif; font-size: 1.4rem; line-height: 2.2; text-align: right; margin: 15px 0; color: #fef3c7; }
+        .ayah-translation { font-size: 0.88rem; color: #cbd5e1; line-height: 1.5; font-style: italic; }
+        .ayah-actions { display: flex; gap: 10px; margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .btn-ayah-action { background: rgba(255,255,255,0.1); color: white; border: none; padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; cursor: pointer; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .section-title { font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin: 0; }
         .leçons-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
         .leçon-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: var(--shadow-sm); }
         .leçon-info { display: flex; align-items: center; gap: 12px; }
         .leçon-num { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #064e3b, #059669); color: white; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-        .leçon-titre { font-size: 0.95rem; font-weight: 600; margin: 0; }
+        .leçon-titre { font-size: 0.95rem; font-weight: 600; margin: 0; color: var(--text-main); }
         .leçon-sub { font-size: 0.78rem; color: var(--text-muted); margin: 2px 0 0 0; }
         .badge-gratuit { background: #dcfce7; color: #15803d; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; }
         .badge-lock { font-size: 1.1rem; }
-        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
-        .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; box-shadow: var(--shadow-sm); }
-        .feature-icon { font-size: 1.5rem; width: 42px; height: 42px; border-radius: 14px; background: var(--gold-light); display: flex; align-items: center; justify-content: center; }
-        .feature-title { font-size: 0.95rem; font-weight: 700; }
-        .ayah-card { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; border-radius: 22px; padding: 22px; margin-bottom: 25px; border: 1px solid rgba(217, 119, 6, 0.35); }
-        .ayah-arabic { font-family: serif; font-size: 1.4rem; line-height: 2.2; text-align: right; margin: 15px 0; color: #fef3c7; }
-        .ayah-translation { font-size: 0.88rem; color: #cbd5e1; line-height: 1.5; font-style: italic; }
-        .sadaqa-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 22px; padding: 20px; margin-bottom: 20px; text-align: center; }
-        .btn-continue { width: 100%; padding: 12px; background: #0284c7; color: white; border: none; border-radius: 12px; font-weight: 700; cursor: pointer; }
+        .sadaqa-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 22px; padding: 20px; margin-bottom: 20px; text-align: center; box-shadow: var(--shadow-sm); }
+        .pwa-card { background: linear-gradient(135deg, #064e3b, #047857); color: white; border-radius: 22px; padding: 22px; margin-bottom: 20px; }
+        .btn-continue { width: 100%; padding: 14px; background: linear-gradient(135deg, #064e3b, #059669); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
+
 <body>
     <div class="app-wrapper">
         <header class="header-dash">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <span style="font-size: 0.75rem; opacity: 0.9; text-transform: uppercase; font-weight: 700; color: #fde68a;">LE VERIDIQUE A-Z 🇲🇱</span>
-                <button class="control-btn" onclick="window.location.href='index.html'">⚙️ Changer niveau</button>
+                <div style="display: flex; gap: 8px;">
+                    <button class="control-btn" onclick="window.location.href='index.html'">⚙️ Changer niveau</button>
+                    <button id="themeToggleBtn" class="control-btn" onclick="basculerTheme()">🌙 Sombre</button>
+                </div>
             </div>
             <h2 style="margin: 0; font-size: 1.4rem;">Salam, <span id="dashUserPrenom">Apprenant</span> 👋</h2>
             <p style="margin: 5px 0 0 0; font-size: 0.88rem; opacity: 0.9;">Niveau : <strong style="color: #fde68a;">PROFESSIONNEL</strong></p>
@@ -51,41 +66,65 @@
             <div class="features-grid">
                 <div class="feature-card" onclick="alert('Assistant IA')"><div class="feature-icon">🤖</div><div class="feature-title">Lire le Coran IA</div></div>
                 <div class="feature-card" onclick="alert('Sourates')"><div class="feature-icon">📖</div><div class="feature-title">Sourates</div></div>
+                <div class="feature-card" onclick="alert('Dou\'as')"><div class="feature-icon">🤲</div><div class="feature-title">Dou'as</div></div>
+                <div class="feature-card" onclick="alert('Calendrier')"><div class="feature-icon">🗓️</div><div class="feature-title">Calendrier</div></div>
             </div>
 
             <div class="ayah-card">
-                <div style="font-size: 0.75rem; text-transform: uppercase; color: #fbbf24; font-weight: 700;">Ayah du jour</div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.75rem; text-transform: uppercase; color: #fbbf24; font-weight: 700;">Ayah du jour</span>
+                    <span style="font-size: 0.78rem; color: #94a3b8;">Al-Israa · v.28</span>
+                </div>
                 <div class="ayah-arabic">وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا</div>
                 <div class="ayah-translation">« Et Répète le Coran lentement et clairement... »</div>
+                <div class="ayah-actions">
+                    <button class="btn-ayah-action" onclick="alert('Lecture audio...')">🔊 Écouter</button>
+                    <button class="btn-ayah-action" onclick="navigator.clipboard.writeText(window.location.href); alert('Copié !');">📋 Partager</button>
+                </div>
             </div>
 
             <div class="section-header">
-                <h3 class="section-title">Leçons — Niveau Professionnel</h3>
+                <h3 class="section-title">Leçons de Tajweed</h3>
+                <span style="font-size: 0.8rem; color: var(--primary-accent); font-weight: 600;">Professionnel</span>
             </div>
 
             <div class="leçons-list">
                 <div class="leçon-card">
-                    <div class="leçon-info"><div class="leçon-num">1</div><div><h4 class="leçon-titre">Makharij al-Huruf</h4><p class="leçon-sub">Points de sortie de la gorge et langue</p></div></div>
+                    <div class="leçon-info"><div class="leçon-num">1</div><div><h4 class="leçon-titre">Les Makharij al-Huruf</h4><p class="leçon-sub">Points de sortie de la gorge et langue</p></div></div>
                     <span class="badge-gratuit">Gratuit</span>
                 </div>
                 <div class="leçon-card">
                     <div class="leçon-info"><div class="leçon-num">2</div><div><h4 class="leçon-titre">Ahkam al-Mad al-Far'i</h4><p class="leçon-sub">Madd Muttasil et Munfasil</p></div></div>
                     <span class="badge-gratuit">Gratuit</span>
                 </div>
-                <div class="leçon-card" style="opacity: 0.7; border-style: dashed;">
+                <div class="leçon-card" style="opacity: 0.8; border-style: dashed;">
                     <div class="leçon-info"><div class="leçon-num" style="background: #94a3b8;">3</div><div><h4 class="leçon-titre">Les arrêts (Waqf) & Reprises (Ibtida)</h4><p class="leçon-sub">Pauses obligatoires</p></div></div>
                     <span class="badge-lock">🔒</span>
                 </div>
             </div>
 
             <div class="sadaqa-card">
-                <h4 style="margin: 0 0 8px 0; color: var(--primary-dark);">Partage cette app 🤲</h4>
-                <button class="btn-continue" onclick="navigator.clipboard.writeText(window.location.href); alert('Lien copié !');">🔗 Copier le lien</button>
+                <h4 style="margin: 0 0 8px 0; color: var(--primary-dark);">Partage cette app avec tes proches 🤲</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 15px;">Chaque personne qui apprend grâce à toi...</p>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-continue" style="margin: 0; background: #0284c7;" onclick="navigator.clipboard.writeText(window.location.href); alert('Lien copié !');">🔗 Copier le lien</button>
+                    <button class="btn-continue" style="margin: 0; background: #25d366;" onclick="window.open('https://wa.me/?text=Viens%20apprendre%20le%20Coran%20!%20' + encodeURIComponent(window.location.href))">💬 WhatsApp</button>
+                </div>
+            </div>
+
+            <div class="pwa-card">
+                <h4 style="margin: 0 0 8px 0;">📲 Installe l'application</h4>
+                <p style="font-size: 0.82rem; opacity: 0.9; margin-bottom: 12px;">Accès rapide · Sans App Store · Mode hors ligne</p>
             </div>
         </main>
     </div>
+
     <script>
         document.getElementById('dashUserPrenom').textContent = localStorage.getItem('coranAppUserPrenom') || 'Apprenant';
+        function basculerTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        }
     </script>
 </body>
 </html>

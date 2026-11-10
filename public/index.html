@@ -314,13 +314,25 @@
 
         function finaliserNiveau(niveau) {
             localStorage.setItem('coranAppUserNiveau', niveau);
+            const objectif = localStorage.getItem('coranAppObjectif');
 
-            if (niveau === 'debutant') {
-                window.location.href = 'debutant.html';
-            } else if (niveau === 'moyen') {
-                window.location.href = 'moyen.html';
-            } else if (niveau === 'professionnel') {
-                window.location.href = 'professionnel.html';
+            // Redirection intelligente selon le choix (Tajweed vs Sourates)
+            if (objectif === 'sourates') {
+                if (niveau === 'debutant') {
+                    window.location.href = 'debutantcorant.html';
+                } else if (niveau === 'moyen') {
+                    window.location.href = 'Moyencorant.html';
+                } else if (niveau === 'professionnel') {
+                    window.location.href = 'professionnelle coran.html';
+                }
+            } else {
+                if (niveau === 'debutant') {
+                    window.location.href = 'debutant.html';
+                } else if (niveau === 'moyen') {
+                    window.location.href = 'moyen.html';
+                } else if (niveau === 'professionnel') {
+                    window.location.href = 'professionnel.html';
+                }
             }
         }
 

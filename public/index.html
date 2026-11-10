@@ -92,15 +92,6 @@
 </head>
 
 <body>
-    <!-- Script de vérification automatique : si le prénom existe déjà, on redirige directement -->
-    <script>
-        const savedPrenom = localStorage.getItem('coranAppUserPrenom');
-        const savedNiveau = localStorage.getItem('coranAppUserNiveau');
-        if (savedPrenom && savedNiveau) {
-            window.location.href = savedNiveau + '.html';
-        }
-    </script>
-
     <div id="onboardingModal" class="onboarding-overlay">
         <div class="onboarding-card">
             <div class="bismillah-header">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
@@ -131,6 +122,23 @@
     </div>
 
     <script>
+        // Remplissage automatique si le prénom est déjà enregistré dans le navigateur
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedPrenom = localStorage.getItem('coranAppUserPrenom');
+            const savedNom = localStorage.getItem('coranAppUserNom');
+            const savedNiveau = localStorage.getItem('coranAppUserNiveau');
+
+            if (savedPrenom) {
+                document.getElementById('userPrenom').value = savedPrenom;
+            }
+            if (savedNom) {
+                document.getElementById('userNom').value = savedNom;
+            }
+            if (savedNiveau) {
+                document.getElementById('userNiveau').value = savedNiveau;
+            }
+        });
+
         function enregistrerProfil() {
             const prenom = document.getElementById('userPrenom').value.trim();
             const nom = document.getElementById('userNom').value.trim();
@@ -145,7 +153,13 @@
             localStorage.setItem('coranAppUserNom', nom);
             localStorage.setItem('coranAppUserNiveau', niveau);
 
-            window.location.href = niveau + '.html';
+            if (niveau === 'debutant') {
+                window.location.href = 'debutant.html';
+            } else if (niveau === 'moyen') {
+                window.location.href = 'moyen.html';
+            } else if (niveau === 'professionnel') {
+                window.location.href = 'professionnel.html';
+            }
         }
     </script>
 </body>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mémorisation - Niveau Professionnel - LE VERIDIQUE A-Z</title>
+    
+    <style>
+        :root {
+            --primary-dark: #064e3b; --primary-accent: #059669; --gold-accent: #d97706; --gold-light: #fef3c7;
+            --bg-main: #064e3b; --card-bg: #ffffff; --card-inner-bg: #edf2f7; --text-main: #0f172a;
+            --text-muted: #64748b; --border-color: #cbd5e1; --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        [data-theme="dark"] {
+            --primary-dark: #10b981; --primary-accent: #34d399; --gold-accent: #fbbf24;
+            --gold-light: rgba(251, 191, 36, 0.15); --bg-main: #060911; --card-bg: #0f172a;
+            --card-inner-bg: #1e293b; --text-main: #f8fafc; --text-muted: #94a3b8; --border-color: #334155;
+        }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg-main); color: #ffffff; margin: 0; padding: 0; display: flex; justify-content: center; min-height: 100vh; }
+        .app-wrapper { width: 100%; max-width: 480px; background-color: var(--bg-main); min-height: 100vh; display: flex; flex-direction: column; position: relative; padding-bottom: 40px; box-shadow: 0 0 30px rgba(0,0,0,0.2); }
+        
+        .header-dash { padding: 20px 20px 30px 20px; background: #064e3b; color: white; text-align: center; position: relative; }
+        .top-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .control-btn { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); color: white; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.78rem; font-weight: 600; }
+        .control-btn:hover { background: rgba(255, 255, 255, 0.25); }
+
+        .header-icon-container { width: 70px; height: 70px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; margin: 0 auto 15px auto; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; background: rgba(255, 255, 255, 0.05); }
+        .bismillah-text { font-size: 1.3rem; font-family: serif; color: #fef3c7; margin-bottom: 12px; letter-spacing: 0.5px; }
+
+        .dashboard-container { padding: 0 20px; margin-top: 10px; }
+        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+        .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; box-shadow: var(--shadow-sm); color: var(--text-main); }
+        .feature-icon { font-size: 1.5rem; width: 42px; height: 42px; border-radius: 14px; background: var(--gold-light); display: flex; align-items: center; justify-content: center; }
+        .feature-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
+        
+        .ayah-card { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; border-radius: 22px; padding: 22px; margin-bottom: 25px; border: 1px solid rgba(217, 119, 6, 0.35); }
+        .ayah-arabic { font-family: serif; font-size: 1.4rem; line-height: 2.2; text-align: right; margin: 15px 0; color: #fef3c7; }
+        .ayah-translation { font-size: 0.88rem; color: #cbd5e1; line-height: 1.5; font-style: italic; }
+        .ayah-actions { display: flex; gap: 10px; margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .btn-ayah-action { background: rgba(255,255,255,0.1); color: white; border: none; padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; cursor: pointer; }
+
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; color: #ffffff; }
+        .section-title { font-size: 1.1rem; font-weight: 700; color: #ffffff; margin: 0; }
+        
+        .leçons-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+        .leçon-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: var(--shadow-sm); color: var(--text-main); }
+        .leçon-info { display: flex; align-items: center; gap: 12px; }
+        .leçon-num { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #064e3b, #059669); color: white; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+        .leçon-titre { font-size: 0.95rem; font-weight: 600; margin: 0; color: var(--text-main); }
+        .leçon-sub { font-size: 0.78rem; color: var(--text-muted); margin: 2px 0 0 0; }
+        .badge-gratuit { background: #dcfce7; color: #15803d; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; }
+        .badge-lock { font-size: 1.1rem; }
+        
+        .sadaqa-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 22px; padding: 20px; margin-bottom: 20px; text-align: center; box-shadow: var(--shadow-sm); color: var(--text-main); }
+        .btn-continue { width: 100%; padding: 14px; background: linear-gradient(135deg, #064e3b, #059669); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 10px; }
+    </style>
+</head>
+
+<body>
+    <div class="app-wrapper">
+        <header class="header-dash">
+            <div class="top-controls">
+                <button class="control-btn" onclick="window.location.href='index.html'">⚙️ Accueil</button>
+                <span style="font-size: 0.70rem; opacity: 0.8; text-transform: uppercase; font-weight: 700; color: #fde68a;">LE VERIDIQUE A-Z 🇲🇱</span>
+                <button id="themeToggleBtn" class="control-btn" onclick="basculerTheme()">🌙 Sombre</button>
+            </div>
+
+            <div class="header-icon-container">🤲</div>
+            <div class="bismillah-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+
+            <h2 style="margin: 0 0 5px 0; font-size: 1.5rem; font-weight: 600;">As-salāmu 'alaykum, <span id="dashUserPrenom">Apprenant</span> !</h2>
+            <p style="margin: 0; font-size: 0.85rem; opacity: 0.9; color: #fde68a; text-transform: uppercase; letter-spacing: 0.5px;">Objectif : <strong>Mémorisation Sourates (Professionnel)</strong></p>
+        </header>
+
+        <main class="dashboard-container">
+            <div class="features-grid">
+                <div class="feature-card" onclick="alert('Assistant IA')"><div class="feature-icon">🤖</div><div class="feature-title">Assistant IA</div></div>
+                <div class="feature-card" onclick="alert('Récitation')"><div class="feature-icon">🎧</div><div class="feature-title">Écoute audio</div></div>
+            </div>
+
+            <div class="ayah-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.75rem; text-transform: uppercase; color: #fbbf24; font-weight: 700;">Sourate Al-Baqarah</span>
+                    <span style="font-size: 0.78rem; color: #94a3b8;">Verset 255 (Ayat al-Kursi)</span>
+                </div>
+                <div class="ayah-arabic">اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ</div>
+                <div class="ayah-translation">« Allah ! Point de divinité à part Lui, Le Vivant, Celui qui subsiste par Lui-même... »</div>
+                <div class="ayah-actions">
+                    <button class="btn-ayah-action" onclick="alert('Écouter...')">🔊 Écouter</button>
+                    <button class="btn-ayah-action" onclick="alert('Validé')">✅ Marquer appris</button>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h3 class="section-title">Longues Sourates & Hifz Avancé</h3>
+                <span style="font-size: 0.8rem; color: #34d399; font-weight: 600;">Niveau Professionnel</span>
+            </div>
+
+            <div class="leçons-list">
+                <div class="leçon-card">
+                    <div class="leçon-info"><div class="leçon-num">1</div><div><h4 class="leçon-titre">Sourate Al-Baqarah (2)</h4><p class="leçon-sub">La Vache (Intégrale / Hifz)</p></div></div>
+                    <span class="badge-gratuit">Gratuit</span>
+                </div>
+                <div class="leçon-card">
+                    <div class="leçon-info"><div class="leçon-num">2</div><div><h4 class="leçon-titre">Sourate Ali 'Imran (3)</h4><p class="leçon-sub">La Famille d'Imran</p></div></div>
+                    <span class="badge-gratuit">Gratuit</span>
+                </div>
+                <div class="leçon-card" style="opacity: 0.8; border-style: dashed;">
+                    <div class="leçon-info"><div class="leçon-num" style="background: #94a3b8;">3</div><div><h4 class="leçon-titre">Sourate An-Nisa (4)</h4><p class="leçon-sub">Les Femmes</p></div></div>
+                    <span class="badge-lock">🔒</span>
+                </div>
+            </div>
+
+            <div class="sadaqa-card">
+                <h4 style="margin: 0 0 8px 0; color: var(--primary-dark);">Partage cette app 🤲</h4>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 15px;">Partage la science du Coran.</p>
+                <button class="btn-continue" style="margin: 0; background: #25d366;" onclick="window.open('https://wa.me/?text=Viens%20apprendre%20le%20Coran%20!%20')">💬 Partager sur WhatsApp</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedPrenom = localStorage.getItem('coranAppUserPrenom');
+            if (savedPrenom) document.getElementById('dashUserPrenom').textContent = savedPrenom;
+        });
+        function basculerTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        }
+    </script>
+</body>
+</html>

@@ -309,7 +309,10 @@
         <header class="header-dash">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <span style="font-size: 0.75rem; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; color: #fde68a;">LE VERIDIQUE A-Z 🇲🇱</span>
-                <button id="themeToggleBtn" class="control-btn" onclick="basculerTheme()">🌙 Sombre</button>
+                <div style="display: flex; gap: 8px;">
+                    <button class="control-btn" onclick="changerNiveau()">⚙️ Changer niveau</button>
+                    <button id="themeToggleBtn" class="control-btn" onclick="basculerTheme()">🌙 Sombre</button>
+                </div>
             </div>
             <h2 style="margin: 0; font-size: 1.4rem;">Salam, <span id="dashUserPrenom">Apprenant</span> 👋</h2>
             <p style="margin: 5px 0 0 0; font-size: 0.88rem; opacity: 0.9;">Niveau : <strong id="dashUserNiveau" style="color: #fde68a; text-transform: uppercase;">Débutant</strong></p>
@@ -516,6 +519,19 @@
             document.getElementById('onboardingModal').style.display = 'none';
 
             chargerLecons(niveau);
+        }
+
+        // Fonction pour rouvrir la modale et changer de niveau/prénom
+        function changerNiveau() {
+            const savedPrenom = localStorage.getItem('coranAppUserPrenom') || '';
+            const savedNom = localStorage.getItem('coranAppUserNom') || '';
+            const savedNiveau = localStorage.getItem('coranAppUserNiveau') || 'debutant';
+
+            document.getElementById('userPrenom').value = savedPrenom;
+            document.getElementById('userNom').value = savedNom;
+            document.getElementById('userNiveau').value = savedNiveau;
+
+            document.getElementById('onboardingModal').style.display = 'flex';
         }
 
         window.addEventListener('DOMContentLoaded', () => {

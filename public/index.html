@@ -92,6 +92,15 @@
 </head>
 
 <body>
+    <!-- Script de vérification automatique : si le prénom existe déjà, on redirige directement -->
+    <script>
+        const savedPrenom = localStorage.getItem('coranAppUserPrenom');
+        const savedNiveau = localStorage.getItem('coranAppUserNiveau');
+        if (savedPrenom && savedNiveau) {
+            window.location.href = savedNiveau + '.html';
+        }
+    </script>
+
     <div id="onboardingModal" class="onboarding-overlay">
         <div class="onboarding-card">
             <div class="bismillah-header">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
@@ -136,13 +145,7 @@
             localStorage.setItem('coranAppUserNom', nom);
             localStorage.setItem('coranAppUserNiveau', niveau);
 
-            if (niveau === 'debutant') {
-                window.location.href = 'debutant.html';
-            } else if (niveau === 'moyen') {
-                window.location.href = 'moyen.html';
-            } else if (niveau === 'professionnel') {
-                window.location.href = 'professionnel.html';
-            }
+            window.location.href = niveau + '.html';
         }
     </script>
 </body>

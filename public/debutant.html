@@ -333,10 +333,48 @@
                 </button>
             </div>
 
-            <!-- CONTENU DE L'ONGLET "ÉCOUTER" (Avec les 3 sous-onglets: Tableau / Quiz / Assemblage) -->
+            <!-- CONTENU DE LA VUE "ÉCOUTER" -->
             <div id="contentListen" style="display: none;">
                 
-                <!-- Sous-onglets de l'écoute (Tableau / Quiz / Assemblage) -->
+                <!-- 1. GRILLE DES 28 LETTRES EN HAUT -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ث</p><p class="font-black text-sm">th</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ت</p><p class="font-black text-sm">t</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ب</p><p class="font-black text-sm">b</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ا</p><p class="font-black text-sm">a</p></div>
+
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">د</p><p class="font-black text-sm">d</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">خ</p><p class="font-black text-sm">kh</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ح</p><p class="font-black text-sm">ḥ</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ج</p><p class="font-black text-sm">dj</p></div>
+
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">س</p><p class="font-black text-sm">s</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ز</p><p class="font-black text-sm">z</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ر</p><p class="font-black text-sm">r</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ذ</p><p class="font-black text-sm">dh</p></div>
+
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ط</p><p class="font-black text-sm">ṭ</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ض</p><p class="font-black text-sm">ḍ</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ص</p><p class="font-black text-sm">ṣ</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ش</p><p class="font-black text-sm">ch</p></div>
+
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ف</p><p class="font-black text-sm">f</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">غ</p><p class="font-black text-sm">gh</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ع</p><p class="font-black text-sm">ʿ</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ظ</p><p class="font-black text-sm">ẓ</p></div>
+
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">م</p><p class="font-black text-sm">m</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ل</p><p class="font-black text-sm">l</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ك</p><p class="font-black text-sm">k</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ق</p><p class="font-black text-sm">q</p></div>
+
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ي</p><p class="font-black text-sm">y/î</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">و</p><p class="font-black text-sm">w/û</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ه</p><p class="font-black text-sm">h</p></div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ن</p><p class="font-black text-sm">n</p></div>
+                </div>
+
+                <!-- 2. LES 3 SOUS-ONGLETS EN BAS (Tableau / Quiz / Assemblage) -->
                 <div class="flex bg-white/10 border border-white/20 rounded-2xl p-1 mb-4 shadow-lg max-w-md mx-auto">
                     <button id="subTabTable" onclick="changerSousOnglet('table')" class="flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-xs py-2 rounded-xl shadow cursor-pointer transition-all">
                         📖 Tableau
@@ -349,11 +387,9 @@
                     </button>
                 </div>
 
-                <!-- SOUS-ONGLET 1 : TABLEAU (Détail de la lettre avec ses formes selon la position) -->
+                <!-- CONTENU DU SOUS-ONGLET "TABLEAU" -->
                 <div id="subContentTable">
                     <p class="text-xs text-white/80 mb-3 text-center">Appuie sur chaque forme pour écouter sa prononciation.</p>
-                    
-                    <!-- Carte principale d'une lettre (ex: Alif) -->
                     <div class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl mb-6 border border-white/20">
                         <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
                             <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ا</span>
@@ -363,8 +399,6 @@
                                 <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Ne se connecte qu'à droite</span>
                             </div>
                         </div>
-
-                        <!-- Grille des positions -->
                         <div class="grid grid-cols-2 gap-3">
                             <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
                                 <p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p>
@@ -390,19 +424,19 @@
                     </div>
                 </div>
 
-                <!-- SOUS-ONGLET 2 : QUIZ -->
+                <!-- CONTENU DU SOUS-ONGLET "QUIZ" -->
                 <div id="subContentQuiz" style="display: none;">
                     <div class="bg-white/10 border border-white/20 rounded-3xl p-8 text-center shadow-xl mb-6">
                         <p class="text-lg font-bold text-amber-300 mb-2">Quiz interactif</p>
-                        <p class="text-sm text-white/80">Testez votre reconnaissance auditive des lettres arabes.</p>
+                        <p class="text-sm text-white/80">Testez votre reconnaissance des lettres arabes.</p>
                     </div>
                 </div>
 
-                <!-- SOUS-ONGLET 3 : ASSEMBLAGE -->
+                <!-- CONTENU DU SOUS-ONGLET "ASSEMBLAGE" -->
                 <div id="subContentAssemble" style="display: none;">
                     <div class="bg-white/10 border border-white/20 rounded-3xl p-8 text-center shadow-xl mb-6">
                         <p class="text-lg font-bold text-amber-300 mb-2">Module d'Assemblage</p>
-                        <p class="text-sm text-white/80">Apprenez à lier les lettres entre elles dans les mots.</p>
+                        <p class="text-sm text-white/80">Apprenez à lier les lettres entre elles.</p>
                     </div>
                 </div>
 
@@ -488,7 +522,7 @@
             window.scrollTo(0, 0);
         }
 
-        // Fonction pour basculer entre les sous-onglets de l'écoute (Tableau / Quiz / Assemblage)
+        // Fonction pour basculer entre les sous-onglets en bas (Tableau / Quiz / Assemblage)
         function changerSousOnglet(sousOnglet) {
             const subTabTable = document.getElementById('subTabTable');
             const subTabQuiz = document.getElementById('subTabQuiz');

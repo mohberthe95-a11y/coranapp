@@ -490,7 +490,7 @@
             window.scrollTo(0, 0);
         }
 
-        // Fonction pour sélectionner une lettre et mettre à jour le tableau en bas
+        // Fonction pour sélectionner une lettre et mettre à jour le tableau en bas avec défilement fluide
         function selectionnerLettre(nom, son, connexion, iso, deb, mil, fin) {
             document.getElementById('lettreGrandSymbole').textContent = iso;
             document.getElementById('lettreNom').textContent = nom;
@@ -501,7 +501,8 @@
             document.getElementById('formMilieu').textContent = mil;
             document.getElementById('formFin').textContent = fin;
             changerSousOnglet('table');
-            window.scrollTo({ top: 300, behavior: 'smooth' });
+            // Défilement automatique vers le bas pour voir le tableau mis à jour
+            window.scrollTo({ top: 400, behavior: 'smooth' });
         }
 
         // Fonction pour basculer entre les onglets principaux (Leçon / Écouter / Exercice)

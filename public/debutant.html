@@ -339,8 +339,8 @@
                 <!-- 1. GRILLE DES 28 LETTRES EN HAUT -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                     <div onclick="selectionnerLettre('Thâ', 'th', 'Ne se connecte qu’à droite', 'ث', '—', '—', 'ث')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ث</p><p class="font-black text-sm">th</p></div>
-                    <div onclick="selectionnerLettre('Bâ', 'b', 'Se connecte des deux côtés', 'ب', 'بـ', 'ـبـ', 'ـب')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ب</p><p class="font-black text-sm">b</p></div>
                     <div onclick="selectionnerLettre('Tâ', 't', 'Se connecte des deux côtés', 'ت', 'تـ', 'ـتـ', 'ـت')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ت</p><p class="font-black text-sm">t</p></div>
+                    <div onclick="selectionnerLettre('Bâ', 'b', 'Se connecte des deux côtés', 'ب', 'بـ', 'ـبـ', 'ـب')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ب</p><p class="font-black text-sm">b</p></div>
                     <div onclick="selectionnerLettre('Alif', 'a', 'Ne se connecte qu’à droite', 'ا', '—', '—', 'ا')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ا</p><p class="font-black text-sm">a</p></div>
 
                     <div onclick="selectionnerLettre('Dâl', 'd', 'Ne se connecte qu’à droite', 'د', '—', '—', 'ـد')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">د</p><p class="font-black text-sm">d</p></div>
@@ -392,32 +392,32 @@
                     <p class="text-xs text-white/80 mb-3 text-center">Appuie sur chaque forme pour écouter sa prononciation.</p>
                     <div class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl mb-6 border border-white/20">
                         <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
-                            <span id="lettreGrandSymbole" class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ب</span>
+                            <span id="lettreGrandSymbole" class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ا</span>
                             <div>
-                                <h3 id="lettreNom" class="font-black text-xl text-slate-900">Bâ'</h3>
-                                <p id="lettreSon" class="text-sm text-slate-500">b</p>
-                                <span id="lettreConnexion" class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                <h3 id="lettreNom" class="font-black text-xl text-slate-900">Alif</h3>
+                                <p id="lettreSon" class="text-sm text-slate-500">a</p>
+                                <span id="lettreConnexion" class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Ne se connecte qu'à droite</span>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-3">
                             <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
                                 <p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p>
-                                <p id="formIsolee" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ب</p>
+                                <p id="formIsolee" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ا</p>
                                 <p class="text-xs text-slate-500 font-bold">🔊 Écouter</p>
                             </div>
                             <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
                                 <p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p>
-                                <p id="formDebut" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">بـ</p>
+                                <p id="formDebut" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p>
                                 <p class="text-xs text-slate-500 font-bold">🔊 Écouter</p>
                             </div>
                             <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
                                 <p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p>
-                                <p id="formMilieu" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـبـ</p>
+                                <p id="formMilieu" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p>
                                 <p class="text-xs text-slate-500 font-bold">🔊 Écouter</p>
                             </div>
                             <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
                                 <p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p>
-                                <p id="formFin" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـب</p>
+                                <p id="formFin" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ا</p>
                                 <p class="text-xs text-slate-500 font-bold">🔊 Écouter</p>
                             </div>
                         </div>
@@ -490,7 +490,7 @@
             window.scrollTo(0, 0);
         }
 
-        // Fonction pour sélectionner une lettre et défiler automatiquement vers le bas
+        // Fonction pour sélectionner une lettre et mettre à jour le tableau en bas
         function selectionnerLettre(nom, son, connexion, iso, deb, mil, fin) {
             document.getElementById('lettreGrandSymbole').textContent = iso;
             document.getElementById('lettreNom').textContent = nom;
@@ -501,8 +501,7 @@
             document.getElementById('formMilieu').textContent = mil;
             document.getElementById('formFin').textContent = fin;
             changerSousOnglet('table');
-            // Défilement automatique vers le bas pour voir le détail et les sous-onglets
-            window.scrollTo({ top: 600, behavior: 'smooth' });
+            window.scrollTo({ top: 300, behavior: 'smooth' });
         }
 
         // Fonction pour basculer entre les onglets principaux (Leçon / Écouter / Exercice)

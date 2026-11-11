@@ -215,7 +215,7 @@
         </div>
     </div>
 
-    <!-- VUE DU DÉTAIL D'UNE LEÇON (Onglets, Carte centrale, Lecture auto, Conseils et 6 exemples) -->
+    <!-- VUE DU DÉTAIL D'UNE LEÇON (Onglets interactifs & Contenu dynamique Leçon/Écouter) -->
     <div id="lessonDetailView" style="display: none;" class="min-h-screen bg-[#064e3b] text-white p-4 md:p-8">
         <div class="max-w-4xl mx-auto">
             
@@ -226,115 +226,217 @@
 
             <!-- Onglets de navigation en haut (Leçon / Écouter / Exercice) -->
             <div class="flex bg-white/10 border border-white/20 rounded-2xl p-1 mb-6 shadow-lg max-w-md mx-auto">
-                <button class="flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-sm py-2.5 rounded-xl shadow cursor-pointer">
+                <button id="tabLesson" onclick="changerOnglet('lesson')" class="flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-sm py-2.5 rounded-xl shadow cursor-pointer transition-all">
                     📖 Leçon
                 </button>
-                <button class="flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer">
+                <button id="tabListen" onclick="changerOnglet('listen')" class="flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer transition-all">
                     🎧 Écouter
                 </button>
-                <button class="flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer">
+                <button id="tabExercise" onclick="changerOnglet('exercise')" class="flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer transition-all">
                     ✍️ Exercice
                 </button>
             </div>
 
-            <!-- Grande carte centrale interactive -->
-            <div class="bg-white text-slate-900 rounded-3xl p-8 shadow-2xl text-center mb-6 border border-white/20">
-                <p class="text-4xl md:text-6xl font-bold font-arabic mb-4 tracking-wider" style="font-family: 'Amiri Quran', serif;" dir="rtl">ا ب ت</p>
-                <p class="text-xs text-slate-500 font-bold flex items-center justify-center gap-1">
-                    <span>🔊</span> Appuyez pour écouter
-                </p>
-            </div>
-
-            <!-- Bouton Lecture automatique -->
-            <div class="bg-white/10 border border-white/20 rounded-2xl p-4 flex items-center justify-between mb-6 shadow-lg">
-                <div class="flex items-center gap-2">
-                    <span class="text-amber-300">🔊</span>
-                    <span class="text-sm font-bold text-white">Lecture automatique</span>
+            <!-- CONTENU DE L'ONGLET "LEÇON" -->
+            <div id="contentLesson">
+                <!-- Grande carte centrale interactive -->
+                <div class="bg-white text-slate-900 rounded-3xl p-8 shadow-2xl text-center mb-6 border border-white/20">
+                    <p class="text-4xl md:text-6xl font-bold font-arabic mb-4 tracking-wider" style="font-family: 'Amiri Quran', serif;" dir="rtl">ا ب ت</p>
+                    <p class="text-xs text-slate-500 font-bold flex items-center justify-center gap-1">
+                        <span>🔊</span> Appuyez pour écouter
+                    </p>
                 </div>
-                <button class="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors cursor-pointer">
-                    Réécouter
+
+                <!-- Bouton Lecture automatique -->
+                <div class="bg-white/10 border border-white/20 rounded-2xl p-4 flex items-center justify-between mb-6 shadow-lg">
+                    <div class="flex items-center gap-2">
+                        <span class="text-amber-300">🔊</span>
+                        <span class="text-sm font-bold text-white">Lecture automatique</span>
+                    </div>
+                    <button class="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors cursor-pointer">
+                        Réécouter
+                    </button>
+                </div>
+
+                <!-- Description générale de la leçon -->
+                <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
+                    <p class="text-sm text-white/90 leading-relaxed">
+                        L'alphabet arabe contient 28 lettres. Il se lit de droite à gauche. Chaque lettre a un son unique. Dans cette leçon, vous allez découvrir chaque lettre, son nom et sa prononciation.
+                    </p>
+                </div>
+
+                <!-- Conseils pour apprendre -->
+                <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
+                    <h3 class="text-amber-300 text-sm font-black uppercase mb-4 flex items-center gap-2">
+                        <span>📖</span> CONSEILS POUR APPRENDRE
+                    </h3>
+                    <div class="space-y-3 text-sm text-white/90">
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
+                            <p>L'arabe se lit de droite à gauche, c'est l'inverse du français.</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
+                            <p>Chaque lettre change de forme selon sa position dans le mot (début, milieu, fin).</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
+                            <p>Certaines lettres se ressemblent beaucoup : seuls les points les distinguent. Par exemple <span class="font-arabic font-bold text-amber-200">ب</span> (Bā'), <span class="font-arabic font-bold text-amber-200">ت</span> (Tā') et <span class="font-arabic font-bold text-amber-200">ث</span> (Thā').</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
+                            <p>Écoutez bien chaque son et répétez à voix haute pour mémoriser.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exemples interactifs (6 cartes) -->
+                <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
+                    <h3 class="text-amber-300 text-sm font-black uppercase mb-4">EXEMPLES - CLIQUEZ POUR ÉCOUTER</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                            <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ت</p>
+                            <p class="font-black text-base">t</p>
+                            <p class="text-xs text-slate-500">Tâ - comme 't' en français</p>
+                        </div>
+                        <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                            <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ب</p>
+                            <p class="font-black text-base">b</p>
+                            <p class="text-xs text-slate-500">Bâ - comme 'b' en français</p>
+                        </div>
+                        <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                            <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ا</p>
+                            <p class="font-black text-base">a</p>
+                            <p class="text-xs text-slate-500">Alif - voyelle support</p>
+                        </div>
+                        <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                            <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ح</p>
+                            <p class="font-black text-base">ḥ</p>
+                            <p class="text-xs text-slate-500">Hâ - H guttural profond</p>
+                        </div>
+                        <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                            <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ج</p>
+                            <p class="font-black text-base">dj</p>
+                            <p class="text-xs text-slate-500">Jim - comme 'dj' dans Djibouti</p>
+                        </div>
+                        <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                            <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ث</p>
+                            <p class="font-black text-base">th</p>
+                            <p class="text-xs text-slate-500">Tha' - 'th' anglais sourd (think)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bouton inférieur qui bascule vers l'onglet Écouter (28 lettres) -->
+                <button onclick="changerOnglet('listen')" class="w-full bg-[#1e3a34] hover:bg-[#162c27] border border-emerald-400/30 text-emerald-200 font-bold py-4 rounded-2xl shadow-xl transition-colors cursor-pointer">
+                    Écouter tous les exemples 🎧
                 </button>
             </div>
 
-            <!-- Description générale de la leçon -->
-            <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
-                <p class="text-sm text-white/90 leading-relaxed">
-                    L'alphabet arabe contient 28 lettres. Il se lit de droite à gauche. Chaque lettre a un son unique. Dans cette leçon, vous allez découvrir chaque lettre, son nom et sa prononciation.
-                </p>
-            </div>
-
-            <!-- Conseils pour apprendre -->
-            <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
-                <h3 class="text-amber-300 text-sm font-black uppercase mb-4 flex items-center gap-2">
-                    <span>📖</span> CONSEILS POUR APPRENDRE
-                </h3>
-                <div class="space-y-3 text-sm text-white/90">
-                    <div class="flex items-start gap-3">
-                        <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</span>
-                        <p>L'arabe se lit de droite à gauche, c'est l'inverse du français.</p>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</span>
-                        <p>Chaque lettre change de forme selon sa position dans le mot (début, milieu, fin).</p>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</span>
-                        <p>Certaines lettres se ressemblent beaucoup : seuls les points les distinguent. Par exemple <span class="font-arabic font-bold text-amber-200">ب</span> (Bā'), <span class="font-arabic font-bold text-amber-200">ت</span> (Tā') et <span class="font-arabic font-bold text-amber-200">ث</span> (Thā').</p>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</span>
-                        <p>Écoutez bien chaque son et répétez à voix haute pour mémoriser.</p>
-                    </div>
+            <!-- CONTENU DE L'ONGLET "ÉCOUTER" (Les 28 lettres de l'alphabet) -->
+            <div id="contentListen" style="display: none;">
+                <div class="flex items-center justify-between mb-4 px-2">
+                    <p class="text-sm text-white/80">Clique sur chaque lettre pour écouter</p>
+                    <span class="bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">0/28</span>
                 </div>
-            </div>
 
-            <!-- Exemples interactifs (6 cartes) -->
-            <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
-                <h3 class="text-amber-300 text-sm font-black uppercase mb-4">EXEMPLES - CLIQUEZ POUR ÉCOUTER</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Carte 1 : Tâ -->
-                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
-                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ت</p>
-                        <p class="font-black text-base">t</p>
-                        <p class="text-xs text-slate-500">Tâ - comme 't' en français</p>
-                    </div>
-                    <!-- Carte 2 : Bâ -->
-                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
-                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ب</p>
-                        <p class="font-black text-base">b</p>
-                        <p class="text-xs text-slate-500">Bâ - comme 'b' en français</p>
-                    </div>
-                    <!-- Carte 3 : Alif -->
-                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
-                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ا</p>
-                        <p class="font-black text-base">a</p>
-                        <p class="text-xs text-slate-500">Alif - voyelle support</p>
-                    </div>
-                    <!-- Carte 4 : Hâ -->
-                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
-                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ح</p>
-                        <p class="font-black text-base">ḥ</p>
-                        <p class="text-xs text-slate-500">Hâ - H guttural profond</p>
-                    </div>
-                    <!-- Carte 5 : Jim -->
-                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
-                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ج</p>
-                        <p class="font-black text-base">dj</p>
-                        <p class="text-xs text-slate-500">Jim - comme 'dj' dans Djibouti</p>
-                    </div>
-                    <!-- Carte 6 : Thâ -->
+                <!-- Grille des 28 lettres de base -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <!-- Lettre 1 : Thâ -->
                     <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
                         <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ث</p>
-                        <p class="font-black text-base">th</p>
-                        <p class="text-xs text-slate-500">Tha' - 'th' anglais sourd (think)</p>
+                        <p class="font-black text-sm">th</p>
                     </div>
+                    <!-- Lettre 2 : Tâ -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ت</p>
+                        <p class="font-black text-sm">t</p>
+                    </div>
+                    <!-- Lettre 3 : Bâ -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ب</p>
+                        <p class="font-black text-sm">b</p>
+                    </div>
+                    <!-- Lettre 4 : Alif -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ا</p>
+                        <p class="font-black text-sm">a</p>
+                    </div>
+                    <!-- Lettre 5 : Khâ -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">خ</p>
+                        <p class="font-black text-sm">kh</p>
+                    </div>
+                    <!-- Lettre 6 : Hâ -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ح</p>
+                        <p class="font-black text-sm">ḥ</p>
+                    </div>
+                    <!-- Lettre 7 : Jim -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ج</p>
+                        <p class="font-black text-sm">dj</p>
+                    </div>
+                    <!-- Lettre 8 : Dâl -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">د</p>
+                        <p class="font-black text-sm">d</p>
+                    </div>
+                    <!-- Lettre 9 : Zay -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ز</p>
+                        <p class="font-black text-sm">z</p>
+                    </div>
+                    <!-- Lettre 10 : Râ -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ر</p>
+                        <p class="font-black text-sm">r</p>
+                    </div>
+                    <!-- Lettre 11 : Dhâl -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ذ</p>
+                        <p class="font-black text-sm">dh</p>
+                    </div>
+                    <!-- Lettre 12 : Sîn -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">س</p>
+                        <p class="font-black text-sm">s</p>
+                    </div>
+                    <!-- Lettre 13 : Tâ (emphatique) -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ط</p>
+                        <p class="font-black text-sm">ṭ</p>
+                    </div>
+                    <!-- Lettre 14 : Dâd -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ض</p>
+                        <p class="font-black text-sm">ḍ</p>
+                    </div>
+                    <!-- Lettre 15 : Sâd -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ص</p>
+                        <p class="font-black text-sm">ṣ</p>
+                    </div>
+                    <!-- Lettre 16 : Chîn -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ش</p>
+                        <p class="font-black text-sm">ch</p>
+                    </div>
+                </div>
+
+                <button onclick="alert('Lancement de l’exercice')" class="w-full bg-[#1e3a34] hover:bg-[#162c27] border border-emerald-400/35 text-emerald-200 font-bold py-4 rounded-2xl shadow-xl transition-colors cursor-pointer">
+                    Commencer l'exercice →
+                </button>
+            </div>
+
+            <!-- CONTENU DE L'ONGLET "EXERCICE" -->
+            <div id="contentExercise" style="display: none;">
+                <div class="bg-white/10 border border-white/20 rounded-3xl p-8 text-center shadow-xl">
+                    <p class="text-lg font-bold text-amber-300 mb-2">Exercice en cours de préparation</p>
+                    <p class="text-sm text-white/80">Revenez bientôt pour tester vos connaissances sur l'alphabet arabe !</p>
                 </div>
             </div>
 
-            <!-- Bouton inférieur -->
-            <button class="w-full bg-[#1e3a34] hover:bg-[#162c27] border border-emerald-400/30 text-emerald-200 font-bold py-4 rounded-2xl shadow-xl transition-colors cursor-pointer">
-                Écouter tous les exemples 🎧
-            </button>
         </div>
     </div>
 
@@ -369,6 +471,39 @@
         function retourListeLecons() {
             document.getElementById('lessonDetailView').style.display = 'none';
             document.getElementById('lessonsView').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        // Fonction pour basculer entre les onglets (Leçon / Écouter / Exercice)
+        function changerOnglet(onglet) {
+            const tabLesson = document.getElementById('tabLesson');
+            const tabListen = document.getElementById('tabListen');
+            const tabExercise = document.getElementById('tabExercise');
+
+            const contentLesson = document.getElementById('contentLesson');
+            const contentListen = document.getElementById('contentListen');
+            const contentExercise = document.getElementById('contentExercise');
+
+            // Réinitialiser tous les styles d'onglets
+            tabLesson.className = "flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer transition-all";
+            tabListen.className = "flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer transition-all";
+            tabExercise.className = "flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer transition-all";
+
+            contentLesson.style.display = 'none';
+            contentListen.style.display = 'none';
+            contentExercise.style.display = 'none';
+
+            if (onglet === 'lesson') {
+                tabLesson.className = "flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-sm py-2.5 rounded-xl shadow cursor-pointer transition-all";
+                contentLesson.style.display = 'block';
+            } else if (onglet === 'listen') {
+                tabListen.className = "flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-sm py-2.5 rounded-xl shadow cursor-pointer transition-all";
+                contentListen.style.display = 'block';
+            } else if (onglet === 'exercise') {
+                tabExercise.className = "flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-sm py-2.5 rounded-xl shadow cursor-pointer transition-all";
+                contentExercise.style.display = 'block';
+            }
+
             window.scrollTo(0, 0);
         }
     </script>

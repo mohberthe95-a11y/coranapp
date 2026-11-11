@@ -215,12 +215,46 @@
         </div>
     </div>
 
-    <!-- VUE DU DÉTAIL D'UNE LEÇON (Conseils et 6 exemples complets) -->
+    <!-- VUE DU DÉTAIL D'UNE LEÇON (Onglets, Carte centrale, Lecture auto, Conseils et 6 exemples) -->
     <div id="lessonDetailView" style="display: none;" class="min-h-screen bg-[#064e3b] text-white p-4 md:p-8">
         <div class="max-w-4xl mx-auto">
+            
+            <!-- Bouton Retour -->
             <button onclick="retourListeLecons()" class="mb-6 flex items-center gap-2 bg-white text-[#064e3b] px-4 py-2 rounded-xl font-bold cursor-pointer shadow-lg">
                 ← Retour aux leçons
             </button>
+
+            <!-- Onglets de navigation en haut (Leçon / Écouter / Exercice) -->
+            <div class="flex bg-white/10 border border-white/20 rounded-2xl p-1 mb-6 shadow-lg max-w-md mx-auto">
+                <button class="flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-sm py-2.5 rounded-xl shadow cursor-pointer">
+                    📖 Leçon
+                </button>
+                <button class="flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer">
+                    🎧 Écouter
+                </button>
+                <button class="flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer">
+                    ✍️ Exercice
+                </button>
+            </div>
+
+            <!-- Grande carte centrale interactive -->
+            <div class="bg-white text-slate-900 rounded-3xl p-8 shadow-2xl text-center mb-6 border border-white/20">
+                <p class="text-4xl md:text-6xl font-bold font-arabic mb-4 tracking-wider" style="font-family: 'Amiri Quran', serif;" dir="rtl">ا ب ت</p>
+                <p class="text-xs text-slate-500 font-bold flex items-center justify-center gap-1">
+                    <span>🔊</span> Appuyez pour écouter
+                </p>
+            </div>
+
+            <!-- Bouton Lecture automatique -->
+            <div class="bg-white/10 border border-white/20 rounded-2xl p-4 flex items-center justify-between mb-6 shadow-lg">
+                <div class="flex items-center gap-2">
+                    <span class="text-amber-300">🔊</span>
+                    <span class="text-sm font-bold text-white">Lecture automatique</span>
+                </div>
+                <button class="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-4 py-2 rounded-xl transition-colors cursor-pointer">
+                    Réécouter
+                </button>
+            </div>
 
             <!-- Description générale de la leçon -->
             <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
@@ -254,7 +288,7 @@
                 </div>
             </div>
 
-            <!-- Exemples interactifs (6 cartes comme sur le modèle) -->
+            <!-- Exemples interactifs (6 cartes) -->
             <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
                 <h3 class="text-amber-300 text-sm font-black uppercase mb-4">EXEMPLES - CLIQUEZ POUR ÉCOUTER</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">

@@ -5,8 +5,32 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Niveau Débutant - LE VERIDIQUE A-Z</title>
+    <meta name="description" content="Apprenez à lire et mémoriser le Coran étape par étape avec LE VERIDIQUE A-Z">
+    <meta name="author" content="Berthé Mohamed">
     
-    <style>
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#064e3b">
+    <meta name="google" content="notranslate">
+    
+    <!-- Apple PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LE VERIDIQUE A-Z">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon/icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon/icon-512.png">
+    
+    <!-- Android / Microsoft -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="LE VERIDIQUE A-Z">
+    <meta name="msapplication-TileColor" content="#064e3b">
+    <meta name="msapplication-TileImage" content="/icon/icon-192.png">
+
+    <!-- Polices d'écriture arabes (Amiri & Scheherazade) -->
+    <style type="text/css">
+        @font-face {font-family:'Amiri';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);unicode-range:U+0600-06FF,U+0750-077F;font-display:swap;}
+        @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);unicode-range:U+0600-06FF,U+0750-077F;font-display:swap;}
+
         :root {
             --primary-dark: #064e3b;     /* Vert émeraude profond spirituel */
             --primary-accent: #059669;   
@@ -107,7 +131,7 @@
 
         .bismillah-text {
             font-size: 1.3rem;
-            font-family: serif;
+            font-family: 'Amiri', serif;
             color: #fef3c7;
             margin-bottom: 12px;
             letter-spacing: 0.5px;
@@ -137,7 +161,7 @@
             color: white; border-radius: 22px; padding: 22px; margin-bottom: 25px;
             border: 1px solid rgba(217, 119, 6, 0.35); box-shadow: var(--shadow-lg);
         }
-        .ayah-arabic { font-family: serif; font-size: 1.4rem; line-height: 2.2; text-align: right; margin: 15px 0; color: #fef3c7; }
+        .ayah-arabic { font-family: 'Amiri Quran', serif; font-size: 1.4rem; line-height: 2.2; text-align: right; margin: 15px 0; color: #fef3c7; }
         .ayah-translation { font-size: 0.88rem; color: #cbd5e1; line-height: 1.5; font-style: italic; }
         .ayah-actions { display: flex; gap: 10px; margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
         .btn-ayah-action { background: rgba(255,255,255,0.1); color: white; border: none; padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; cursor: pointer; }
@@ -178,6 +202,22 @@
             color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 10px;
         }
     </style>
+
+    <!-- Détection du mode sombre (Dark Mode) -->
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("theme");
+          if (theme === "system" || !theme) {
+            var prefersDark = window.matchMedia(
+              "(prefers-color-scheme: dark)",
+            ).matches;
+            theme = prefersDark ? "dark" : "light";
+          }
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {}
+      })();
+    </script>
 </head>
 
 <body>
@@ -301,7 +341,7 @@
 
     </div>
 
-    <!-- SCRIPT DE GESTION DU PRÉNOM -->
+    <!-- SCRIPTS DE GESTION -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const savedPrenom = localStorage.getItem('coranAppUserPrenom');
@@ -312,7 +352,9 @@
 
         function basculerTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
-            document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
         }
 
         function copierLienApp() {

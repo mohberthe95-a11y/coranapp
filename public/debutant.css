@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+/* Polices d'écriture arabes (Amiri & Scheherazade) */
+@font-face {
+    font-family: 'Amiri';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Amiri Quran';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Scheherazade New';
+    font-style: normal;
+    font-weight: 400;
+    src: url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);
+    font-display: swap;
+}
+
+.bg-primary {
+    background-color: #064e3b;
+}

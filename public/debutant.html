@@ -23,14 +23,8 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <!-- Polices d'écriture arabes (Amiri & Scheherazade) -->
-    <style type="text/css">
-        @font-face {font-family:'Amiri';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);font-display:swap;}
-        @font-face {font-family:'Amiri Quran';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);font-display:swap;}
-        @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);font-display:swap;}
-        
-        .bg-primary { background-color: #064e3b; }
-    </style>
+    <!-- Fichier CSS externe -->
+    <link rel="stylesheet" href="debutant.css">
 </head>
 
 <body class="bg-[#064e3b] text-white m-0 p-0">
@@ -338,40 +332,40 @@
                 
                 <!-- 1. GRILLE DES 28 LETTRES EN HAUT -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-                    <div onclick="selectionnerLettre('Thâ', 'th', 'Ne se connecte qu’à droite', 'ث', '—', '—', 'ث')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ث</p><p class="font-black text-sm">th</p></div>
-                    <div onclick="selectionnerLettre('Tâ', 't', 'Se connecte des deux côtés', 'ت', 'تـ', 'ـتـ', 'ـت')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ت</p><p class="font-black text-sm">t</p></div>
-                    <div onclick="selectionnerLettre('Bâ', 'b', 'Se connecte des deux côtés', 'ب', 'بـ', 'ـبـ', 'ـب')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ب</p><p class="font-black text-sm">b</p></div>
-                    <div onclick="selectionnerLettre('Alif', 'a', 'Ne se connecte qu’à droite', 'ا', '—', '—', 'ا')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ا</p><p class="font-black text-sm">a</p></div>
+                    <div onclick="allerALaLettre('lettre-tha')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ث</p><p class="font-black text-sm">th</p></div>
+                    <div onclick="allerALaLettre('lettre-ta')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ت</p><p class="font-black text-sm">t</p></div>
+                    <div onclick="allerALaLettre('lettre-ba')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ب</p><p class="font-black text-sm">b</p></div>
+                    <div onclick="allerALaLettre('lettre-alif')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ا</p><p class="font-black text-sm">a</p></div>
 
-                    <div onclick="selectionnerLettre('Dâl', 'd', 'Ne se connecte qu’à droite', 'د', '—', '—', 'ـد')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">د</p><p class="font-black text-sm">d</p></div>
-                    <div onclick="selectionnerLettre('Khâ', 'kh', 'Se connecte des deux côtés', 'خ', 'خـ', 'ـخـ', 'ـخ')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">خ</p><p class="font-black text-sm">kh</p></div>
-                    <div onclick="selectionnerLettre('Hâ', 'ḥ', 'Se connecte des deux côtés', 'ح', 'حـ', 'ـحـ', 'ـح')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ح</p><p class="font-black text-sm">ḥ</p></div>
-                    <div onclick="selectionnerLettre('Jim', 'dj', 'Se connecte des deux côtés', 'ج', 'جـ', 'ـجـ', 'ـج')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ج</p><p class="font-black text-sm">dj</p></div>
+                    <div onclick="allerALaLettre('lettre-dal')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">د</p><p class="font-black text-sm">d</p></div>
+                    <div onclick="allerALaLettre('lettre-kha')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">خ</p><p class="font-black text-sm">kh</p></div>
+                    <div onclick="allerALaLettre('lettre-ha')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ح</p><p class="font-black text-sm">ḥ</p></div>
+                    <div onclick="allerALaLettre('lettre-jim')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ج</p><p class="font-black text-sm">dj</p></div>
 
-                    <div onclick="selectionnerLettre('Sîn', 's', 'Se connecte des deux côtés', 'س', 'سـ', 'ـسـ', 'ـس')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">س</p><p class="font-black text-sm">s</p></div>
-                    <div onclick="selectionnerLettre('Zay', 'z', 'Ne se connecte qu’à droite', 'ز', '—', '—', 'ـز')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ز</p><p class="font-black text-sm">z</p></div>
-                    <div onclick="selectionnerLettre('Râ', 'r', 'Ne se connecte qu’à droite', 'ر', '—', '—', 'ـر')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ر</p><p class="font-black text-sm">r</p></div>
-                    <div onclick="selectionnerLettre('Dhâl', 'dh', 'Ne se connecte qu’à droite', 'ذ', '—', '—', 'ـذ')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ذ</p><p class="font-black text-sm">dh</p></div>
+                    <div onclick="allerALaLettre('lettre-sin')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">س</p><p class="font-black text-sm">s</p></div>
+                    <div onclick="allerALaLettre('lettre-zay')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ز</p><p class="font-black text-sm">z</p></div>
+                    <div onclick="allerALaLettre('lettre-ra')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ر</p><p class="font-black text-sm">r</p></div>
+                    <div onclick="allerALaLettre('lettre-dhal')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ذ</p><p class="font-black text-sm">dh</p></div>
 
-                    <div onclick="selectionnerLettre('Tâ (emphatique)', 'ṭ', 'Se connecte des deux côtés', 'ط', 'طـ', 'ـطـ', 'ـط')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ط</p><p class="font-black text-sm">ṭ</p></div>
-                    <div onclick="selectionnerLettre('Dâd', 'ḍ', 'Se connecte des deux côtés', 'ض', 'ضـ', 'ـضـ', 'ـض')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ض</p><p class="font-black text-sm">ḍ</p></div>
-                    <div onclick="selectionnerLettre('Sâd', 'ṣ', 'Se connecte des deux côtés', 'ص', 'صـ', 'ـصـ', 'ـص')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ص</p><p class="font-black text-sm">ṣ</p></div>
-                    <div onclick="selectionnerLettre('Chîn', 'ch', 'Se connecte des deux côtés', 'ش', 'شـ', 'ـشـ', 'ـش')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ش</p><p class="font-black text-sm">ch</p></div>
+                    <div onclick="allerALaLettre('lettre-ta-emph')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ط</p><p class="font-black text-sm">ṭ</p></div>
+                    <div onclick="allerALaLettre('lettre-dad')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ض</p><p class="font-black text-sm">ḍ</p></div>
+                    <div onclick="allerALaLettre('lettre-sad')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ص</p><p class="font-black text-sm">ṣ</p></div>
+                    <div onclick="allerALaLettre('lettre-chin')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ش</p><p class="font-black text-sm">ch</p></div>
 
-                    <div onclick="selectionnerLettre('Fâ', 'f', 'Se connecte des deux côtés', 'ف', 'فـ', 'ـفـ', 'ـف')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ف</p><p class="font-black text-sm">f</p></div>
-                    <div onclick="selectionnerLettre('Ghâyn', 'gh', 'Se connecte des deux côtés', 'غ', 'غـ', 'ـغـ', 'ـغ')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">غ</p><p class="font-black text-sm">gh</p></div>
-                    <div onclick="selectionnerLettre('Ayn', 'ʿ', 'Se connecte des deux côtés', 'ع', 'عـ', 'ـعـ', 'ـع')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ع</p><p class="font-black text-sm">ʿ</p></div>
-                    <div onclick="selectionnerLettre('Zâ (emphatique)', 'ẓ', 'Se connecte des deux côtés', 'ظ', 'ظـ', 'ـظـ', 'ـظ')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ظ</p><p class="font-black text-sm">ẓ</p></div>
+                    <div onclick="allerALaLettre('lettre-fa')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ف</p><p class="font-black text-sm">f</p></div>
+                    <div onclick="allerALaLettre('lettre-ghayn')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">غ</p><p class="font-black text-sm">gh</p></div>
+                    <div onclick="allerALaLettre('lettre-ayn')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ع</p><p class="font-black text-sm">ʿ</p></div>
+                    <div onclick="allerALaLettre('lettre-za-emph')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ظ</p><p class="font-black text-sm">ẓ</p></div>
 
-                    <div onclick="selectionnerLettre('Mîm', 'm', 'Se connecte des deux côtés', 'م', 'مـ', 'ـمـ', 'ـم')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">م</p><p class="font-black text-sm">m</p></div>
-                    <div onclick="selectionnerLettre('Lâm', 'l', 'Se connecte des deux côtés', 'ل', 'لـ', 'ـلـ', 'ـل')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ل</p><p class="font-black text-sm">l</p></div>
-                    <div onclick="selectionnerLettre('Kâf', 'k', 'Se connecte des deux côtés', 'ك', 'كـ', 'ـكـ', 'ـك')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ك</p><p class="font-black text-sm">k</p></div>
-                    <div onclick="selectionnerLettre('Qâf', 'q', 'Se connecte des deux côtés', 'ق', 'قـ', 'ـقـ', 'ـق')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ق</p><p class="font-black text-sm">q</p></div>
+                    <div onclick="allerALaLettre('lettre-mim')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">م</p><p class="font-black text-sm">m</p></div>
+                    <div onclick="allerALaLettre('lettre-lam')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ل</p><p class="font-black text-sm">l</p></div>
+                    <div onclick="allerALaLettre('lettre-kaf')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ك</p><p class="font-black text-sm">k</p></div>
+                    <div onclick="allerALaLettre('lettre-qaf')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ق</p><p class="font-black text-sm">q</p></div>
 
-                    <div onclick="selectionnerLettre('Yâ', 'y/î', 'Se connecte des deux côtés', 'ي', 'يـ', 'ـيـ', 'ـي')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ي</p><p class="font-black text-sm">y/î</p></div>
-                    <div onclick="selectionnerLettre('Wâw', 'w/û', 'Ne se connecte qu’à droite', 'و', '—', '—', 'ـو')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">و</p><p class="font-black text-sm">w/û</p></div>
-                    <div onclick="selectionnerLettre('Hâ', 'h', 'Se connecte des deux côtés', 'ه', 'هـ', 'ـهـ', 'ـه')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ه</p><p class="font-black text-sm">h</p></div>
-                    <div onclick="selectionnerLettre('Nûn', 'n', 'Se connecte des deux côtés', 'ن', 'نـ', 'ـنـ', 'ـن')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ن</p><p class="font-black text-sm">n</p></div>
+                    <div onclick="allerALaLettre('lettre-ya')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ي</p><p class="font-black text-sm">y/î</p></div>
+                    <div onclick="allerALaLettre('lettre-waw')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">و</p><p class="font-black text-sm">w/û</p></div>
+                    <div onclick="allerALaLettre('lettre-ha-fin')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ه</p><p class="font-black text-sm">h</p></div>
+                    <div onclick="allerALaLettre('lettre-nun')" class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors"><p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ن</p><p class="font-black text-sm">n</p></div>
                 </div>
 
                 <!-- 2. LES 3 SOUS-ONGLETS EN BAS (Tableau / Quiz / Assemblage) -->
@@ -387,40 +381,516 @@
                     </button>
                 </div>
 
-                <!-- CONTENU DU SOUS-ONGLET "TABLEAU" -->
+                <!-- CONTENU DU SOUS-ONGLET "TABLEAU" : LISTE DÉFILANTE DE TOUTES LES LETTRES (1 par 1) -->
                 <div id="subContentTable">
                     <p class="text-xs text-white/80 mb-3 text-center">Appuie sur chaque forme pour écouter sa prononciation.</p>
-                    <div class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl mb-6 border border-white/20">
-                        <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
-                            <span id="lettreGrandSymbole" class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ا</span>
-                            <div>
-                                <h3 id="lettreNom" class="font-black text-xl text-slate-900">Alif</h3>
-                                <p id="lettreSon" class="text-sm text-slate-500">a</p>
-                                <span id="lettreConnexion" class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Ne se connecte qu'à droite</span>
+                    
+                    <div class="space-y-6">
+                        
+                        <!-- 1. Thâ -->
+                        <div id="lettre-tha" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ث</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Thâ'</h3>
+                                    <p class="text-sm text-slate-500">th</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Ne se connecte qu’à droite</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ث</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ث</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-3">
-                            <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
-                                <p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p>
-                                <p id="formIsolee" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ا</p>
-                                <p class="text-xs text-slate-500 font-bold">🔊 Écouter</p>
+
+                        <!-- 2. Tâ -->
+                        <div id="lettre-ta" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ت</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Tâ'</h3>
+                                    <p class="text-sm text-slate-500">t</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
                             </div>
-                            <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
-                                <p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p>
-                                <p id="formDebut" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p>
-                                <p class="text-xs text-slate-500 font-bold">🔊 Écouter</p>
-                            </div>
-                            <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
-                                <p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p>
-                                <p id="formMilieu" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p>
-                                <p class="text-xs text-slate-500 font-bold">🔊 Écouter</p>
-                            </div>
-                            <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100">
-                                <p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p>
-                                <p id="formFin" class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ا</p>
-                                <p class="text-xs text-slate-500 font-bold">🔊 Écouter</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ت</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">تـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـتـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـت</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
                             </div>
                         </div>
+
+                        <!-- 3. Bâ -->
+                        <div id="lettre-ba" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ب</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Bâ'</h3>
+                                    <p class="text-sm text-slate-500">b</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ب</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">بـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـبـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـب</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Alif -->
+                        <div id="lettre-alif" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ا</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Alif</h3>
+                                    <p class="text-sm text-slate-500">a</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Ne se connecte qu’à droite</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ا</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ا</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 5. Dâl -->
+                        <div id="lettre-dal" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">د</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Dâl</h3>
+                                    <p class="text-sm text-slate-500">d</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Ne se connecte qu’à droite</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">د</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـد</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 6. Khâ -->
+                        <div id="lettre-kha" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">خ</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Khâ'</h3>
+                                    <p class="text-sm text-slate-500">kh</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">خ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">خـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـخـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـخ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 7. Hâ -->
+                        <div id="lettre-ha" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ح</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Hâ'</h3>
+                                    <p class="text-sm text-slate-500">ḥ</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ح</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">حـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـحـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـح</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 8. Jim -->
+                        <div id="lettre-jim" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ج</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Jim</h3>
+                                    <p class="text-sm text-slate-500">dj</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ج</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">جـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـجـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـج</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 9. Sîn -->
+                        <div id="lettre-sin" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">س</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Sîn</h3>
+                                    <p class="text-sm text-slate-500">s</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">س</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">سـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـسـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـس</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 10. Zay -->
+                        <div id="lettre-zay" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ز</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Zay</h3>
+                                    <p class="text-sm text-slate-500">z</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Ne se connecte qu’à droite</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ز</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـز</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 11. Râ -->
+                        <div id="lettre-ra" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ر</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Râ'</h3>
+                                    <p class="text-sm text-slate-500">r</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Ne se connecte qu’à droite</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ر</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـر</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 12. Dhâl -->
+                        <div id="lettre-dhal" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ذ</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Dhâl</h3>
+                                    <p class="text-sm text-slate-500">dh</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Ne se connecte qu’à droite</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ذ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـذ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 13. Tâ (emphatique) -->
+                        <div id="lettre-ta-emph" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ط</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Tâ' (emphatique)</h3>
+                                    <p class="text-sm text-slate-500">ṭ</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ط</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">طـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـطـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـط</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 14. Dâd -->
+                        <div id="lettre-dad" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ض</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Dâd</h3>
+                                    <p class="text-sm text-slate-500">ḍ</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ض</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ضـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـضـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـض</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 15. Sâd -->
+                        <div id="lettre-sad" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ص</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Sâd</h3>
+                                    <p class="text-sm text-slate-500">ṣ</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ص</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">صـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـصـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـص</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 16. Chîn -->
+                        <div id="lettre-chin" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ش</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Chîn</h3>
+                                    <p class="text-sm text-slate-500">ch</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ش</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">شـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـشـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـش</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 17. Fâ -->
+                        <div id="lettre-fa" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ف</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Fâ'</h3>
+                                    <p class="text-sm text-slate-500">f</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ف</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">فـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـفـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـف</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 18. Ghâyn -->
+                        <div id="lettre-ghayn" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">غ</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Ghâyn</h3>
+                                    <p class="text-sm text-slate-500">gh</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">غ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">غـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـغـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـغ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 19. Ayn -->
+                        <div id="lettre-ayn" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ع</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Ayn</h3>
+                                    <p class="text-sm text-slate-500">ʿ</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ع</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">عـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـعـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـع</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 20. Zâ (emphatique) -->
+                        <div id="lettre-za-emph" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ظ</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Zâ' (emphatique)</h3>
+                                    <p class="text-sm text-slate-500">ẓ</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ظ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ظـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـظـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـظ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 21. Mîm -->
+                        <div id="lettre-mim" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">م</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Mîm</h3>
+                                    <p class="text-sm text-slate-500">m</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">م</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">مـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـمـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـم</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 22. Lâm -->
+                        <div id="lettre-lam" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ل</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Lâm</h3>
+                                    <p class="text-sm text-slate-500">l</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ل</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">لـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـلـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـل</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 23. Kâf -->
+                        <div id="lettre-kaf" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ك</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Kâf</h3>
+                                    <p class="text-sm text-slate-500">k</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ك</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">كـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـكـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـك</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 24. Qâf -->
+                        <div id="lettre-qaf" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ق</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Qâf</h3>
+                                    <p class="text-sm text-slate-500">q</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ق</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">قـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـقـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـق</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 25. Yâ -->
+                        <div id="lettre-ya" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ي</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Yâ'</h3>
+                                    <p class="text-sm text-slate-500">y/î</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ي</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">يـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـيـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـي</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 26. Wâw -->
+                        <div id="lettre-waw" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">و</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Wâw</h3>
+                                    <p class="text-sm text-slate-500">w/û</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Ne se connecte qu’à droite</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">و</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">—</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـو</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 27. Hâ (fin) -->
+                        <div id="lettre-ha-fin" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ه</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Hâ'</h3>
+                                    <p class="text-sm text-slate-500">h</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ه</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">هـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـهـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـه</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
+                        <!-- 28. Nûn -->
+                        <div id="lettre-nun" class="bg-white text-slate-900 rounded-3xl p-6 shadow-2xl border border-white/20">
+                            <div class="flex items-center gap-4 mb-4 border-b border-slate-100 pb-4">
+                                <span class="text-5xl font-bold font-arabic" style="font-family: 'Amiri Quran', serif;">ن</span>
+                                <div>
+                                    <h3 class="font-black text-xl text-slate-900">Nûn</h3>
+                                    <p class="text-sm text-slate-500">n</p>
+                                    <span class="inline-block bg-amber-50 text-amber-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full mt-1">Se connecte des deux côtés</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Isolée</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ن</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Début</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">نـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Milieu</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـنـ</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                                <div class="bg-slate-50 p-4 rounded-2xl text-center border border-slate-100"><p class="text-[10px] font-black uppercase text-slate-400 mb-1">Fin</p><p class="text-3xl font-bold font-arabic mb-2" style="font-family: 'Amiri Quran', serif;">ـن</p><p class="text-xs text-slate-500 font-bold">🔊 Écouter</p></div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -440,7 +910,7 @@
                     </div>
                 </div>
 
-                <button onclick="alert('Lancement de l’exercice')" class="w-full bg-[#1e3a34] hover:bg-[#162c27] border border-emerald-400/35 text-emerald-200 font-bold py-4 rounded-2xl shadow-xl transition-colors cursor-pointer">
+                <button onclick="alert('Lancement de l’exercice')" class="w-full bg-[#1e3a34] hover:bg-[#162c27] border border-emerald-400/35 text-emerald-200 font-bold py-4 rounded-2xl shadow-xl transition-colors cursor-pointer mt-6">
                     Commencer l'exercice →
                 </button>
             </div>
@@ -456,117 +926,8 @@
         </div>
     </div>
 
-    <!-- SCRIPT DE NAVIGATION ET GESTION -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const savedPrenom = localStorage.getItem('coranAppUserPrenom');
-            if (savedPrenom) {
-                document.getElementById('userNameDisplay').textContent = savedPrenom;
-            }
-        });
-
-        function afficherVueLecons() {
-            document.getElementById('root').style.display = 'none';
-            document.getElementById('lessonDetailView').style.display = 'none';
-            document.getElementById('lessonsView').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        function fermerVueLecons() {
-            document.getElementById('lessonsView').style.display = 'none';
-            document.getElementById('root').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        function ouvrirDetailLecon() {
-            document.getElementById('lessonsView').style.display = 'none';
-            document.getElementById('lessonDetailView').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        function retourListeLecons() {
-            document.getElementById('lessonDetailView').style.display = 'none';
-            document.getElementById('lessonsView').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        // Fonction pour sélectionner une lettre et mettre à jour le tableau en bas avec défilement fluide
-        function selectionnerLettre(nom, son, connexion, iso, deb, mil, fin) {
-            document.getElementById('lettreGrandSymbole').textContent = iso;
-            document.getElementById('lettreNom').textContent = nom;
-            document.getElementById('lettreSon').textContent = son;
-            document.getElementById('lettreConnexion').textContent = connexion;
-            document.getElementById('formIsolee').textContent = iso;
-            document.getElementById('formDebut').textContent = deb;
-            document.getElementById('formMilieu').textContent = mil;
-            document.getElementById('formFin').textContent = fin;
-            changerSousOnglet('table');
-            // Défilement automatique vers le bas pour voir le tableau mis à jour
-            window.scrollTo({ top: 400, behavior: 'smooth' });
-        }
-
-        // Fonction pour basculer entre les onglets principaux (Leçon / Écouter / Exercice)
-        function changerOnglet(onglet) {
-            const tabLesson = document.getElementById('tabLesson');
-            const tabListen = document.getElementById('tabListen');
-            const tabExercise = document.getElementById('tabExercise');
-
-            const contentLesson = document.getElementById('contentLesson');
-            const contentListen = document.getElementById('contentListen');
-            const contentExercise = document.getElementById('contentExercise');
-
-            tabLesson.className = "flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer transition-all";
-            tabListen.className = "flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer transition-all";
-            tabExercise.className = "flex-1 flex items-center justify-center gap-2 text-white/80 hover:text-white font-bold text-sm py-2.5 rounded-xl cursor-pointer transition-all";
-
-            contentLesson.style.display = 'none';
-            contentListen.style.display = 'none';
-            contentExercise.style.display = 'none';
-
-            if (onglet === 'lesson') {
-                tabLesson.className = "flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-sm py-2.5 rounded-xl shadow cursor-pointer transition-all";
-                contentLesson.style.display = 'block';
-            } else if (onglet === 'listen') {
-                tabListen.className = "flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-sm py-2.5 rounded-xl shadow cursor-pointer transition-all";
-                contentListen.style.display = 'block';
-            } else if (onglet === 'exercise') {
-                tabExercise.className = "flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-sm py-2.5 rounded-xl shadow cursor-pointer transition-all";
-                contentExercise.style.display = 'block';
-            }
-
-            window.scrollTo(0, 0);
-        }
-
-        // Fonction pour basculer entre les sous-onglets en bas (Tableau / Quiz / Assemblage)
-        function changerSousOnglet(sousOnglet) {
-            const subTabTable = document.getElementById('subTabTable');
-            const subTabQuiz = document.getElementById('subTabQuiz');
-            const subTabAssemble = document.getElementById('subTabAssemble');
-
-            const subContentTable = document.getElementById('subContentTable');
-            const subContentQuiz = document.getElementById('subContentQuiz');
-            const subContentAssemble = document.getElementById('subContentAssemble');
-
-            subTabTable.className = "flex-1 flex items-center justify-center gap-2 text-white/85 hover:text-white font-bold text-xs py-2 rounded-xl cursor-pointer transition-all";
-            subTabQuiz.className = "flex-1 flex items-center justify-center gap-2 text-white/85 hover:text-white font-bold text-xs py-2 rounded-xl cursor-pointer transition-all";
-            subTabAssemble.className = "flex-1 flex items-center justify-center gap-2 text-white/85 hover:text-white font-bold text-xs py-2 rounded-xl cursor-pointer transition-all";
-
-            subContentTable.style.display = 'none';
-            subContentQuiz.style.display = 'none';
-            subContentAssemble.style.display = 'none';
-
-            if (sousOnglet === 'table') {
-                subTabTable.className = "flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-xs py-2 rounded-xl shadow cursor-pointer transition-all";
-                subContentTable.style.display = 'block';
-            } else if (sousOnglet === 'quiz') {
-                subTabQuiz.className = "flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-xs py-2 rounded-xl shadow cursor-pointer transition-all";
-                subContentQuiz.style.display = 'block';
-            } else if (sousOnglet === 'assemble') {
-                subTabAssemble.className = "flex-1 flex items-center justify-center gap-2 bg-white text-[#064e3b] font-black text-xs py-2 rounded-xl shadow cursor-pointer transition-all";
-                subContentAssemble.style.display = 'block';
-            }
-        }
-    </script>
+    <!-- SCRIPT EXTERNE -->
+    <script src="debutant.js"></script>
 </body>
 
 </html>

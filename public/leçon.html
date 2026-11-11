@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" style="color-scheme: light;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Apprendre le Coran - LE VERIDIQUE A-Z</title>
+    <meta name="description" content="Apprenez à lire et mémoriser le Coran étape par étape avec LE VERIDIQUE A-Z">
+    <meta name="author" content="Berthé Mohamed">
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#064e3b">
+    <meta name="google" content="notranslate">
+    
+    <!-- Apple PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LE VERIDIQUE A-Z">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon/icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon/icon-512.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Fichier CSS externe -->
+    <link rel="stylesheet" href="debutant.css">
+</head>
+
+<body class="bg-[#064e3b] text-white m-0 p-0">
+
+    <!-- BOUTONS FLOTTANTS (WhatsApp & Vocal sur le côté) -->
+    <a href="https://whatsapp.com/channel/0029Vb6e1diBvvsfUwa7hy1w" target="_blank" rel="noopener noreferrer" class="fixed top-4 right-4 z-50 flex items-center gap-2 bg-[#25D366] text-white rounded-full pl-3 pr-4 py-2.5 shadow-xl font-semibold text-sm border-2 border-white/30 cursor-pointer hover:scale-105 transition-transform">
+        📱 WhatsApp
+    </a>
+    <button type="button" class="fixed top-16 right-4 z-50 flex items-center gap-2 bg-amber-400 text-emerald-950 rounded-full pl-3 pr-4 py-2.5 shadow-xl font-black text-sm border-2 border-white/40 cursor-pointer hover:scale-105 transition-transform">
+        🎤 Vocal <span class="bg-red-600 text-white text-[10px] rounded-full px-1.5 py-0.2">Nouveau</span>
+    </button>
+
+    <!-- SECTION ACCUEIL (Menu Principal) -->
+    <div id="root">
+        <div class="min-h-screen bg-primary relative overflow-hidden flex flex-col">
+            
+            <!-- Éléments de fond décoratifs -->
+            <div class="absolute top-0 right-0 w-72 h-72 rounded-full bg-white/5 blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-white/5 blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
+            <div class="absolute inset-0 opacity-[0.035] pointer-events-none" style="background-image: radial-gradient(circle, white 1.5px, transparent 1.5px); background-size: 36px 36px;"></div>
+
+            <div class="relative flex-1 max-w-md md:max-w-lg lg:max-w-xl mx-auto w-full px-6 py-12 flex flex-col">
+
+                <!-- EN-TÊTE ET SALUTATION -->
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-white/15 border-2 border-white/25 mb-6 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-11 h-11 text-white"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
+                    </div>
+                    <p lang="ar" translate="no" class="text-white/90 text-2xl mb-4 leading-loose tracking-wide notranslate" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif; direction: rtl;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                    <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-3">As-salāmu ʿalaykum, <span id="userNameDisplay">Mohamed</span> ! 🌙</h1>
+                    <p class="text-white/70 text-base">Apprends l'arabe coranique étape par étape</p>
+                    <p class="text-amber-300/80 text-sm font-bold mt-2">Formé par LE VERIDIQUE A-Z</p>
+                </div>
+
+                <!-- BOUTONS DE NAVIGATION PRINCIPAUX -->
+                <div class="mb-4 space-y-3">
+                    <!-- Redirige vers la page des leçons -->
+                    <a href="leçon.html" class="inline-flex items-center justify-center gap-2 w-full bg-white text-[#064e3b] hover:bg-white/90 font-black text-lg h-16 rounded-2xl shadow-2xl cursor-pointer transition-all">
+                        📖 Commencer les leçons
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right ml-1 w-5 h-5"><path d="m9 18 6-6-6-6"></path></svg>
+                    </a>
+
+                    <div class="flex gap-3">
+                        <button class="inline-flex items-center justify-center gap-2 flex-1 bg-amber-400 text-emerald-950 hover:bg-amber-300 shadow-lg font-black text-base h-14 rounded-2xl cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-text mr-1.5 w-5 h-5"><path d="M12 7v14"></path><path d="M16 12h2"></path><path d="M16 8h2"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path><path d="M6 12h2"></path><path d="M6 8h2"></path></svg>
+                            Lire le Coran
+                        </button>
+                        <button class="flex flex-col items-center justify-center gap-1 bg-emerald-400/15 border border-emerald-400/30 rounded-2xl px-4 h-14 hover:bg-emerald-400/25 transition-colors cursor-pointer flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-5 h-5 text-emerald-300"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path></svg>
+                            <span class="text-emerald-200 font-black text-[10px] leading-none">IA</span>
+                        </button>
+                    </div>
+
+                    <button class="w-full flex items-center justify-center gap-2 bg-white text-emerald-950 rounded-2xl h-14 hover:bg-white/90 transition-colors cursor-pointer shadow-lg">
+                        <span class="text-xl">📖</span>
+                        <span class="font-black text-base">Apprendre les sourates</span>
+                    </button>
+
+                    <div class="flex gap-3">
+                        <button class="flex-1 flex items-center justify-center gap-2 bg-purple-400/15 border border-purple-400/25 rounded-2xl h-12 hover:bg-purple-400/25 transition-colors cursor-pointer">
+                            <span class="text-lg">🤲</span>
+                            <span class="text-purple-200 font-black text-sm">Dou'a</span>
+                        </button>
+                        <button class="flex-1 flex items-center justify-center gap-2 bg-sky-400/15 border border-sky-400/25 rounded-2xl h-12 hover:bg-sky-400/25 transition-colors cursor-pointer">
+                            <span class="text-lg">🗓️</span>
+                            <span class="text-sky-200 font-black text-sm">Calendrier</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARTE AYAH DU JOUR -->
+                <div class="relative rounded-2xl overflow-hidden mb-4 cursor-pointer group shadow-xl border border-white/10 bg-[#738ca6]">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80"></div>
+                    <div class="relative p-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-4 h-4 text-amber-300"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path></svg>
+                                <span class="text-amber-300 text-xs font-black uppercase tracking-wider">Ayah du jour</span>
+                            </div>
+                            <span class="text-white/70 text-[10px] font-bold bg-black/30 rounded-full px-2 py-0.5">Al-Israa · v.32</span>
+                        </div>
+                        <p lang="ar" translate="no" class="text-xl leading-[2.2] text-amber-100 font-bold mb-3 text-right notranslate" dir="rtl" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;">وَلَا تَقْرَبُوا۟ ٱلزِّنَىٰٓ ۖ إِنَّهُۥ كَانَ فَٰحِشَةًۭ وَسَآءَ سَبِيلًۭا</p>
+                        <p class="text-white/90 text-sm leading-relaxed mb-3 italic">« Et n'approchez point la fornication. En vérité, c'est une turpitude et quel mauvais chemin! »</p>
+                        <div class="flex items-center gap-2">
+                            <button class="flex items-center gap-1.5 rounded-full px-3 py-1.5 bg-white/15 hover:bg-white/25 transition-colors text-xs font-bold text-white cursor-pointer">Écouter</button>
+                            <button class="flex items-center gap-1.5 rounded-full px-3 py-1.5 bg-amber-400 hover:bg-amber-300 transition-colors text-xs font-black text-emerald-950 shadow-lg cursor-pointer">Partager</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTE OFFRE PREMIUM (2000 FCFA) -->
+                <div class="mb-4">
+                    <div class="relative rounded-3xl overflow-hidden border border-amber-400/40 shadow-2xl bg-gradient-to-br from-amber-900 via-amber-700 to-amber-600 p-6 text-white">
+                        <div class="inline-flex items-center gap-1.5 bg-white/15 border border-white/25 rounded-full px-3 py-1 mb-4">
+                            <span class="text-amber-100 text-[11px] font-black uppercase tracking-wider">Offre Premium</span>
+                        </div>
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-amber-300/25 border-2 border-amber-200/40 flex items-center justify-center flex-shrink-0">
+                                ⭐
+                            </div>
+                            <div>
+                                <h3 class="font-black text-xl leading-tight">Passe à la version Premium</h3>
+                                <p class="text-amber-100/85 text-sm mt-1">Débloque tout le programme et accélère ton apprentissage.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between gap-3 bg-black/20 rounded-2xl px-4 py-3 mb-4">
+                            <div>
+                                <p class="text-amber-100/70 text-[11px] font-bold uppercase">Paiement unique</p>
+                                <p class="font-black text-2xl leading-none">2 000 FCFA</p>
+                            </div>
+                            <span class="text-emerald-200 text-[11px] font-black bg-emerald-500/25 border border-emerald-400/30 rounded-full px-2.5 py-1">Accès à vie</span>
+                        </div>
+                        <button class="w-full flex items-center justify-center gap-2 bg-white text-amber-700 font-black text-base rounded-2xl h-14 shadow-lg cursor-pointer">
+                            Débloquer maintenant
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STATISTIQUES DES LEÇONS -->
+                <div class="grid grid-cols-3 gap-3 mb-8">
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">29</p>
+                        <p class="text-white/60 text-xs mt-0.5">Leçons</p>
+                    </div>
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">0</p>
+                        <p class="text-white/60 text-xs mt-0.5">Terminées</p>
+                    </div>
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">6</p>
+                        <p class="text-white/60 text-xs mt-0.5">Gratuites</p>
+                    </div>
+                </div>
+
+                <!-- BOUTON CHAÎNE WHATSAPP -->
+                <div class="mt-auto pt-6 border-t border-white/15 text-center">
+                    <a href="https://whatsapp.com/channel/0029Vb6e1diBvvsfUwa7hy1w" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-[#25D366] text-white font-bold text-lg rounded-xl px-6 py-4 shadow-lg hover:bg-[#1ebe5a] transition-colors w-full cursor-pointer">
+                        Rejoindre notre chaîne WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT EXTERNE -->
+    <script src="debutant.js"></script>
+</body>
+
+</html>

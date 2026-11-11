@@ -67,7 +67,6 @@
 
                 <!-- BOUTONS DE NAVIGATION PRINCIPAUX -->
                 <div class="mb-4 space-y-3">
-                    <!-- Bouton Commencer les leçons qui appelle la fonction JS pour afficher la liste -->
                     <button onclick="afficherVueLecons()" class="inline-flex items-center justify-center gap-2 w-full bg-white text-[#064e3b] hover:bg-white/90 font-black text-lg h-16 rounded-2xl shadow-2xl cursor-pointer transition-all">
                         📖 Commencer les leçons
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right ml-1 w-5 h-5"><path d="m9 18 6-6-6-6"></path></svg>
@@ -176,7 +175,7 @@
         </div>
     </div>
 
-    <!-- VUE DES LEÇONS (Cachée par défaut, s'affiche au clic sur le bouton) -->
+    <!-- VUE DE LA LISTE DES LEÇONS -->
     <div id="lessonsView" style="display: none;" class="min-h-screen bg-[#064e3b] text-white p-4 md:p-8">
         <div class="max-w-4xl mx-auto">
             <button onclick="fermerVueLecons()" class="mb-6 flex items-center gap-2 bg-white text-[#064e3b] px-4 py-2 rounded-xl font-bold cursor-pointer shadow-lg">
@@ -190,10 +189,9 @@
                 <h2 class="text-2xl font-black text-white mb-2">Alphabet, voyelles et chiffres de base</h2>
             </div>
             
-            <!-- Grille des leçons style référence -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <!-- Leçon 1 -->
-                <div onclick="alerteLecon(1)" class="bg-white text-slate-900 rounded-2xl p-5 border border-slate-200 shadow-md hover:shadow-lg cursor-pointer transition-all">
+                <!-- Leçon 1 (Ouvre le détail de la leçon) -->
+                <div onclick="ouvrirDetailLecon()" class="bg-white text-slate-900 rounded-2xl p-5 border border-slate-200 shadow-md hover:shadow-lg cursor-pointer transition-all">
                     <div class="flex justify-between items-start mb-3">
                         <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-black text-sm">1</span>
                         <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Gratuit</span>
@@ -204,7 +202,7 @@
                 </div>
 
                 <!-- Leçon 2 -->
-                <div onclick="alerteLecon(2)" class="bg-white text-slate-900 rounded-2xl p-5 border border-slate-200 shadow-md hover:shadow-lg cursor-pointer transition-all">
+                <div onclick="alert('Leçon verrouillée (Premium)')" class="bg-white text-slate-900 rounded-2xl p-5 border border-slate-200 shadow-md hover:shadow-lg cursor-pointer transition-all">
                     <div class="flex justify-between items-start mb-3">
                         <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-black text-sm">2</span>
                         <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">🔒 Premium</span>
@@ -217,7 +215,71 @@
         </div>
     </div>
 
-    <!-- SCRIPT DE GESTION DE L'AFFICHAGE -->
+    <!-- VUE DU DÉTAIL D'UNE LEÇON (Style exact des photos 17, 18, 19) -->
+    <div id="lessonDetailView" style="display: none;" class="min-h-screen bg-[#064e3b] text-white p-4 md:p-8">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="retourListeLecons()" class="mb-6 flex items-center gap-2 bg-white text-[#064e3b] px-4 py-2 rounded-xl font-bold cursor-pointer shadow-lg">
+                ← Retour aux leçons
+            </button>
+
+            <!-- En-tête de la leçon -->
+            <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6 text-center">
+                <span class="text-amber-300 text-xs font-black uppercase tracking-wider">1 · Alphabet arabe</span>
+                <h2 class="text-xl font-bold text-white/80 mt-1 mb-4">Les 28 lettres de base</h2>
+                
+                <!-- Grande carte centrale arabe -->
+                <div class="bg-white text-slate-900 rounded-2xl p-8 shadow-inner mb-4">
+                    <p class="text-4xl md:text-5xl font-bold font-arabic mb-3" style="font-family: 'Amiri Quran', serif;" dir="rtl">ا ب ت</p>
+                    <p class="text-xs text-slate-500">🔊 Appuyez pour écouter</p>
+                </div>
+
+                <!-- Bouton lecture automatique -->
+                <div class="bg-white/15 border border-white/25 rounded-2xl p-4 flex items-center justify-between">
+                    <span class="text-sm font-bold text-white">🔊 Lecture automatique</span>
+                    <button class="bg-white/20 hover:bg-white/30 text-white text-xs font-bold px-3 py-1.5 rounded-xl transition-colors">Réécouter</button>
+                </div>
+            </div>
+
+            <!-- Conseils pour apprendre -->
+            <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
+                <h3 class="text-amber-300 text-sm font-black uppercase mb-3">💡 Conseils pour apprendre</h3>
+                <ul class="space-y-2 text-sm text-white/90">
+                    <li>• L'arabe se lit de droite à gauche, c'est l'inverse du français.</li>
+                    <li>• Chaque lettre change de forme selon sa position dans le mot (début, milieu, fin).</li>
+                    <li>• Écoutez bien chaque son et répétez à voix haute pour mémoriser.</li>
+                </ul>
+            </div>
+
+            <!-- Exemples interactifs -->
+            <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
+                <h3 class="text-amber-300 text-sm font-black uppercase mb-4">Exemples - Cliquez pour écouter</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ت</p>
+                        <p class="font-black text-base">t</p>
+                        <p class="text-xs text-slate-500">Tâ - comme 'T' en français</p>
+                    </div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ب</p>
+                        <p class="font-black text-base">b</p>
+                        <p class="text-xs text-slate-500">Bâ - comme 'B' en français</p>
+                    </div>
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ا</p>
+                        <p class="font-black text-base">a</p>
+                        <p class="text-xs text-slate-500">Alif - voyelle support</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bouton inférieur -->
+            <button class="w-full bg-[#1e3a34] hover:bg-[#162c27] border border-emerald-400/30 text-emerald-200 font-bold py-4 rounded-2xl shadow-xl transition-colors cursor-pointer">
+                Écouter tous les exemples 🎧
+            </button>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE NAVIGATION ET GESTION -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const savedPrenom = localStorage.getItem('coranAppUserPrenom');
@@ -228,6 +290,7 @@
 
         function afficherVueLecons() {
             document.getElementById('root').style.display = 'none';
+            document.getElementById('lessonDetailView').style.display = 'none';
             document.getElementById('lessonsView').style.display = 'block';
             window.scrollTo(0, 0);
         }
@@ -238,8 +301,16 @@
             window.scrollTo(0, 0);
         }
 
-        function alerteLecon(num) {
-            alert("Ouverture de la leçon " + num);
+        function ouvrirDetailLecon() {
+            document.getElementById('lessonsView').style.display = 'none';
+            document.getElementById('lessonDetailView').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function retourListeLecons() {
+            document.getElementById('lessonDetailView').style.display = 'none';
+            document.getElementById('lessonsView').style.display = 'block';
+            window.scrollTo(0, 0);
         }
     </script>
 </body>

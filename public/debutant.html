@@ -1,875 +1,204 @@
-<!doctype html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Apprendre le Coran</title>
-        <meta name="description" content="Apprenez à lire le Coran étape par étape"/>
-        <meta name="author" content="Hercules"/>
-        <link rel="icon" type="image/png" href="/icon/icon-192.png"/>
-        <!-- PWA Configuration -->
-        <link rel="manifest" href="/site.webmanifest"/>
-        <meta name="theme-color" content="#166534"/>
-        <meta name="google" content="notranslate"/>
-        <!-- Apple PWA -->
-        <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-        <meta name="apple-mobile-web-app-title" content="Le Coran"/>
-        <link rel="apple-touch-icon" sizes="192x192" href="/icon/icon-192.png"/>
-        <link rel="apple-touch-icon" sizes="512x512" href="/icon/icon-512.png"/>
-        <!-- Android / Microsoft -->
-        <meta name="mobile-web-app-capable" content="yes"/>
-        <meta name="application-name" content="Le Coran"/>
-        <meta name="msapplication-TileColor" content="#166534"/>
-        <meta name="msapplication-TileImage" content="/icon/icon-192.png"/>
-        <meta property="og:title" content="Apprendre le Coran"/>
-        <meta property="og:description" content="Apprenez à lire le Coran étape par étape"/>
-        <meta property="og:type" content="website"/>
-        <meta property="og:image" content="https://hercules.app/og/app/01KM83WMTHFBE7T4ZQAA9G8NTH.png"/>
-        <meta property="og:image:type" content="image/png"/>
-        <meta name="twitter:card" content="summary_large_image"/>
-        <meta name="twitter:image" content="https://hercules.app/og/app/01KM83WMTHFBE7T4ZQAA9G8NTH.png"/>
-        <meta name="twitter:site" content="@UseHercules"/>
-        <!-- Fonts -->
-        <style type="text/css">
-            @font-face {
-                font-family: 'Amiri';
-                font-style: normal;
-                font-weight: 400;
-                src: url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);
-                unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri';
-                font-style: normal;
-                font-weight: 400;
-                src: url(/cf-fonts/s/amiri/5.2.8/latin-ext/400/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri';
-                font-style: normal;
-                font-weight: 400;
-                src: url(/cf-fonts/s/amiri/5.2.8/latin/400/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri';
-                font-style: normal;
-                font-weight: 700;
-                src: url(/cf-fonts/s/amiri/5.2.8/arabic/700/normal.woff2);
-                unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri';
-                font-style: normal;
-                font-weight: 700;
-                src: url(/cf-fonts/s/amiri/5.2.8/latin/700/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri';
-                font-style: normal;
-                font-weight: 700;
-                src: url(/cf-fonts/s/amiri/5.2.8/latin-ext/700/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri';
-                font-style: italic;
-                font-weight: 400;
-                src: url(/cf-fonts/s/amiri/5.2.8/latin-ext/400/italic.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri';
-                font-style: italic;
-                font-weight: 400;
-                src: url(/cf-fonts/s/amiri/5.2.8/latin/400/italic.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri';
-                font-style: italic;
-                font-weight: 400;
-                src: url(/cf-fonts/s/amiri/5.2.8/arabic/400/italic.woff2);
-                unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri';
-                font-style: italic;
-                font-weight: 700;
-                src: url(/cf-fonts/s/amiri/5.2.8/latin-ext/700/italic.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri';
-                font-style: italic;
-                font-weight: 700;
-                src: url(/cf-fonts/s/amiri/5.2.8/latin/700/italic.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri';
-                font-style: italic;
-                font-weight: 700;
-                src: url(/cf-fonts/s/amiri/5.2.8/arabic/700/italic.woff2);
-                unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri Quran';
-                font-style: normal;
-                font-weight: 400;
-                src: url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);
-                unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Amiri Quran';
-                font-style: normal;
-                font-weight: 400;
-                src: url(/cf-fonts/s/amiri-quran/5.2.10/latin/400/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 400;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/latin-ext/400/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 400;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/latin/400/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 400;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);
-                unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 500;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/latin-ext/500/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 500;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/500/normal.woff2);
-                unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 500;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/latin/500/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 600;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/latin/600/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 600;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/600/normal.woff2);
-                unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 600;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/latin-ext/600/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 700;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/latin/700/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 700;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/700/normal.woff2);
-                unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Scheherazade New';
-                font-style: normal;
-                font-weight: 700;
-                src: url(/cf-fonts/s/scheherazade-new/5.2.8/latin-ext/700/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Fira Code';
-                font-style: normal;
-                font-weight: 300 700;
-                src: url(/cf-fonts/v/fira-code/5.2.7/cyrillic/wght/normal.woff2);
-                unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Fira Code';
-                font-style: normal;
-                font-weight: 300 700;
-                src: url(/cf-fonts/v/fira-code/5.2.7/cyrillic-ext/wght/normal.woff2);
-                unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Fira Code';
-                font-style: normal;
-                font-weight: 300 700;
-                src: url(/cf-fonts/v/fira-code/5.2.7/latin/wght/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Fira Code';
-                font-style: normal;
-                font-weight: 300 700;
-                src: url(/cf-fonts/v/fira-code/5.2.7/latin-ext/wght/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Fira Code';
-                font-style: normal;
-                font-weight: 300 700;
-                src: url(/cf-fonts/v/fira-code/5.2.7/symbols2/wght/normal.woff2);
-                unicode-range: U+2000-2001,U+2004-2008,U+200A,U+23B8-23BD,U+2500-259F;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Fira Code';
-                font-style: normal;
-                font-weight: 300 700;
-                src: url(/cf-fonts/v/fira-code/5.2.7/greek-ext/wght/normal.woff2);
-                unicode-range: U+1F00-1FFF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Fira Code';
-                font-style: normal;
-                font-weight: 300 700;
-                src: url(/cf-fonts/v/fira-code/5.2.7/greek/wght/normal.woff2);
-                unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Geist Mono';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/geist-mono/5.2.7/latin-ext/wght/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Geist Mono';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/geist-mono/5.2.7/cyrillic/wght/normal.woff2);
-                unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Geist Mono';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/geist-mono/5.2.7/latin/wght/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Geist';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/geist/5.2.8/latin-ext/wght/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Geist';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/geist/5.2.8/cyrillic/wght/normal.woff2);
-                unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Geist';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/geist/5.2.8/latin/wght/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/greek/opsz/normal.woff2);
-                unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/latin-ext/opsz/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/vietnamese/opsz/normal.woff2);
-                unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/opsz/normal.woff2);
-                unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/greek-ext/opsz/normal.woff2);
-                unicode-range: U+1F00-1FFF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/cyrillic/opsz/normal.woff2);
-                unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/latin/opsz/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/greek/opsz/italic.woff2);
-                unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/cyrillic-ext/opsz/italic.woff2);
-                unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/latin/opsz/italic.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/latin-ext/opsz/italic.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/greek-ext/opsz/italic.woff2);
-                unicode-range: U+1F00-1FFF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/vietnamese/opsz/italic.woff2);
-                unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Inter';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/inter/5.2.8/cyrillic/opsz/italic.woff2);
-                unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: normal;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/cyrillic-ext/wght/normal.woff2);
-                unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: normal;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/greek/wght/normal.woff2);
-                unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: normal;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/cyrillic/wght/normal.woff2);
-                unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: normal;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/latin/wght/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: normal;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/latin-ext/wght/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: normal;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/vietnamese/wght/normal.woff2);
-                unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: italic;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/cyrillic/wght/italic.woff2);
-                unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: italic;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/latin-ext/wght/italic.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: italic;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/greek/wght/italic.woff2);
-                unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: italic;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/cyrillic-ext/wght/italic.woff2);
-                unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: italic;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/latin/wght/italic.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'JetBrains Mono';
-                font-style: italic;
-                font-weight: 100 800;
-                src: url(/cf-fonts/v/jetbrains-mono/5.2.8/vietnamese/wght/italic.woff2);
-                unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Montserrat';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/montserrat/5.2.8/latin-ext/wght/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Montserrat';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/montserrat/5.2.8/vietnamese/wght/normal.woff2);
-                unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Montserrat';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/montserrat/5.2.8/cyrillic-ext/wght/normal.woff2);
-                unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
-                font-display: swap;
-            }
+<!DOCTYPE html>
+<html lang="fr" class="light" style="color-scheme: light;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Apprendre le Coran - LE VERIDIQUE A-Z</title>
+    <meta name="description" content="Apprenez à lire et mémoriser le Coran étape par étape avec LE VERIDIQUE A-Z">
+    <meta name="author" content="Berthé Mohamed">
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#064e3b">
+    <meta name="google" content="notranslate">
+    
+    <!-- Apple PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LE VERIDIQUE A-Z">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon/icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon/icon-512.png">
+
+    <!-- Tailwind CSS (ou les styles de ton application) -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Polices d'écriture arabes (Amiri & Scheherazade) -->
+    <style type="text/css">
+        @font-face {font-family:'Amiri';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Amiri Quran';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        
+        .bg-primary { background-color: #064e3b; }
+    </style>
+</head>
+
+<body class="bg-[#064e3b] text-white m-0 p-0">
+
+    <div id="root">
+        <div class="min-h-screen bg-primary relative overflow-hidden flex flex-col">
+            
+            <!-- Éléments de fond décoratifs -->
+            <div class="absolute top-0 right-0 w-72 h-72 rounded-full bg-white/5 blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-white/5 blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
+            <div class="absolute inset-0 opacity-[0.035] pointer-events-none" style="background-image: radial-gradient(circle, white 1.5px, transparent 1.5px); background-size: 36px 36px;"></div>
+
+            <div class="relative flex-1 max-w-md md:max-w-lg lg:max-w-xl mx-auto w-full px-6 py-12 flex flex-col">
+                
+                <!-- MESSAGE VOCAL DU PROFESSEUR -->
+                <div class="mt-8 mb-6 rounded-2xl border-2 border-amber-400/70 bg-amber-400/15 p-3 shadow-xl space-y-2">
+                    <button type="button" class="w-full flex items-center justify-between cursor-pointer">
+                        <span class="flex items-center gap-2 text-amber-300 text-sm font-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mic w-4 h-4"><path d="M12 19v3"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><rect x="9" y="2" width="6" height="13" rx="3"></rect></svg>
+                            Message vocal du professeur
+                            <span class="bg-red-600 text-white text-[10px] rounded-full px-2 py-0.5">Nouveau</span>
+                        </span>
+                        <span class="flex items-center text-white/80 text-xs font-bold">Tous <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></span>
+                    </button>
+                    <div class="flex items-center gap-3 rounded-2xl border p-3 bg-white/10 border-white/15">
+                        <button type="button" aria-label="Écouter" class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer transition-colors bg-amber-400 text-emerald-950 hover:bg-amber-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play w-5 h-5 ml-0.5"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path></svg>
+                        </button>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-bold text-sm truncate text-white">Il faut écouter ce Message urgent 🚨</p>
+                            <div class="h-1.5 rounded-full mt-1.5 overflow-hidden bg-white/20">
+                                <div class="h-full rounded-full bg-amber-300" style="width: 0%;"></div>
+                            </div>
+                            <p class="text-[11px] mt-1 text-white/60">7 novembre 2026 à 23:13 · 0:28</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EN-TÊTE ET SALUTATION -->
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-white/15 border-2 border-white/25 mb-6 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-11 h-11 text-white"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
+                    </div>
+                    <p lang="ar" translate="no" class="text-white/90 text-2xl mb-4 leading-loose tracking-wide notranslate" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif; direction: rtl;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                    <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-3">As-salāmu ʿalaykum, <span id="userNameDisplay">Mohamed</span> ! 🌙</h1>
+                    <p class="text-white/70 text-base">Apprends l'arabe coranique étape par étape</p>
+                    <p class="text-amber-300/80 text-sm font-bold mt-2">Formé par LE VERIDIQUE A-Z</p>
+                </div>
+
+                <!-- BOUTONS DE NAVIGATION PRINCIPAUX -->
+                <div class="mb-4 space-y-3">
+                    <button onclick="window.location.href='debutant.html'" class="inline-flex items-center justify-center gap-2 w-full bg-white text-[#064e3b] hover:bg-white/90 font-black text-lg h-16 rounded-2xl shadow-2xl cursor-pointer transition-all">
+                        📖 Commencer les leçons
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right ml-1 w-5 h-5"><path d="m9 18 6-6-6-6"></path></svg>
+                    </button>
+
+                    <div class="flex gap-3">
+                        <button class="inline-flex items-center justify-center gap-2 flex-1 bg-amber-400 text-emerald-950 hover:bg-amber-300 shadow-lg font-black text-base h-14 rounded-2xl cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-text mr-1.5 w-5 h-5"><path d="M12 7v14"></path><path d="M16 12h2"></path><path d="M16 8h2"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path><path d="M6 12h2"></path><path d="M6 8h2"></path></svg>
+                            Lire le Coran
+                        </button>
+                        <button class="flex flex-col items-center justify-center gap-1 bg-emerald-400/15 border border-emerald-400/30 rounded-2xl px-4 h-14 hover:bg-emerald-400/25 transition-colors cursor-pointer flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-5 h-5 text-emerald-300"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path></svg>
+                            <span class="text-emerald-200 font-black text-[10px] leading-none">IA</span>
+                        </button>
+                    </div>
+
+                    <button class="w-full flex items-center justify-center gap-2 bg-white text-emerald-950 rounded-2xl h-14 hover:bg-white/90 transition-colors cursor-pointer shadow-lg">
+                        <span class="text-xl">📖</span>
+                        <span class="font-black text-base">Apprendre les sourates</span>
+                    </button>
+
+                    <div class="flex gap-3">
+                        <button class="flex-1 flex items-center justify-center gap-2 bg-purple-400/15 border border-purple-400/25 rounded-2xl h-12 hover:bg-purple-400/25 transition-colors cursor-pointer">
+                            <span class="text-lg">🤲</span>
+                            <span class="text-purple-200 font-black text-sm">Dou'a</span>
+                        </button>
+                        <button class="flex-1 flex items-center justify-center gap-2 bg-sky-400/15 border border-sky-400/25 rounded-2xl h-12 hover:bg-sky-400/25 transition-colors cursor-pointer">
+                            <span class="text-lg">🗓️</span>
+                            <span class="text-sky-200 font-black text-sm">Calendrier</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARTE AYAH DU JOUR -->
+                <div class="relative rounded-2xl overflow-hidden mb-4 cursor-pointer group shadow-xl border border-white/10 bg-[#738ca6]">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80"></div>
+                    <div class="relative p-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-4 h-4 text-amber-300"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path></svg>
+                                <span class="text-amber-300 text-xs font-black uppercase tracking-wider">Ayah du jour</span>
+                            </div>
+                            <span class="text-white/70 text-[10px] font-bold bg-black/30 rounded-full px-2 py-0.5">Al-Israa · v.32</span>
+                        </div>
+                        <p lang="ar" translate="no" class="text-xl leading-[2.2] text-amber-100 font-bold mb-3 text-right notranslate" dir="rtl" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;">وَلَا تَقْرَبُوا۟ ٱلزِّنَىٰٓ ۖ إِنَّهُۥ كَانَ فَٰحِشَةًۭ وَسَآءَ سَبِيلًۭا</p>
+                        <p class="text-white/90 text-sm leading-relaxed mb-3 italic">« Et n'approchez point la fornication. En vérité, c'est une turpitude et quel mauvais chemin! »</p>
+                        <div class="flex items-center gap-2">
+                            <button class="flex items-center gap-1.5 rounded-full px-3 py-1.5 bg-white/15 hover:bg-white/25 transition-colors text-xs font-bold text-white cursor-pointer">Écouter</button>
+                            <button class="flex items-center gap-1.5 rounded-full px-3 py-1.5 bg-amber-400 hover:bg-amber-300 transition-colors text-xs font-black text-emerald-950 shadow-lg cursor-pointer">Partager</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARTE OFFRE PREMIUM (2000 FCFA) -->
+                <div class="mb-4">
+                    <div class="relative rounded-3xl overflow-hidden border border-amber-400/40 shadow-2xl bg-gradient-to-br from-amber-900 via-amber-700 to-amber-600 p-6 text-white">
+                        <div class="inline-flex items-center gap-1.5 bg-white/15 border border-white/25 rounded-full px-3 py-1 mb-4">
+                            <span class="text-amber-100 text-[11px] font-black uppercase tracking-wider">Offre Premium</span>
+                        </div>
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-amber-300/25 border-2 border-amber-200/40 flex items-center justify-center flex-shrink-0">
+                                ⭐
+                            </div>
+                            <div>
+                                <h3 class="font-black text-xl leading-tight">Passe à la version Premium</h3>
+                                <p class="text-amber-100/85 text-sm mt-1">Débloque tout le programme et accélère ton apprentissage.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between gap-3 bg-black/20 rounded-2xl px-4 py-3 mb-4">
+                            <div>
+                                <p class="text-amber-100/70 text-[11px] font-bold uppercase">Paiement unique</p>
+                                <p class="font-black text-2xl leading-none">2 000 FCFA</p>
+                            </div>
+                            <span class="text-emerald-200 text-[11px] font-black bg-emerald-500/25 border border-emerald-400/30 rounded-full px-2.5 py-1">Accès à vie</span>
+                        </div>
+                        <button class="w-full flex items-center justify-center gap-2 bg-white text-amber-700 font-black text-base rounded-2xl h-14 shadow-lg cursor-pointer">
+                            Débloquer maintenant
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STATISTIQUES DES LEÇONS -->
+                <div class="grid grid-cols-3 gap-3 mb-8">
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">29</p>
+                        <p class="text-white/60 text-xs mt-0.5">Leçons</p>
+                    </div>
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">0</p>
+                        <p class="text-white/60 text-xs mt-0.5">Terminées</p>
+                    </div>
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">6</p>
+                        <p class="text-white/60 text-xs mt-0.5">Gratuites</p>
+                    </div>
+                </div>
+
+                <!-- BOUTON CHAÎNE WHATSAPP -->
+                <div class="mt-auto pt-6 border-t border-white/15 text-center">
+                    <a href="https://whatsapp.com/channel/0029Vb6e1diBvvsfUwa7hy1w" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-[#25D366] text-white font-bold text-lg rounded-xl px-6 py-4 shadow-lg hover:bg-[#1ebe5a] transition-colors w-full cursor-pointer">
+                        Rejoindre notre chaîne WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE CHARGEMENT DU PRÉNOM -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedPrenom = localStorage.getItem('coranAppUserPrenom');
+            if (savedPrenom) {
+                document.getElementById('userNameDisplay').textContent = savedPrenom;
+            }
+        });
+    </script>
+</body>
 
-            @font-face {
-                font-family: 'Montserrat';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/montserrat/5.2.8/latin/wght/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Montserrat';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/montserrat/5.2.8/cyrillic/wght/normal.woff2);
-                unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Montserrat';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/montserrat/5.2.8/vietnamese/wght/italic.woff2);
-                unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Montserrat';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/montserrat/5.2.8/cyrillic/wght/italic.woff2);
-                unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Montserrat';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/montserrat/5.2.8/cyrillic-ext/wght/italic.woff2);
-                unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Montserrat';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/montserrat/5.2.8/latin-ext/wght/italic.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Montserrat';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/montserrat/5.2.8/latin/wght/italic.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/cyrillic-ext/wght/normal.woff2);
-                unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/math/wght/normal.woff2);
-                unicode-range: U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/greek/wght/normal.woff2);
-                unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/cyrillic/wght/normal.woff2);
-                unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/greek-ext/wght/normal.woff2);
-                unicode-range: U+1F00-1FFF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/latin-ext/wght/normal.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/latin/wght/normal.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: normal;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/vietnamese/wght/normal.woff2);
-                unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/greek-ext/wght/italic.woff2);
-                unicode-range: U+1F00-1FFF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/greek/wght/italic.woff2);
-                unicode-range: U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/latin/wght/italic.woff2);
-                unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/latin-ext/wght/italic.woff2);
-                unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/math/wght/italic.woff2);
-                unicode-range: U+0302-0303,U+0305,U+0307-0308,U+0310,U+0312,U+0315,U+031A,U+0326-0327,U+032C,U+032F-0330,U+0332-0333,U+0338,U+033A,U+0346,U+034D,U+0391-03A1,U+03A3-03A9,U+03B1-03C9,U+03D1,U+03D5-03D6,U+03F0-03F1,U+03F4-03F5,U+2016-2017,U+2034-2038,U+203C,U+2040,U+2043,U+2047,U+2050,U+2057,U+205F,U+2070-2071,U+2074-208E,U+2090-209C,U+20D0-20DC,U+20E1,U+20E5-20EF,U+2100-2112,U+2114-2115,U+2117-2121,U+2123-214F,U+2190,U+2192,U+2194-21AE,U+21B0-21E5,U+21F1-21F2,U+21F4-2211,U+2213-2214,U+2216-22FF,U+2308-230B,U+2310,U+2319,U+231C-2321,U+2336-237A,U+237C,U+2395,U+239B-23B7,U+23D0,U+23DC-23E1,U+2474-2475,U+25AF,U+25B3,U+25B7,U+25BD,U+25C1,U+25CA,U+25CC,U+25FB,U+266D-266F,U+27C0-27FF,U+2900-2AFF,U+2B0E-2B11,U+2B30-2B4C,U+2BFE,U+3030,U+FF5B,U+FF5D,U+1D400-1D7FF,U+1EE00-1EEFF;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/vietnamese/wght/italic.woff2);
-                unicode-range: U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/cyrillic-ext/wght/italic.woff2);
-                unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;
-                font-display: swap;
-            }
-
-            @font-face {
-                font-family: 'Noto Serif';
-                font-style: italic;
-                font-weight: 100 900;
-                src: url(/cf-fonts/v/noto-serif/5.2.9/cyrillic/wght/italic.woff2);
-                unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-                font-display: swap;
-            }
-        </style>
-        <!-- Detect dark mode preference and set the class before next-themes loads. This avoids a flash of unstyled content (FOUC) when the page loads. -->
-        <script>
-            (function() {
-                try {
-                    var theme = localStorage.getItem("theme");
-                    if (theme === "system" || !theme) {
-                        var prefersDark = window.matchMedia("(prefers-color-scheme: dark)", ).matches;
-                        theme = prefersDark ? "dark" : "light";
-                    }
-                    document.documentElement.classList.add(theme);
-                } catch (e) {}
-            }
-            )();
-        </script>
-        <script type="module" crossorigin src="/assets/index-BOpwm8_X.js"></script>
-        <link rel="stylesheet" crossorigin href="/assets/index-Dddtkkqk.css">
-        <script type="module" async fetchpriority="low" src="/_hercules/i.128m0g0qvu.js"></script>
-    </head>
-    <body>
-        <div id="root"></div>
-    </body>
 </html>

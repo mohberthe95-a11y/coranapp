@@ -215,7 +215,7 @@
         </div>
     </div>
 
-    <!-- VUE DU DÉTAIL D'UNE LEÇON (Conseils complets et fidèles) -->
+    <!-- VUE DU DÉTAIL D'UNE LEÇON (Conseils et 6 exemples complets) -->
     <div id="lessonDetailView" style="display: none;" class="min-h-screen bg-[#064e3b] text-white p-4 md:p-8">
         <div class="max-w-4xl mx-auto">
             <button onclick="retourListeLecons()" class="mb-6 flex items-center gap-2 bg-white text-[#064e3b] px-4 py-2 rounded-xl font-bold cursor-pointer shadow-lg">
@@ -229,7 +229,7 @@
                 </p>
             </div>
 
-            <!-- Conseils pour apprendre (Complets et identiques à la référence) -->
+            <!-- Conseils pour apprendre -->
             <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
                 <h3 class="text-amber-300 text-sm font-black uppercase mb-4 flex items-center gap-2">
                     <span>📖</span> CONSEILS POUR APPRENDRE
@@ -254,24 +254,45 @@
                 </div>
             </div>
 
-            <!-- Exemples interactifs -->
+            <!-- Exemples interactifs (6 cartes comme sur le modèle) -->
             <div class="bg-white/10 border border-white/20 rounded-3xl p-6 shadow-xl mb-6">
                 <h3 class="text-amber-300 text-sm font-black uppercase mb-4">EXEMPLES - CLIQUEZ POUR ÉCOUTER</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow">
+                    <!-- Carte 1 : Tâ -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
                         <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ت</p>
                         <p class="font-black text-base">t</p>
-                        <p class="text-xs text-slate-500">Tâ - comme 'T' en français</p>
+                        <p class="text-xs text-slate-500">Tâ - comme 't' en français</p>
                     </div>
-                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow">
+                    <!-- Carte 2 : Bâ -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
                         <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ب</p>
                         <p class="font-black text-base">b</p>
-                        <p class="text-xs text-slate-500">Bâ - comme 'B' en français</p>
+                        <p class="text-xs text-slate-500">Bâ - comme 'b' en français</p>
                     </div>
-                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow">
+                    <!-- Carte 3 : Alif -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
                         <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ا</p>
                         <p class="font-black text-base">a</p>
                         <p class="text-xs text-slate-500">Alif - voyelle support</p>
+                    </div>
+                    <!-- Carte 4 : Hâ -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ح</p>
+                        <p class="font-black text-base">ḥ</p>
+                        <p class="text-xs text-slate-500">Hâ - H guttural profond</p>
+                    </div>
+                    <!-- Carte 5 : Jim -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ج</p>
+                        <p class="font-black text-base">dj</p>
+                        <p class="text-xs text-slate-500">Jim - comme 'dj' dans Djibouti</p>
+                    </div>
+                    <!-- Carte 6 : Thâ -->
+                    <div class="bg-white text-slate-900 p-4 rounded-2xl text-center shadow cursor-pointer hover:bg-slate-50 transition-colors">
+                        <p class="text-3xl font-bold mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ث</p>
+                        <p class="font-black text-base">th</p>
+                        <p class="text-xs text-slate-500">Tha' - 'th' anglais sourd (think)</p>
                     </div>
                 </div>
             </div>

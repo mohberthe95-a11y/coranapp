@@ -20,7 +20,7 @@
     <link rel="apple-touch-icon" sizes="192x192" href="/icon/icon-192.png">
     <link rel="apple-touch-icon" sizes="512x512" href="/icon/icon-512.png">
 
-    <!-- Tailwind CSS (ou les styles de ton application) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Polices d'écriture arabes (Amiri & Scheherazade) -->
@@ -34,6 +34,14 @@
 </head>
 
 <body class="bg-[#064e3b] text-white m-0 p-0">
+
+    <!-- BOUTONS FLOTTANTS (WhatsApp & Vocal sur le côté) -->
+    <a href="https://whatsapp.com/channel/0029Vb6e1diBvvsfUwa7hy1w" target="_blank" rel="noopener noreferrer" class="fixed top-4 right-4 z-50 flex items-center gap-2 bg-[#25D366] text-white rounded-full pl-3 pr-4 py-2.5 shadow-xl font-semibold text-sm border-2 border-white/30 cursor-pointer hover:scale-105 transition-transform">
+        📱 WhatsApp
+    </a>
+    <button type="button" class="fixed top-16 right-4 z-50 flex items-center gap-2 bg-amber-400 text-emerald-950 rounded-full pl-3 pr-4 py-2.5 shadow-xl font-black text-sm border-2 border-white/40 cursor-pointer hover:scale-105 transition-transform">
+        🎤 Vocal <span class="bg-red-600 text-white text-[10px] rounded-full px-1.5 py-0.2">Nouveau</span>
+    </button>
 
     <div id="root">
         <div class="min-h-screen bg-primary relative overflow-hidden flex flex-col">
@@ -58,7 +66,8 @@
 
                 <!-- BOUTONS DE NAVIGATION PRINCIPAUX -->
                 <div class="mb-4 space-y-3">
-                    <button onclick="window.location.href='debutant.html'" class="inline-flex items-center justify-center gap-2 w-full bg-white text-[#064e3b] hover:bg-white/90 font-black text-lg h-16 rounded-2xl shadow-2xl cursor-pointer transition-all">
+                    <!-- Bouton Commencer les leçons mis à jour pour basculer vers la vue des leçons -->
+                    <button onclick="afficherVueLecons()" class="inline-flex items-center justify-center gap-2 w-full bg-white text-[#064e3b] hover:bg-white/90 font-black text-lg h-16 rounded-2xl shadow-2xl cursor-pointer transition-all">
                         📖 Commencer les leçons
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right ml-1 w-5 h-5"><path d="m9 18 6-6-6-6"></path></svg>
                     </button>
@@ -166,7 +175,48 @@
         </div>
     </div>
 
-    <!-- SCRIPT DE CHARGEMENT DU PRÉNOM -->
+    <!-- VUE DES LEÇONS (Générée dynamiquement ou affichée au clic) -->
+    <div id="lessonsView" style="display: none;" class="min-h-screen bg-slate-50 text-slate-800 p-4 md:p-8">
+        <div class="max-w-4xl mx-auto">
+            <button onclick="fermerVueLecons()" class="mb-6 flex items-center gap-2 bg-[#064e3b] text-white px-4 py-2 rounded-xl font-bold cursor-pointer">
+                ← Retour au menu
+            </button>
+            <div class="bg-white rounded-3xl p-6 shadow-xl border border-slate-200 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3 py-1 rounded-full uppercase">Niveau 1 · Débutant</span>
+                    <span class="text-slate-500 font-bold text-sm">0/10 terminées (0%)</span>
+                </div>
+                <h2 class="text-2xl font-black text-slate-900 mb-2">Alphabet, voyelles et chiffres de base</h2>
+            </div>
+            
+            <!-- Grille des leçons style référence -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <!-- Leçon 1 -->
+                <div onclick="alerteLecon(1)" class="bg-white rounded-2xl p-5 border border-slate-200 shadow-md hover:shadow-lg cursor-pointer transition-all">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-black text-sm">1</span>
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Gratuit</span>
+                    </div>
+                    <p class="text-2xl font-bold text-right mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">ا ب ت</p>
+                    <h3 class="font-black text-base text-slate-900">Alphabet arabe</h3>
+                    <p class="text-xs text-slate-500 mt-1">Les 28 lettres de base</p>
+                </div>
+
+                <!-- Leçon 2 -->
+                <div onclick="alerteLecon(2)" class="bg-white rounded-2xl p-5 border border-slate-200 shadow-md hover:shadow-lg cursor-pointer transition-all">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-black text-sm">2</span>
+                        <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full">🔒 Premium</span>
+                    </div>
+                    <p class="text-2xl font-bold text-right mb-2 font-arabic" style="font-family: 'Amiri Quran', serif;">كَتَبَ</p>
+                    <h3 class="font-black text-base text-slate-900">Les formes des lettres</h3>
+                    <p class="text-xs text-slate-500 mt-1">Isolée, début, milieu, fin</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE GESTION ET CHARGEMENT -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const savedPrenom = localStorage.getItem('coranAppUserPrenom');
@@ -174,6 +224,15 @@
                 document.getElementById('userNameDisplay').textContent = savedPrenom;
             }
         });
+
+        function afficherVueLecons() {
+            // Bascule l'affichage vers la section des leçons comme sur le modèle
+            window.location.href = 'debutant.html'; // Si tu as une page dédiée ou tu peux afficher le bloc #lessonsView
+        }
+
+        function alerteLecon(num) {
+            alert("Ouverture de la leçon " + num);
+        }
     </script>
 </body>
 

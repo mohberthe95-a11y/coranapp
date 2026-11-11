@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="light" style="color-scheme: light;">
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Niveau Débutant - LE VERIDIQUE A-Z</title>
+    <title>Apprendre le Coran - LE VERIDIQUE A-Z</title>
     <meta name="description" content="Apprenez à lire et mémoriser le Coran étape par étape avec LE VERIDIQUE A-Z">
     <meta name="author" content="Berthé Mohamed">
     
@@ -19,356 +19,185 @@
     <meta name="apple-mobile-web-app-title" content="LE VERIDIQUE A-Z">
     <link rel="apple-touch-icon" sizes="192x192" href="/icon/icon-192.png">
     <link rel="apple-touch-icon" sizes="512x512" href="/icon/icon-512.png">
-    
-    <!-- Android / Microsoft -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="LE VERIDIQUE A-Z">
-    <meta name="msapplication-TileColor" content="#064e3b">
-    <meta name="msapplication-TileImage" content="/icon/icon-192.png">
+
+    <!-- Tailwind CSS (ou les styles de ton application) -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <!-- Polices d'écriture arabes (Amiri & Scheherazade) -->
     <style type="text/css">
-        @font-face {font-family:'Amiri';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);unicode-range:U+0600-06FF,U+0750-077F;font-display:swap;}
-        @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);unicode-range:U+0600-06FF,U+0750-077F;font-display:swap;}
-
-        :root {
-            --primary-dark: #064e3b;     /* Vert émeraude profond spirituel */
-            --primary-accent: #059669;   
-            --gold-accent: #d97706;      
-            --gold-light: #fef3c7;
-            --bg-main: #064e3b;          /* Arrière-plan entièrement en vert */
-            --card-bg: #ffffff;
-            --card-inner-bg: #edf2f7;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border-color: #cbd5e1;
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Thème Sombre */
-        [data-theme="dark"] {
-            --primary-dark: #10b981;
-            --primary-accent: #34d399;
-            --gold-accent: #fbbf24;
-            --gold-light: rgba(251, 191, 36, 0.15);
-            --bg-main: #060911;
-            --card-bg: #0f172a;
-            --card-inner-bg: #1e293b;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.5);
-        }
-
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background-color: var(--bg-main);
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        .app-wrapper {
-            width: 100%;
-            max-width: 480px;
-            background-color: var(--bg-main);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            padding-bottom: 40px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.2);
-        }
-
-        /* En-tête inspiré de ton image (fond vert unifié, épuré, centré) */
-        .header-dash {
-            padding: 20px 20px 30px 20px;
-            background: #064e3b;
-            color: white;
-            text-align: center;
-            position: relative;
-        }
-
-        /* Conteneur des deux boutons en haut */
-        .top-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .control-btn {
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.78rem;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-        .control-btn:hover { background: rgba(255, 255, 255, 0.25); }
-
-        /* Style inspiré de l'image (icône du livre, texte arabe et salutation) */
-        .header-icon-container {
-            width: 70px;
-            height: 70px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            margin: 0 auto 15px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .bismillah-text {
-            font-size: 1.3rem;
-            font-family: 'Amiri', serif;
-            color: #fef3c7;
-            margin-bottom: 12px;
-            letter-spacing: 0.5px;
-        }
-
-        .dashboard-container {
-            padding: 0 20px;
-            margin-top: 10px;
-        }
-
-        /* Grille des fonctionnalités */
-        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
-        .feature-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer;
-            box-shadow: var(--shadow-sm); color: var(--text-main);
-        }
-        .feature-icon {
-            font-size: 1.5rem; width: 42px; height: 42px; border-radius: 14px;
-            background: var(--gold-light); display: flex; align-items: center; justify-content: center;
-        }
-        .feature-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
-
-        /* Carte Ayah du jour */
-        .ayah-card {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white; border-radius: 22px; padding: 22px; margin-bottom: 25px;
-            border: 1px solid rgba(217, 119, 6, 0.35); box-shadow: var(--shadow-lg);
-        }
-        .ayah-arabic { font-family: 'Amiri Quran', serif; font-size: 1.4rem; line-height: 2.2; text-align: right; margin: 15px 0; color: #fef3c7; }
-        .ayah-translation { font-size: 0.88rem; color: #cbd5e1; line-height: 1.5; font-style: italic; }
-        .ayah-actions { display: flex; gap: 10px; margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .btn-ayah-action { background: rgba(255,255,255,0.1); color: white; border: none; padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; cursor: pointer; }
-
-        /* Liste des leçons */
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; color: #ffffff; }
-        .section-title { font-size: 1.1rem; font-weight: 700; margin: 0; color: #ffffff; }
+        @font-face {font-family:'Amiri';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Amiri Quran';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);font-display:swap;}
         
-        .leçons-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
-        .leçon-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 16px; padding: 16px; display: flex; align-items: center;
-            justify-content: space-between; cursor: pointer; box-shadow: var(--shadow-sm);
-            color: var(--text-main);
-        }
-        .leçon-info { display: flex; align-items: center; gap: 12px; }
-        .leçon-num {
-            width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #064e3b, #059669);
-            color: white; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 0.9rem;
-        }
-        .leçon-titre { font-size: 0.95rem; font-weight: 600; margin: 0; color: var(--text-main); }
-        .leçon-sub { font-size: 0.78rem; color: var(--text-muted); margin: 2px 0 0 0; }
-        .badge-gratuit { background: #dcfce7; color: #15803d; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; }
-        .badge-lock { font-size: 1.1rem; }
-
-        /* Cartes d'actions bas de page */
-        .sadaqa-card {
-            background: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 22px; padding: 20px; margin-bottom: 20px; text-align: center; box-shadow: var(--shadow-sm);
-            color: var(--text-main);
-        }
-        .pwa-card {
-            background: linear-gradient(135deg, #064e3b, #047857);
-            color: white; border-radius: 22px; padding: 22px; margin-bottom: 20px; box-shadow: var(--shadow-sm);
-        }
-        .btn-continue {
-            width: 100%; padding: 14px; background: linear-gradient(135deg, #064e3b, #059669);
-            color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 10px;
-        }
+        .bg-primary { background-color: #064e3b; }
     </style>
-
-    <!-- Détection du mode sombre (Dark Mode) -->
-    <script>
-      (function () {
-        try {
-          var theme = localStorage.getItem("theme");
-          if (theme === "system" || !theme) {
-            var prefersDark = window.matchMedia(
-              "(prefers-color-scheme: dark)",
-            ).matches;
-            theme = prefersDark ? "dark" : "light";
-          }
-          document.documentElement.setAttribute('data-theme', theme);
-        } catch (e) {}
-      })();
-    </script>
 </head>
 
-<body>
+<body class="bg-[#064e3b] text-white m-0 p-0">
 
-    <div class="app-wrapper">
+    <div id="root">
+        <div class="min-h-screen bg-primary relative overflow-hidden flex flex-col">
+            
+            <!-- Éléments de fond décoratifs -->
+            <div class="absolute top-0 right-0 w-72 h-72 rounded-full bg-white/5 blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-white/5 blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
+            <div class="absolute inset-0 opacity-[0.035] pointer-events-none" style="background-image: radial-gradient(circle, white 1.5px, transparent 1.5px); background-size: 36px 36px;"></div>
 
-        <!-- EN-TÊTE AU DESIGN ÉPURÉ ET FOND VERT -->
-        <header class="header-dash">
-            <!-- Les deux boutons de contrôle conservés en haut -->
-            <div class="top-controls">
-                <button class="control-btn" onclick="window.location.href='index.html'">⚙️ Niveau</button>
-                <span style="font-size: 0.70rem; opacity: 0.8; text-transform: uppercase; font-weight: 700; color: #fde68a;">LE VERIDIQUE A-Z 🇲🇱</span>
-                <button id="themeToggleBtn" class="control-btn" onclick="basculerTheme()">🌙 Sombre</button>
-            </div>
-
-            <!-- Élément visuel de l'image (icône du livre) -->
-            <div class="header-icon-container">📖</div>
-
-            <!-- Bismillah stylisé -->
-            <div class="bismillah-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-
-            <!-- Message de salutation personnalisé -->
-            <h2 style="margin: 0 0 5px 0; font-size: 1.5rem; font-weight: 600;">
-                As-salāmu 'alaykum, <span id="dashUserPrenom">Apprenant</span> !
-            </h2>
-            <p style="margin: 0; font-size: 0.85rem; opacity: 0.9; color: #fde68a; text-transform: uppercase; letter-spacing: 0.5px;">
-                Niveau : <strong>DÉBUTANT</strong>
-            </p>
-        </header>
-
-        <main class="dashboard-container">
-
-            <!-- GRILLE DES FONCTIONNALITÉS -->
-            <div class="features-grid">
-                <div class="feature-card" onclick="alert('Assistant IA')">
-                    <div class="feature-icon">🤖</div>
-                    <div class="feature-title">Assistant IA</div>
-                </div>
-                <div class="feature-card" onclick="alert('Alphabet')">
-                    <div class="feature-icon">🔤</div>
-                    <div class="feature-title">Alphabet</div>
-                </div>
-            </div>
-
-            <!-- CARTE AYAH DU JOUR -->
-            <div class="ayah-card">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 0.75rem; text-transform: uppercase; color: #fbbf24; font-weight: 700; letter-spacing: 1px;">Ayah du jour</span>
-                    <span style="font-size: 0.78rem; color: #94a3b8;">Al-Alaq · v.1</span>
-                </div>
-                <div class="ayah-arabic">
-                    اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ
-                </div>
-                <div class="ayah-translation">
-                    « Lis, au nom de ton Seigneur qui a créé... »
-                </div>
-                <div class="ayah-actions">
-                    <button class="btn-ayah-action" onclick="alert('Lecture audio du verset...')">🔊 Écouter</button>
-                    <button class="btn-ayah-action" onclick="copierAyah()">📋 Partager</button>
-                </div>
-            </div>
-
-            <!-- SECTION DES LEÇONS -->
-            <div class="section-header">
-                <h3 class="section-title">Leçons de Tajweed</h3>
-                <span style="font-size: 0.8rem; color: #34d399; font-weight: 600;">Programme adapté</span>
-            </div>
-
-            <div id="leconsContainer" class="leçons-list">
-                <div class="leçon-card">
-                    <div class="leçon-info">
-                        <div class="leçon-num">1</div>
-                        <div>
-                            <h4 class="leçon-titre">L'Alphabet Arabe & Les Harakat</h4>
-                            <p class="leçon-sub">Prononciation de base et voyelles courtes</p>
+            <div class="relative flex-1 max-w-md md:max-w-lg lg:max-w-xl mx-auto w-full px-6 py-12 flex flex-col">
+                
+                <!-- MESSAGE VOCAL DU PROFESSEUR -->
+                <div class="mt-8 mb-6 rounded-2xl border-2 border-amber-400/70 bg-amber-400/15 p-3 shadow-xl space-y-2">
+                    <button type="button" class="w-full flex items-center justify-between cursor-pointer">
+                        <span class="flex items-center gap-2 text-amber-300 text-sm font-black">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mic w-4 h-4"><path d="M12 19v3"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><rect x="9" y="2" width="6" height="13" rx="3"></rect></svg>
+                            Message vocal du professeur
+                            <span class="bg-red-600 text-white text-[10px] rounded-full px-2 py-0.5">Nouveau</span>
+                        </span>
+                        <span class="flex items-center text-white/80 text-xs font-bold">Tous <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4"><path d="m9 18 6-6-6-6"></path></svg></span>
+                    </button>
+                    <div class="flex items-center gap-3 rounded-2xl border p-3 bg-white/10 border-white/15">
+                        <button type="button" aria-label="Écouter" class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer transition-colors bg-amber-400 text-emerald-950 hover:bg-amber-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play w-5 h-5 ml-0.5"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path></svg>
+                        </button>
+                        <div class="flex-1 min-w-0">
+                            <p class="font-bold text-sm truncate text-white">Il faut écouter ce Message urgent 🚨</p>
+                            <div class="h-1.5 rounded-full mt-1.5 overflow-hidden bg-white/20">
+                                <div class="h-full rounded-full bg-amber-300" style="width: 0%;"></div>
+                            </div>
+                            <p class="text-[11px] mt-1 text-white/60">7 novembre 2026 à 23:13 · 0:28</p>
                         </div>
                     </div>
-                    <span class="badge-gratuit">Gratuit</span>
                 </div>
-                <div class="leçon-card">
-                    <div class="leçon-info">
-                        <div class="leçon-num">2</div>
-                        <div>
-                            <h4 class="leçon-titre">Le Tanween (Double voyelle)</h4>
-                            <p class="leçon-sub">Les sons An, In, Oun à la fin des mots</p>
+
+                <!-- EN-TÊTE ET SALUTATION -->
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-white/15 border-2 border-white/25 mb-6 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-11 h-11 text-white"><path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path></svg>
+                    </div>
+                    <p lang="ar" translate="no" class="text-white/90 text-2xl mb-4 leading-loose tracking-wide notranslate" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif; direction: rtl;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                    <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-3">As-salāmu ʿalaykum, <span id="userNameDisplay">Mohamed</span> ! 🌙</h1>
+                    <p class="text-white/70 text-base">Apprends l'arabe coranique étape par étape</p>
+                    <p class="text-amber-300/80 text-sm font-bold mt-2">Formé par LE VERIDIQUE A-Z</p>
+                </div>
+
+                <!-- BOUTONS DE NAVIGATION PRINCIPAUX -->
+                <div class="mb-4 space-y-3">
+                    <button onclick="window.location.href='debutant.html'" class="inline-flex items-center justify-center gap-2 w-full bg-white text-[#064e3b] hover:bg-white/90 font-black text-lg h-16 rounded-2xl shadow-2xl cursor-pointer transition-all">
+                        📖 Commencer les leçons
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right ml-1 w-5 h-5"><path d="m9 18 6-6-6-6"></path></svg>
+                    </button>
+
+                    <div class="flex gap-3">
+                        <button class="inline-flex items-center justify-center gap-2 flex-1 bg-amber-400 text-emerald-950 hover:bg-amber-300 shadow-lg font-black text-base h-14 rounded-2xl cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-text mr-1.5 w-5 h-5"><path d="M12 7v14"></path><path d="M16 12h2"></path><path d="M16 8h2"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path><path d="M6 12h2"></path><path d="M6 8h2"></path></svg>
+                            Lire le Coran
+                        </button>
+                        <button class="flex flex-col items-center justify-center gap-1 bg-emerald-400/15 border border-emerald-400/30 rounded-2xl px-4 h-14 hover:bg-emerald-400/25 transition-colors cursor-pointer flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-5 h-5 text-emerald-300"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path></svg>
+                            <span class="text-emerald-200 font-black text-[10px] leading-none">IA</span>
+                        </button>
+                    </div>
+
+                    <button class="w-full flex items-center justify-center gap-2 bg-white text-emerald-950 rounded-2xl h-14 hover:bg-white/90 transition-colors cursor-pointer shadow-lg">
+                        <span class="text-xl">📖</span>
+                        <span class="font-black text-base">Apprendre les sourates</span>
+                    </button>
+
+                    <div class="flex gap-3">
+                        <button class="flex-1 flex items-center justify-center gap-2 bg-purple-400/15 border border-purple-400/25 rounded-2xl h-12 hover:bg-purple-400/25 transition-colors cursor-pointer">
+                            <span class="text-lg">🤲</span>
+                            <span class="text-purple-200 font-black text-sm">Dou'a</span>
+                        </button>
+                        <button class="flex-1 flex items-center justify-center gap-2 bg-sky-400/15 border border-sky-400/25 rounded-2xl h-12 hover:bg-sky-400/25 transition-colors cursor-pointer">
+                            <span class="text-lg">🗓️</span>
+                            <span class="text-sky-200 font-black text-sm">Calendrier</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARTE AYAH DU JOUR -->
+                <div class="relative rounded-2xl overflow-hidden mb-4 cursor-pointer group shadow-xl border border-white/10 bg-[#738ca6]">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80"></div>
+                    <div class="relative p-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-4 h-4 text-amber-300"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"></path></svg>
+                                <span class="text-amber-300 text-xs font-black uppercase tracking-wider">Ayah du jour</span>
+                            </div>
+                            <span class="text-white/70 text-[10px] font-bold bg-black/30 rounded-full px-2 py-0.5">Al-Israa · v.32</span>
+                        </div>
+                        <p lang="ar" translate="no" class="text-xl leading-[2.2] text-amber-100 font-bold mb-3 text-right notranslate" dir="rtl" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;">وَلَا تَقْرَبُوا۟ ٱلزِّنَىٰٓ ۖ إِنَّهُۥ كَانَ فَٰحِشَةًۭ وَسَآءَ سَبِيلًۭا</p>
+                        <p class="text-white/90 text-sm leading-relaxed mb-3 italic">« Et n'approchez point la fornication. En vérité, c'est une turpitude et quel mauvais chemin! »</p>
+                        <div class="flex items-center gap-2">
+                            <button class="flex items-center gap-1.5 rounded-full px-3 py-1.5 bg-white/15 hover:bg-white/25 transition-colors text-xs font-bold text-white cursor-pointer">Écouter</button>
+                            <button class="flex items-center gap-1.5 rounded-full px-3 py-1.5 bg-amber-400 hover:bg-amber-300 transition-colors text-xs font-black text-emerald-950 shadow-lg cursor-pointer">Partager</button>
                         </div>
                     </div>
-                    <span class="badge-gratuit">Gratuit</span>
                 </div>
-                <div class="leçon-card" style="opacity: 0.8; border-style: dashed;">
-                    <div class="leçon-info">
-                        <div class="leçon-num" style="background: #94a3b8;">3</div>
-                        <div>
-                            <h4 class="leçon-titre">Règles du Noon Sakinah</h4>
-                            <p class="leçon-sub">L'Izhar : la clarification du son N</p>
+
+                <!-- CARTE OFFRE PREMIUM (2000 FCFA) -->
+                <div class="mb-4">
+                    <div class="relative rounded-3xl overflow-hidden border border-amber-400/40 shadow-2xl bg-gradient-to-br from-amber-900 via-amber-700 to-amber-600 p-6 text-white">
+                        <div class="inline-flex items-center gap-1.5 bg-white/15 border border-white/25 rounded-full px-3 py-1 mb-4">
+                            <span class="text-amber-100 text-[11px] font-black uppercase tracking-wider">Offre Premium</span>
                         </div>
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-amber-300/25 border-2 border-amber-200/40 flex items-center justify-center flex-shrink-0">
+                                ⭐
+                            </div>
+                            <div>
+                                <h3 class="font-black text-xl leading-tight">Passe à la version Premium</h3>
+                                <p class="text-amber-100/85 text-sm mt-1">Débloque tout le programme et accélère ton apprentissage.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between gap-3 bg-black/20 rounded-2xl px-4 py-3 mb-4">
+                            <div>
+                                <p class="text-amber-100/70 text-[11px] font-bold uppercase">Paiement unique</p>
+                                <p class="font-black text-2xl leading-none">2 000 FCFA</p>
+                            </div>
+                            <span class="text-emerald-200 text-[11px] font-black bg-emerald-500/25 border border-emerald-400/30 rounded-full px-2.5 py-1">Accès à vie</span>
+                        </div>
+                        <button class="w-full flex items-center justify-center gap-2 bg-white text-amber-700 font-black text-base rounded-2xl h-14 shadow-lg cursor-pointer">
+                            Débloquer maintenant
+                        </button>
                     </div>
-                    <span class="badge-lock">🔒</span>
                 </div>
-            </div>
 
-            <!-- CARTE PARTAGE SADAQA JARIYA -->
-            <div class="sadaqa-card">
-                <h4 style="margin: 0 0 8px 0; color: var(--primary-dark);">Partage cette app avec tes proches 🤲</h4>
-                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 15px; line-height: 1.4;">
-                    Chaque personne qui apprend grâce à toi, tu reçois la récompense — même après ta mort.
-                </p>
-                <div style="display: flex; gap: 10px;">
-                    <button class="btn-continue" style="margin: 0; background: #0284c7; box-shadow: none;" onclick="copierLienApp()">🔗 Copier le lien</button>
-                    <button class="btn-continue" style="margin: 0; background: #25d366; box-shadow: none;" onclick="partagerWhatsApp()">💬 WhatsApp</button>
+                <!-- STATISTIQUES DES LEÇONS -->
+                <div class="grid grid-cols-3 gap-3 mb-8">
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">29</p>
+                        <p class="text-white/60 text-xs mt-0.5">Leçons</p>
+                    </div>
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">0</p>
+                        <p class="text-white/60 text-xs mt-0.5">Terminées</p>
+                    </div>
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">6</p>
+                        <p class="text-white/60 text-xs mt-0.5">Gratuites</p>
+                    </div>
                 </div>
+
+                <!-- BOUTON CHAÎNE WHATSAPP -->
+                <div class="mt-auto pt-6 border-t border-white/15 text-center">
+                    <a href="https://whatsapp.com/channel/0029Vb6e1diBvvsfUwa7hy1w" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-[#25D366] text-white font-bold text-lg rounded-xl px-6 py-4 shadow-lg hover:bg-[#1ebe5a] transition-colors w-full cursor-pointer">
+                        Rejoindre notre chaîne WhatsApp
+                    </a>
+                </div>
+
             </div>
-
-            <!-- CARTE INSTALLATION PWA -->
-            <div class="pwa-card">
-                <h4 style="margin: 0 0 8px 0;">📲 Installe l'application</h4>
-                <p style="font-size: 0.82rem; opacity: 0.9; margin-bottom: 12px;">Accès rapide · Sans App Store · Mode hors ligne</p>
-            </div>
-
-        </main>
-
+        </div>
     </div>
 
-    <!-- SCRIPTS DE GESTION -->
+    <!-- SCRIPT DE CHARGEMENT DU PRÉNOM -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const savedPrenom = localStorage.getItem('coranAppUserPrenom');
             if (savedPrenom) {
-                document.getElementById('dashUserPrenom').textContent = savedPrenom;
+                document.getElementById('userNameDisplay').textContent = savedPrenom;
             }
         });
-
-        function basculerTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        }
-
-        function copierLienApp() {
-            navigator.clipboard.writeText(window.location.href);
-            alert("Lien copié dans le presse-papier !");
-        }
-
-        function partagerWhatsApp() {
-            window.open('https://wa.me/?text=Viens%20apprendre%20le%20Coran%20avec%20LE%20VERIDIQUE%20A-Z%20!%20' + encodeURIComponent(window.location.href));
-        }
-
-        function copierAyah() {
-            alert("Verset copié !");
-        }
     </script>
 </body>
 

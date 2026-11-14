@@ -1,136 +1,158 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="light" style="color-scheme: light;">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mémorisation - Niveau Débutant - LE VERIDIQUE A-Z</title>
     
-    <style>
-        :root {
-            --primary-dark: #064e3b; --primary-accent: #059669; --gold-accent: #d97706; --gold-light: #fef3c7;
-            --bg-main: #064e3b; --card-bg: #ffffff; --card-inner-bg: #edf2f7; --text-main: #0f172a;
-            --text-muted: #64748b; --border-color: #cbd5e1; --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-        [data-theme="dark"] {
-            --primary-dark: #10b981; --primary-accent: #34d399; --gold-accent: #fbbf24;
-            --gold-light: rgba(251, 191, 36, 0.15); --bg-main: #060911; --card-bg: #0f172a;
-            --card-inner-bg: #1e293b; --text-main: #f8fafc; --text-muted: #94a3b8; --border-color: #334155;
-        }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background-color: var(--bg-main); color: #ffffff; margin: 0; padding: 0; display: flex; justify-content: center; min-height: 100vh; }
-        .app-wrapper { width: 100%; max-width: 480px; background-color: var(--bg-main); min-height: 100vh; display: flex; flex-direction: column; position: relative; padding-bottom: 40px; box-shadow: 0 0 30px rgba(0,0,0,0.2); }
-        
-        .header-dash { padding: 20px 20px 30px 20px; background: #064e3b; color: white; text-align: center; position: relative; }
-        .top-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .control-btn { background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.2); color: white; padding: 6px 12px; border-radius: 20px; cursor: pointer; font-size: 0.78rem; font-weight: 600; }
-        .control-btn:hover { background: rgba(255, 255, 255, 0.25); }
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#064e3b">
+    <meta name="google" content="notranslate">
+    
+    <!-- Apple PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LE VERIDIQUE A-Z">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon/icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon/icon-512.png">
 
-        .header-icon-container { width: 70px; height: 70px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; margin: 0 auto 15px auto; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; background: rgba(255, 255, 255, 0.05); }
-        .bismillah-text { font-size: 1.3rem; font-family: serif; color: #fef3c7; margin-bottom: 12px; letter-spacing: 0.5px; }
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-        .dashboard-container { padding: 0 20px; margin-top: 10px; }
-        .features-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
-        .feature-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; box-shadow: var(--shadow-sm); color: var(--text-main); }
-        .feature-icon { font-size: 1.5rem; width: 42px; height: 42px; border-radius: 14px; background: var(--gold-light); display: flex; align-items: center; justify-content: center; }
-        .feature-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
+    <!-- Polices d'écriture arabes (Amiri & Scheherazade) -->
+    <style type="text/css">
+        @font-face {font-family:'Amiri';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Amiri Quran';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);font-display:swap;}
         
-        .ayah-card { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; border-radius: 22px; padding: 22px; margin-bottom: 25px; border: 1px solid rgba(217, 119, 6, 0.35); }
-        .ayah-arabic { font-family: serif; font-size: 1.4rem; line-height: 2.2; text-align: right; margin: 15px 0; color: #fef3c7; }
-        .ayah-translation { font-size: 0.88rem; color: #cbd5e1; line-height: 1.5; font-style: italic; }
-        .ayah-actions { display: flex; gap: 10px; margin-top: 15px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .btn-ayah-action { background: rgba(255,255,255,0.1); color: white; border: none; padding: 8px 14px; border-radius: 10px; font-size: 0.8rem; cursor: pointer; }
-
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; color: #ffffff; }
-        .section-title { font-size: 1.1rem; font-weight: 700; color: #ffffff; margin: 0; }
-        
-        .leçons-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
-        .leçon-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: var(--shadow-sm); color: var(--text-main); }
-        .leçon-info { display: flex; align-items: center; gap: 12px; }
-        .leçon-num { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #064e3b, #059669); color: white; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-        .leçon-titre { font-size: 0.95rem; font-weight: 600; margin: 0; color: var(--text-main); }
-        .leçon-sub { font-size: 0.78rem; color: var(--text-muted); margin: 2px 0 0 0; }
-        .badge-gratuit { background: #dcfce7; color: #15803d; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 12px; }
-        .badge-lock { font-size: 1.1rem; }
-        
-        .sadaqa-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 22px; padding: 20px; margin-bottom: 20px; text-align: center; box-shadow: var(--shadow-sm); color: var(--text-main); }
-        .pwa-card { background: linear-gradient(135deg, #064e3b, #047857); color: white; border-radius: 22px; padding: 22px; margin-bottom: 20px; }
-        .btn-continue { width: 100%; padding: 14px; background: linear-gradient(135deg, #064e3b, #059669); color: white; border: none; border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 10px; }
+        .bg-primary { background-color: #064e3b; }
     </style>
 </head>
 
-<body>
-    <div class="app-wrapper">
-        <header class="header-dash">
-            <div class="top-controls">
-                <button class="control-btn" onclick="window.location.href='index.html'">⚙️ Accueil</button>
-                <span style="font-size: 0.70rem; opacity: 0.8; text-transform: uppercase; font-weight: 700; color: #fde68a;">LE VERIDIQUE A-Z 🇲🇱</span>
-                <button id="themeToggleBtn" class="control-btn" onclick="basculerTheme()">🌙 Sombre</button>
-            </div>
+<body class="bg-[#064e3b] text-white m-0 p-0">
 
-            <div class="header-icon-container">🤲</div>
-            <div class="bismillah-text">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+    <div id="root">
+        <div class="min-h-screen bg-primary relative overflow-hidden flex flex-col">
+            
+            <!-- Éléments de fond décoratifs -->
+            <div class="absolute top-0 right-0 w-72 h-72 rounded-full bg-white/5 blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-white/5 blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
+            <div class="absolute inset-0 opacity-[0.035] pointer-events-none" style="background-image: radial-gradient(circle, white 1.5px, transparent 1.5px); background-size: 36px 36px;"></div>
 
-            <h2 style="margin: 0 0 5px 0; font-size: 1.5rem; font-weight: 600;">As-salāmu 'alaykum, <span id="dashUserPrenom">Apprenant</span> !</h2>
-            <p style="margin: 0; font-size: 0.85rem; opacity: 0.9; color: #fde68a; text-transform: uppercase; letter-spacing: 0.5px;">Objectif : <strong>Mémorisation Sourates (Débutant)</strong></p>
-        </header>
+            <div class="relative flex-1 max-w-md md:max-w-lg lg:max-w-xl mx-auto w-full px-6 py-6 flex flex-col">
 
-        <main class="dashboard-container">
-            <div class="features-grid">
-                <div class="feature-card" onclick="alert('Assistant IA')"><div class="feature-icon">🤖</div><div class="feature-title">Assistant IA</div></div>
-                <div class="feature-card" onclick="alert('Récitation')"><div class="feature-icon">🎧</div><div class="feature-title">Écoute audio</div></div>
-            </div>
-
-            <div class="ayah-card">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 0.75rem; text-transform: uppercase; color: #fbbf24; font-weight: 700;">Sourate Al-Fatiha</span>
-                    <span style="font-size: 0.78rem; color: #94a3b8;">Verset 1-2</span>
+                <!-- BARRE DU HAUT AVEC BOUTON RETOUR ET TITRE -->
+                <div class="flex items-center justify-between mb-6">
+                    <button onclick="history.back()" class="inline-flex items-center gap-2 bg-white text-[#064e3b] px-4 py-2 rounded-xl font-bold cursor-pointer shadow-lg hover:bg-white/90 transition-all text-sm border-0">
+                        ← Retour
+                    </button>
+                    <span class="text-xs font-black uppercase tracking-wider text-amber-300">LE VERIDIQUE A-Z 🇲🇱</span>
                 </div>
-                <div class="ayah-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</div>
-                <div class="ayah-translation">« Au nom d'Allah, le Tout Miséricordieux... Louange à Allah, Seigneur de l'univers. »</div>
-                <div class="ayah-actions">
-                    <button class="btn-ayah-action" onclick="alert('Écouter la sourate...')">🔊 Écouter</button>
-                    <button class="btn-ayah-action" onclick="alert('Récépissé de mémorisation')">✅ Marquer appris</button>
-                </div>
-            </div>
 
-            <div class="section-header">
-                <h3 class="section-title">Sourates Courtes (Juz Amma)</h3>
-                <span style="font-size: 0.8rem; color: #34d399; font-weight: 600;">Niveau Débutant</span>
-            </div>
+                <!-- EN-TÊTE ET SALUTATION -->
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-white/15 border-2 border-white/25 mb-6 shadow-md">
+                        <span class="text-3xl">🤲</span>
+                    </div>
+                    <p lang="ar" translate="no" class="text-white/90 text-2xl mb-4 leading-loose tracking-wide notranslate" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif; direction: rtl;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                    <h1 class="text-3xl md:text-4xl font-black text-white leading-tight mb-2">As-salāmu 'alaykum, <span id="dashUserPrenom">Apprenant</span> !</h1>
+                    <p class="text-amber-300 text-sm font-bold uppercase tracking-wider">Objectif : Mémorisation Sourates (Débutant)</p>
+                </div>
 
-            <div class="leçons-list">
-                <div class="leçon-card">
-                    <div class="leçon-info"><div class="leçon-num">1</div><div><h4 class="leçon-titre">Sourate Al-Fatiha (1)</h4><p class="leçon-sub">L'ouverture du Coran (7 versets)</p></div></div>
-                    <span class="badge-gratuit">Gratuit</span>
+                <!-- GRILLE DES FONCTIONNALITÉS RAPIDES -->
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <div onclick="alert('Assistant IA')" class="bg-white/10 border border-white/15 hover:bg-white/15 transition-all rounded-2xl p-4 flex flex-col gap-2 cursor-pointer shadow-lg">
+                        <div class="w-10 h-10 rounded-xl bg-amber-400/20 flex items-center justify-center text-xl">🤖</div>
+                        <div class="font-black text-sm text-white">Assistant IA</div>
+                    </div>
+                    <div onclick="alert('Récitation')" class="bg-white/10 border border-white/15 hover:bg-white/15 transition-all rounded-2xl p-4 flex flex-col gap-2 cursor-pointer shadow-lg">
+                        <div class="w-10 h-10 rounded-xl bg-amber-400/20 flex items-center justify-center text-xl">🎧</div>
+                        <div class="font-black text-sm text-white">Écoute audio</div>
+                    </div>
                 </div>
-                <div class="leçon-card">
-                    <div class="leçon-info"><div class="leçon-num">2</div><div><h4 class="leçon-titre">Sourate An-Nas (114)</h4><p class="leçon-sub">Les Hommes</p></div></div>
-                    <span class="badge-gratuit">Gratuit</span>
-                </div>
-                <div class="leçon-card" style="opacity: 0.8; border-style: dashed;">
-                    <div class="leçon-info"><div class="leçon-num" style="background: #94a3b8;">3</div><div><h4 class="leçon-titre">Sourate Al-Falaq (113)</h4><p class="leçon-sub">L'aube naissante</p></div></div>
-                    <span class="badge-lock">🔒</span>
-                </div>
-            </div>
 
-            <div class="sadaqa-card">
-                <h4 style="margin: 0 0 8px 0; color: var(--primary-dark);">Partage cette app 🤲</h4>
-                <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 15px;">Aide tes proches à mémoriser le Coran.</p>
-                <button class="btn-continue" style="margin: 0; background: #25d366;" onclick="window.open('https://wa.me/?text=Viens%20mémoriser%20le%20Coran%20!%20')">💬 Partager sur WhatsApp</button>
+                <!-- CARTE SOURATE / AYAH -->
+                <div class="relative rounded-3xl overflow-hidden mb-6 shadow-xl border border-white/10 bg-[#738ca6]">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80"></div>
+                    <div class="relative p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-amber-300 text-xs font-black uppercase tracking-wider">Sourate Al-Fatiha</span>
+                            </div>
+                            <span class="text-white/70 text-[10px] font-bold bg-black/30 rounded-full px-2.5 py-0.5">Verset 1-2</span>
+                        </div>
+                        <p lang="ar" translate="no" class="text-xl leading-[2.2] text-amber-100 font-bold mb-3 text-right notranslate" dir="rtl" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</p>
+                        <p class="text-white/90 text-sm leading-relaxed mb-4 italic">« Au nom d'Allah, le Tout Miséricordieux... Louange à Allah, Seigneur de l'univers. »</p>
+                        <div class="flex items-center gap-2">
+                            <button onclick="alert('Écouter la sourate...')" class="flex items-center gap-1.5 rounded-full px-4 py-2 bg-white/15 hover:bg-white/25 transition-colors text-xs font-bold text-white cursor-pointer">🔊 Écouter</button>
+                            <button onclick="alert('Récépissé de mémorisation')" class="flex items-center gap-1.5 rounded-full px-4 py-2 bg-amber-400 hover:bg-amber-300 transition-colors text-xs font-black text-emerald-950 shadow-lg cursor-pointer">✅ Marquer appris</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TITRE SECTION SOURATES -->
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-black text-lg text-white">Sourates Courtes (Juz Amma)</h3>
+                    <span class="text-xs font-bold text-emerald-300 bg-emerald-400/20 px-3 py-1 rounded-full border border-emerald-400/30">Niveau Débutant</span>
+                </div>
+
+                <!-- LISTE DES SOURATES -->
+                <div class="space-y-3 mb-6">
+                    <div class="bg-white text-slate-900 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-all border border-slate-200">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-emerald-700 text-white font-black text-sm flex items-center justify-center shadow">1</div>
+                            <div>
+                                <h4 class="font-black text-base text-slate-900 m-0">Sourate Al-Fatiha (1)</h4>
+                                <p class="text-xs text-slate-500 m-0 mt-0.5">L'ouverture du Coran (7 versets)</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Gratuit</span>
+                    </div>
+
+                    <div class="bg-white text-slate-900 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-all border border-slate-200">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-emerald-700 text-white font-black text-sm flex items-center justify-center shadow">2</div>
+                            <div>
+                                <h4 class="font-black text-base text-slate-900 m-0">Sourate An-Nas (114)</h4>
+                                <p class="text-xs text-slate-500 m-0 mt-0.5">Les Hommes</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Gratuit</span>
+                    </div>
+
+                    <div class="bg-white/90 text-slate-900 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-white transition-all border border-dashed border-white/40 opacity-85">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-slate-400 text-white font-black text-sm flex items-center justify-center shadow">3</div>
+                            <div>
+                                <h4 class="font-black text-base text-slate-900 m-0">Sourate Al-Falaq (113)</h4>
+                                <p class="text-xs text-slate-500 m-0 mt-0.5">L'aube naissante</p>
+                            </div>
+                        </div>
+                        <span class="text-base">🔒</span>
+                    </div>
+                </div>
+
+                <!-- CARTE SADAQA / PARTAGE -->
+                <div class="bg-white/10 border border-white/15 rounded-3xl p-6 shadow-xl mb-4 text-center">
+                    <h4 class="font-black text-base text-white mb-2">Partage cette app 🤲</h4>
+                    <p class="text-xs text-white/70 mb-4 leading-relaxed">Aide tes proches à mémoriser le Coran.</p>
+                    <button onclick="window.open('https://wa.me/?text=Viens%20m%C3%A9moriser%20le%20Coran%20!%20')" class="w-full bg-[#25D366] hover:bg-[#1ebe5a] text-white font-black text-sm py-3.5 rounded-xl shadow cursor-pointer transition-all">💬 Partager sur WhatsApp</button>
+                </div>
+
             </div>
-        </main>
+        </div>
     </div>
 
+    <!-- SCRIPT DE CHARGEMENT DU PRÉNOM -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const savedPrenom = localStorage.getItem('coranAppUserPrenom');
-            if (savedPrenom) document.getElementById('dashUserPrenom').textContent = savedPrenom;
+            if (savedPrenom) {
+                document.getElementById('dashUserPrenom').textContent = savedPrenom;
+            }
         });
-        function basculerTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            document.documentElement.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
-        }
     </script>
 </body>
 </html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" style="color-scheme: light;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mémorisation - Niveau Professionnel - LE VERIDIQUE A-Z</title>
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#064e3b">
+    <meta name="google" content="notranslate">
+    
+    <!-- Apple PWA -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="LE VERIDIQUE A-Z">
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon/icon-192.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon/icon-512.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Polices d'écriture arabes (Amiri & Scheherazade) -->
+    <style type="text/css">
+        @font-face {font-family:'Amiri';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Amiri Quran';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        
+        .bg-primary { background-color: #064e3b; }
+    </style>
+</head>
+
+<body class="bg-[#064e3b] text-white m-0 p-0">
+
+    <div id="root">
+        <div class="min-h-screen bg-primary relative overflow-hidden flex flex-col">
+            
+            <!-- Éléments de fond décoratifs -->
+            <div class="absolute top-0 right-0 w-72 h-72 rounded-full bg-white/5 blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-white/5 blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
+            <div class="absolute inset-0 opacity-[0.035] pointer-events-none" style="background-image: radial-gradient(circle, white 1.5px, transparent 1.5px); background-size: 36px 36px;"></div>
+
+            <div class="relative flex-1 max-w-md md:max-w-lg lg:max-w-xl mx-auto w-full px-6 py-6 flex flex-col">
+
+                <!-- BARRE DU HAUT AVEC BOUTON RETOUR ET TITRE -->
+                <div class="flex items-center justify-between mb-6">
+                    <button onclick="history.back()" class="inline-flex items-center gap-2 bg-white text-[#064e3b] px-4 py-2 rounded-xl font-bold cursor-pointer shadow-lg hover:bg-white/90 transition-all text-sm border-0">
+                        ← Retour
+                    </button>
+                    <span class="text-xs font-black uppercase tracking-wider text-amber-300">LE VERIDIQUE A-Z 🇲🇱</span>
+                </div>
+
+                <!-- EN-TÊTE ET SALUTATION -->
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-white/15 border-2 border-white/25 mb-6 shadow-md">
+                        <span class="text-3xl">🤲</span>
+                    </div>
+                    <p lang="ar" translate="no" class="text-white/90 text-2xl mb-4 leading-loose tracking-wide notranslate" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif; direction: rtl;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                    <h1 class="text-3xl md:text-4xl font-black text-white leading-tight mb-2">As-salāmu 'alaykum, <span id="dashUserPrenom">Apprenant</span> !</h1>
+                    <p class="text-amber-300 text-sm font-bold uppercase tracking-wider">Objectif : <strong>Mémorisation Sourates (Professionnel)</strong></p>
+                </div>
+
+                <!-- GRILLE DES FONCTIONNALITÉS RAPIDES -->
+                <div class="grid grid-cols-2 gap-3 mb-6">
+                    <div onclick="alert('Assistant IA')" class="bg-white/10 border border-white/15 hover:bg-white/15 transition-all rounded-2xl p-4 flex flex-col gap-2 cursor-pointer shadow-lg">
+                        <div class="w-10 h-10 rounded-xl bg-amber-400/20 flex items-center justify-center text-xl">🤖</div>
+                        <div class="font-black text-sm text-white">Assistant IA</div>
+                    </div>
+                    <div onclick="alert('Récitation')" class="bg-white/10 border border-white/15 hover:bg-white/15 transition-all rounded-2xl p-4 flex flex-col gap-2 cursor-pointer shadow-lg">
+                        <div class="w-10 h-10 rounded-xl bg-amber-400/20 flex items-center justify-center text-xl">🎧</div>
+                        <div class="font-black text-sm text-white">Écoute audio</div>
+                    </div>
+                </div>
+
+                <!-- CARTE SOURATE / AYAH -->
+                <div class="relative rounded-3xl overflow-hidden mb-6 shadow-xl border border-white/10 bg-[#738ca6]">
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80"></div>
+                    <div class="relative p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="text-amber-300 text-xs font-black uppercase tracking-wider">Sourate Al-Baqarah</span>
+                            </div>
+                            <span class="text-white/70 text-[10px] font-bold bg-black/30 rounded-full px-2.5 py-0.5">Verset 255 (Ayat al-Kursi)</span>
+                        </div>
+                        <p lang="ar" translate="no" class="text-xl leading-[2.2] text-amber-100 font-bold mb-3 text-right notranslate" dir="rtl" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;">اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ</p>
+                        <p class="text-white/90 text-sm leading-relaxed mb-4 italic">« Allah ! Point de divinité à part Lui, Le Vivant, Celui qui subsiste par Lui-même... »</p>
+                        <div class="flex items-center gap-2">
+                            <button onclick="alert('Écouter...')" class="flex items-center gap-1.5 rounded-full px-4 py-2 bg-white/15 hover:bg-white/25 transition-colors text-xs font-bold text-white cursor-pointer">🔊 Écouter</button>
+                            <button onclick="alert('Validé')" class="flex items-center gap-1.5 rounded-full px-4 py-2 bg-amber-400 hover:bg-amber-300 transition-colors text-xs font-black text-emerald-950 shadow-lg cursor-pointer">✅ Marquer appris</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TITRE SECTION SOURATES -->
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-black text-lg text-white">Longues Sourates & Hifz Avancé</h3>
+                    <span class="text-xs font-bold text-emerald-300 bg-emerald-400/20 px-3 py-1 rounded-full border border-emerald-400/30">Niveau Professionnel</span>
+                </div>
+
+                <!-- LISTE DES SOURATES -->
+                <div class="space-y-3 mb-6">
+                    <div class="bg-white text-slate-900 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-all border border-slate-200">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-emerald-700 text-white font-black text-sm flex items-center justify-center shadow">1</div>
+                            <div>
+                                <h4 class="font-black text-base text-slate-900 m-0">Sourate Al-Baqarah (2)</h4>
+                                <p class="text-xs text-slate-500 m-0 mt-0.5">La Vache (Intégrale / Hifz)</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Gratuit</span>
+                    </div>
+
+                    <div class="bg-white text-slate-900 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-all border border-slate-200">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-emerald-700 text-white font-black text-sm flex items-center justify-center shadow">2</div>
+                            <div>
+                                <h4 class="font-black text-base text-slate-900 m-0">Sourate Ali 'Imran (3)</h4>
+                                <p class="text-xs text-slate-500 m-0 mt-0.5">La Famille d'Imran</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Gratuit</span>
+                    </div>
+
+                    <div class="bg-white/90 text-slate-900 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-white transition-all border border-dashed border-white/40 opacity-85">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-slate-400 text-white font-black text-sm flex items-center justify-center shadow">3</div>
+                            <div>
+                                <h4 class="font-black text-base text-slate-900 m-0">Sourate An-Nisa (4)</h4>
+                                <p class="text-xs text-slate-500 m-0 mt-0.5">Les Femmes</p>
+                            </div>
+                        </div>
+                        <span class="text-base">🔒</span>
+                    </div>
+                </div>
+
+                <!-- CARTE SADAQA / PARTAGE -->
+                <div class="bg-white/10 border border-white/15 rounded-3xl p-6 shadow-xl mb-6 text-center">
+                    <h4 class="font-black text-base text-white mb-2">Partage cette app 🤲</h4>
+                    <p class="text-xs text-white/70 mb-4 leading-relaxed">Partage la science du Coran.</p>
+                    <button onclick="window.open('https://wa.me/?text=Viens%20apprendre%20le%20Coran%20!%20')" class="w-full bg-[#25D366] hover:bg-[#1ebe5a] text-white font-black text-sm py-3.5 rounded-xl shadow cursor-pointer transition-all">💬 Partager sur WhatsApp</button>
+                </div>
+
+                <!-- CARTE OFFRE PREMIUM (2000 FCFA) -->
+                <div class="mb-4">
+                    <div class="relative rounded-3xl overflow-hidden border border-amber-400/40 shadow-2xl bg-gradient-to-br from-amber-900 via-amber-700 to-amber-600 p-6 text-white">
+                        <div class="inline-flex items-center gap-1.5 bg-white/15 border border-white/25 rounded-full px-3 py-1 mb-4">
+                            <span class="text-amber-100 text-[11px] font-black uppercase tracking-wider">Offre Premium</span>
+                        </div>
+                        <div class="flex items-start gap-3 mb-4">
+                            <div class="w-14 h-14 rounded-2xl bg-amber-300/25 border-2 border-amber-200/40 flex items-center justify-center flex-shrink-0">
+                                ⭐
+                            </div>
+                            <div>
+                                <h3 class="font-black text-xl leading-tight">Passe à la version Premium</h3>
+                                <p class="text-amber-100/85 text-sm mt-1">Débloque tout le programme et accélère ton apprentissage.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between gap-3 bg-black/20 rounded-2xl px-4 py-3 mb-4">
+                            <div>
+                                <p class="text-amber-100/70 text-[11px] font-bold uppercase">Paiement unique</p>
+                                <p class="font-black text-2xl leading-none">2 000 FCFA</p>
+                            </div>
+                            <span class="text-emerald-200 text-[11px] font-black bg-emerald-500/25 border border-emerald-400/30 rounded-full px-2.5 py-1">Accès à vie</span>
+                        </div>
+                        <button class="w-full flex items-center justify-center gap-2 bg-white text-amber-700 font-black text-base rounded-2xl h-14 shadow-lg cursor-pointer">
+                            Débloquer maintenant
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STATISTIQUES DES LEÇONS -->
+                <div class="grid grid-cols-3 gap-3 mb-8">
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">29</p>
+                        <p class="text-white/60 text-xs mt-0.5">Leçons</p>
+                    </div>
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">0</p>
+                        <p class="text-white/60 text-xs mt-0.5">Terminées</p>
+                    </div>
+                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+                        <p class="text-white font-black text-2xl">6</p>
+                        <p class="text-white/60 text-xs mt-0.5">Gratuites</p>
+                    </div>
+                </div>
+
+                <!-- BOUTON CHAÎNE WHATSAPP -->
+                <div class="mt-auto pt-6 border-t border-white/15 text-center">
+                    <a href="https://whatsapp.com/channel/0029Vb6e1diBvvsfUwa7hy1w" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-[#25D366] text-white font-bold text-lg rounded-xl px-6 py-4 shadow-lg hover:bg-[#1ebe5a] transition-colors w-full cursor-pointer">
+                        Rejoindre notre chaîne WhatsApp
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE CHARGEMENT DU PRÉNOM -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedPrenom = localStorage.getItem('coranAppUserPrenom');
+            if (savedPrenom) {
+                document.getElementById('dashUserPrenom').textContent = savedPrenom;
+            }
+        });
+    </script>
+</body>
+</html>

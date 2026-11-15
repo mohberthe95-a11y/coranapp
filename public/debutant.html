@@ -60,7 +60,7 @@
                     <p lang="ar" translate="no" class="text-white/90 text-2xl mb-4 leading-loose tracking-wide notranslate" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif; direction: rtl;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
                     <h1 class="text-4xl md:text-5xl font-black text-white leading-tight mb-3">As-salāmu ʿalaykum, <span id="userNameDisplay">Mohamed</span> ! 🌙</h1>
                     <p class="text-white/70 text-base mb-2">Apprendre, comprendre et appliquer</p>
-                    <p class="text-amber-300/80 text-sm font-bold mt-1">Formé par LE VERIDIQUE A-Z</p>
+                    <p class="text-amber-300 text-sm font-bold mt-1 uppercase tracking-wider">Niveau : <span id="userNiveauDisplay">DÉBUTANT</span></p>
                 </div>
 
                 <!-- BOUTONS DE NAVIGATION PRINCIPAUX -->
@@ -173,12 +173,17 @@
         </div>
     </div>
 
-    <!-- SCRIPT DE CHARGEMENT DU PRÉNOM -->
+    <!-- SCRIPT DE CHARGEMENT DU PRÉNOM ET DU NIVEAU -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const savedPrenom = localStorage.getItem('coranAppUserPrenom');
             if (savedPrenom) {
                 document.getElementById('userNameDisplay').textContent = savedPrenom;
+            }
+
+            const savedNiveau = localStorage.getItem('coranAppUserNiveau');
+            if (savedNiveau) {
+                document.getElementById('userNiveauDisplay').textContent = savedNiveau.toUpperCase();
             }
         });
     </script>

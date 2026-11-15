@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" style="color-scheme: light;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mes Leçons - LE VERIDIQUE A-Z</title>
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#064e3b">
+    <meta name="google" content="notranslate">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Polices d'écriture arabes (Amiri & Scheherazade) -->
+    <style type="text/css">
+        @font-face {font-family:'Amiri';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Amiri Quran';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        
+        .font-arabic {
+            font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#eef6f4] text-slate-900 m-0 p-0 min-h-screen flex flex-col">
+
+    <!-- EN-TÊTE SOMBRE (SANS LES BOUTONS WHATSAPP ET VOCAL) -->
+    <header class="bg-[#064e3b] text-white pt-6 pb-8 px-6 shadow-md">
+        <div class="max-w-4xl mx-auto">
+            <!-- Bouton Retour -->
+            <button onclick="history.back()" class="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-semibold mb-4 cursor-pointer bg-transparent border-0 p-0 transition-colors">
+                ← Accueil
+            </button>
+
+            <!-- Titre & Compteur -->
+            <div class="mb-5">
+                <h1 class="text-2xl md:text-3xl font-black tracking-tight m-0">Mes Leçons</h1>
+                <p class="text-white/75 text-sm mt-1 m-0"><span id="completedCount">0</span> / 29 leçons complétées</p>
+            </div>
+
+            <!-- Barre de progression globale -->
+            <div>
+                <div class="w-full h-2.5 bg-white/15 rounded-full overflow-hidden">
+                    <div id="globalProgressBar" class="h-full bg-amber-400 rounded-full transition-all duration-500" style="width: 0%;"></div>
+                </div>
+                <div class="flex justify-end mt-1.5">
+                    <span id="globalProgressText" class="text-amber-300 text-xs font-black">0%</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- BANNIÈRE OFFRE PREMIUM (2 000 FCFA) -->
+    <div class="bg-[#fffbeb] border-b border-amber-200 px-6 py-3.5 shadow-sm">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+            <div class="flex items-center gap-2.5">
+                <span class="text-amber-500 text-lg">★</span>
+                <p class="text-sm font-bold text-slate-800 m-0">Débloque toutes les leçons + audio complet</p>
+            </div>
+            <button onclick="alert('Ouverture du paiement Premium (2 000 FCFA)')" class="bg-[#d97706] hover:bg-[#b45309] text-white font-black text-xs px-4 py-2 rounded-full shadow cursor-pointer transition-colors flex-shrink-0 border-0">
+                2 000 FCFA
+            </button>
+        </div>
+    </div>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="flex-1 max-w-4xl w-full mx-auto px-6 py-6 space-y-6">
+
+        <!-- CARTE CERTIFICAT -->
+        <div onclick="alert('Termine les 29 leçons pour obtenir ton certificat officiel LE VERIDIQUE A-Z !')" class="bg-white/80 backdrop-blur-sm border border-emerald-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all cursor-pointer">
+            <div class="flex items-center justify-between gap-4 mb-3">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700 flex-shrink-0">
+                        <!-- Icône Médaille / Certificat -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="6"></circle>
+                            <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="font-bold text-base text-slate-900 m-0">Obtenez votre certificat</h2>
+                        <p class="text-xs text-slate-500 m-0 mt-0.5">Encore 29 leçons pour décrocher votre attestation</p>
+                    </div>
+                </div>
+                <span class="text-slate-400 font-bold text-lg">›</span>
+            </div>
+            
+            <!-- Barre de progression certificat -->
+            <div class="flex items-center gap-3">
+                <div class="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+                    <div class="h-full bg-emerald-600 rounded-full" style="width: 0%;"></div>
+                </div>
+                <span class="text-[11px] font-bold text-slate-400">0%</span>
+            </div>
+        </div>
+
+        <!-- EN-TÊTE NIVEAU 1 : DÉBUTANT -->
+        <div class="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-sm flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-xl flex-shrink-0">
+                    🌱
+                </div>
+                <div>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <span class="bg-emerald-700 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+                            Niveau 1
+                        </span>
+                        <h3 class="font-black text-base text-slate-900 m-0">Débutant</h3>
+                    </div>
+                    <p class="text-xs text-slate-500 m-0 mt-1">Alphabet, voyelles et chiffres de base · 0/10 terminées</p>
+                </div>
+            </div>
+            <span class="text-xs font-black text-emerald-700">0%</span>
+        </div>
+
+        <!-- GRILLE DES LEÇONS (4 CARTES PAR LIGNE SUR GRAND ÉCRAN, 2 SUR MOBILE) -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pb-10">
+
+            <!-- LEÇON 1 (DÉBLOQUÉE / GRATUITE) -->
+            <div onclick="alert('Ouverture de la Leçon 1 : L\'alphabet arabe (Alif, Ba...)')" class="bg-white border-2 border-emerald-600/30 hover:border-emerald-600 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between min-h-[155px] relative group">
+                <div class="flex items-center justify-between">
+                    <span class="w-7 h-7 rounded-full bg-emerald-700 text-white font-black text-xs flex items-center justify-center shadow-sm">
+                        1
+                    </span>
+                    <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+                        Gratuit
+                    </span>
+                </div>
+                <div class="my-auto text-center py-2">
+                    <p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-800 group-hover:text-emerald-800 transition-colors m-0">
+                        ا ب
+                    </p>
+                    <p class="text-xs font-bold text-slate-600 mt-2 m-0">L'alphabet (1/2)</p>
+                </div>
+            </div>
+
+            <!-- CARTE BONUS / ASTUCE IA -->
+            <div onclick="alert('Astuce d\'apprentissage : Répète chaque lettre à voix haute 3 fois !')" class="bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between min-h-[155px] relative">
+                <div class="flex items-center justify-between text-emerald-600">
+                    <span class="text-lg">✨</span>
+                    <span class="text-[10px] font-black uppercase tracking-wider text-emerald-700">Conseil</span>
+                </div>
+                <div class="my-auto text-center px-1">
+                    <p class="text-xs font-bold text-emerald-900 leading-snug m-0">
+                        Méthode de prononciation Makharij
+                    </p>
+                </div>
+                <div class="flex justify-end text-amber-500 text-sm">
+                    ✦
+                </div>
+            </div>
+
+            <!-- LEÇON 2 (VERROUILLÉE) -->
+            <div onclick="alert('Cette leçon est réservée aux membres Premium ou débloquée après la Leçon 1.')" class="bg-white/75 border border-slate-200 rounded-2xl p-4 shadow-sm hover:bg-white transition-all cursor-pointer flex flex-col justify-between min-h-[155px] opacity-90">
+                <div class="flex items-center justify-between">
+                    <span class="w-7 h-7 rounded-full bg-slate-200 text-slate-600 font-black text-xs flex items-center justify-center">
+                        2
+                    </span>
+                    <span class="text-slate-400 text-sm" title="Verrouillé">🔒</span>
+                </div>
+                <div class="my-auto text-center py-2">
+                    <p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-600 m-0">
+                        كِتَاب
+                    </p>
+                    <p class="text-xs font-semibold text-slate-500 mt-2 m-0">Les voyelles courtes</p>
+                </div>
+            </div>
+
+            <!-- LEÇON 3 (VERROUILLÉE) -->
+            <div onclick="alert('Cette leçon est réservée aux membres Premium.')" class="bg-white/75 border border-slate-200 rounded-2xl p-4 shadow-sm hover:bg-white transition-all cursor-pointer flex flex-col justify-between min-h-[155px] opacity-90">
+                <div class="flex items-center justify-between">
+                    <span class="w-7 h-7 rounded-full bg-slate-200 text-slate-600 font-black text-xs flex items-center justify-center">
+                        3
+                    </span>
+                    <span class="text-slate-400 text-sm" title="Verrouillé">🔒</span>
+                </div>
+                <div class="my-auto text-center py-2">
+                    <p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-600 m-0">
+                        بَ تَ ثَ
+                    </p>
+                    <p class="text-xs font-semibold text-slate-500 mt-2 m-0">La Fatha ( ـَ )</p>
+                </div>
+            </div>
+
+            <!-- LEÇON 4 (VERROUILLÉE) -->
+            <div onclick="alert('Cette leçon est réservée aux membres Premium.')" class="bg-white/75 border border-slate-200 rounded-2xl p-4 shadow-sm hover:bg-white transition-all cursor-pointer flex flex-col justify-between min-h-[155px] opacity-90">
+                <div class="flex items-center justify-between">
+                    <span class="w-7 h-7 rounded-full bg-slate-200 text-slate-600 font-black text-xs flex items-center justify-center">
+                        4
+                    </span>
+                    <span class="text-slate-400 text-sm" title="Verrouillé">🔒</span>
+                </div>
+                <div class="my-auto text-center py-2">
+                    <p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-600 m-0">
+                        بِ تِ ثِ
+                    </p>
+                    <p class="text-xs font-semibold text-slate-500 mt-2 m-0">La Kasra ( ـِ )</p>
+                </div>
+            </div>
+
+            <!-- LEÇON 5 (VERROUILLÉE) -->
+            <div onclick="alert('Cette leçon est réservée aux membres Premium.')" class="bg-white/75 border border-slate-200 rounded-2xl p-4 shadow-sm hover:bg-white transition-all cursor-pointer flex flex-col justify-between min-h-[155px] opacity-90">
+                <div class="flex items-center justify-between">
+                    <span class="w-7 h-7 rounded-full bg-slate-200 text-slate-600 font-black text-xs flex items-center justify-center">
+                        5
+                    </span>
+                    <span class="text-slate-400 text-sm" title="Verrouillé">🔒</span>
+                </div>
+                <div class="my-auto text-center py-2">
+                    <p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-600 m-0">
+                        بُ تُ ثُ
+                    </p>
+                    <p class="text-xs font-semibold text-slate-500 mt-2 m-0">La Damma ( ـُ )</p>
+                </div>
+            </div>
+
+            <!-- LEÇON 6 (VERROUILLÉE) -->
+            <div onclick="alert('Cette leçon est réservée aux membres Premium.')" class="bg-white/75 border border-slate-200 rounded-2xl p-4 shadow-sm hover:bg-white transition-all cursor-pointer flex flex-col justify-between min-h-[155px] opacity-90">
+                <div class="flex items-center justify-between">
+                    <span class="w-7 h-7 rounded-full bg-slate-200 text-slate-600 font-black text-xs flex items-center justify-center">
+                        6
+                    </span>
+                    <span class="text-slate-400 text-sm" title="Verrouillé">🔒</span>
+                </div>
+                <div class="my-auto text-center py-2">
+                    <p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-600 m-0">
+                        بًا بٍ بٌ
+                    </p>
+                    <p class="text-xs font-semibold text-slate-500 mt-2 m-0">Le Tanwin</p>
+                </div>
+            </div>
+
+            <!-- LEÇON 7 (VERROUILLÉE) -->
+            <div onclick="alert('Cette leçon est réservée aux membres Premium.')" class="bg-white/75 border border-slate-200 rounded-2xl p-4 shadow-sm hover:bg-white transition-all cursor-pointer flex flex-col justify-between min-h-[155px] opacity-90">
+                <div class="flex items-center justify-between">
+                    <span class="w-7 h-7 rounded-full bg-slate-200 text-slate-600 font-black text-xs flex items-center justify-center">
+                        7
+                    </span>
+                    <span class="text-slate-400 text-sm" title="Verrouillé">🔒</span>
+                </div>
+                <div class="my-auto text-center py-2">
+                    <p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-600 m-0">
+                        أَبْ أَتْ
+                    </p>
+                    <p class="text-xs font-semibold text-slate-500 mt-2 m-0">Le Soukoun ( ـْ )</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

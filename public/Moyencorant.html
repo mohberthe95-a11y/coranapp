@@ -8,7 +8,7 @@
     
     <!-- PWA Configuration -->
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#064e3b">
+    <meta name="theme-color" content="#0b132b">
     <meta name="google" content="notranslate">
     
     <!-- Apple PWA -->
@@ -27,11 +27,11 @@
         @font-face {font-family:'Amiri Quran';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);font-display:swap;}
         @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);font-display:swap;}
         
-        .bg-primary { background-color: #064e3b; }
+        .bg-primary { background-color: #0b132b; }
     </style>
 </head>
 
-<body class="bg-[#064e3b] text-white m-0 p-0">
+<body class="bg-[#0b132b] text-white m-0 p-0">
 
     <div id="root">
         <div class="min-h-screen bg-primary relative overflow-hidden flex flex-col">
@@ -45,7 +45,7 @@
 
                 <!-- BARRE DU HAUT AVEC BOUTON RETOUR ET TITRE -->
                 <div class="flex items-center justify-between mb-6">
-                    <button onclick="history.back()" class="inline-flex items-center gap-2 bg-white text-[#064e3b] px-4 py-2 rounded-xl font-bold cursor-pointer shadow-lg hover:bg-white/90 transition-all text-sm border-0">
+                    <button onclick="history.back()" class="inline-flex items-center gap-2 bg-white text-[#0b132b] px-4 py-2 rounded-xl font-bold cursor-pointer shadow-lg hover:bg-white/90 transition-all text-sm border-0">
                         ← Retour
                     </button>
                     <span class="text-xs font-black uppercase tracking-wider text-amber-300">LE VERIDIQUE A-Z 🇲🇱</span>
@@ -74,7 +74,7 @@
                 </div>
 
                 <!-- CARTE SOURATE / AYAH -->
-                <div class="relative rounded-3xl overflow-hidden mb-6 shadow-xl border border-white/10 bg-[#738ca6]">
+                <div class="relative rounded-3xl overflow-hidden mb-6 shadow-xl border border-white/10 bg-[#1c2541]">
                     <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80"></div>
                     <div class="relative p-6">
                         <div class="flex items-center justify-between mb-3">
@@ -87,7 +87,7 @@
                         <p class="text-white/90 text-sm leading-relaxed mb-4 italic">« Béni soit celui dans la main de qui est la royauté, et il est omnipotent... »</p>
                         <div class="flex items-center gap-2">
                             <button onclick="alert('Écouter...')" class="flex items-center gap-1.5 rounded-full px-4 py-2 bg-white/15 hover:bg-white/25 transition-colors text-xs font-bold text-white cursor-pointer">🔊 Écouter</button>
-                            <button onclick="alert('Validé')" class="flex items-center gap-1.5 rounded-full px-4 py-2 bg-amber-400 hover:bg-amber-300 transition-colors text-xs font-black text-emerald-950 shadow-lg cursor-pointer">✅ Marquer appris</button>
+                            <button onclick="alert('Validé')" class="flex items-center gap-1.5 rounded-full px-4 py-2 bg-amber-400 hover:bg-amber-300 transition-colors text-xs font-black text-slate-950 shadow-lg cursor-pointer">✅ Marquer appris</button>
                         </div>
                     </div>
                 </div>
@@ -95,39 +95,39 @@
                 <!-- TITRE SECTION SOURATES -->
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="font-black text-lg text-white">Sourates Intermédiaires</h3>
-                    <span class="text-xs font-bold text-emerald-300 bg-emerald-400/20 px-3 py-1 rounded-full border border-emerald-400/30">Niveau Moyen</span>
+                    <span class="text-xs font-bold text-emerald-300 bg-emerald-500/15 px-3 py-1 rounded-full border border-emerald-400/30">Niveau Moyen</span>
                 </div>
 
                 <!-- LISTE DES SOURATES -->
                 <div class="space-y-3 mb-6">
-                    <div class="bg-white text-slate-900 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-all border border-slate-200">
+                    <div class="bg-[#1c2541] text-white rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-[#253259] transition-all border border-white/15">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-emerald-700 text-white font-black text-sm flex items-center justify-center shadow">1</div>
+                            <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-black text-sm flex items-center justify-center shadow">1</div>
                             <div>
-                                <h4 class="font-black text-base text-slate-900 m-0">Sourate Al-Mulk (67)</h4>
-                                <p class="text-xs text-slate-500 m-0 mt-0.5">La Royauté (30 versets)</p>
+                                <h4 class="font-black text-base text-white m-0">Sourate Al-Mulk (67)</h4>
+                                <p class="text-xs text-slate-300 m-0 mt-0.5">La Royauté (30 versets)</p>
                             </div>
                         </div>
-                        <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Gratuit</span>
+                        <span class="text-xs font-bold text-emerald-300 bg-emerald-500/20 px-2.5 py-1 rounded-full border border-emerald-400/30">Gratuit</span>
                     </div>
 
-                    <div class="bg-white text-slate-900 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-all border border-slate-200">
+                    <div class="bg-[#1c2541] text-white rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-[#253259] transition-all border border-white/15">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-emerald-700 text-white font-black text-sm flex items-center justify-center shadow">2</div>
+                            <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-black text-sm flex items-center justify-center shadow">2</div>
                             <div>
-                                <h4 class="font-black text-base text-slate-900 m-0">Sourate Yaseen (36)</h4>
-                                <p class="text-xs text-slate-500 m-0 mt-0.5">Le cœur du Coran</p>
+                                <h4 class="font-black text-base text-white m-0">Sourate Yaseen (36)</h4>
+                                <p class="text-xs text-slate-300 m-0 mt-0.5">Le cœur du Coran</p>
                             </div>
                         </div>
-                        <span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full">Gratuit</span>
+                        <span class="text-xs font-bold text-emerald-300 bg-emerald-500/20 px-2.5 py-1 rounded-full border border-emerald-400/30">Gratuit</span>
                     </div>
 
-                    <div class="bg-white/90 text-slate-900 rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-white transition-all border border-dashed border-white/40 opacity-85">
+                    <div class="bg-[#1c2541]/80 text-white rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-[#1c2541] transition-all border border-dashed border-white/25 opacity-85">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-slate-400 text-white font-black text-sm flex items-center justify-center shadow">3</div>
+                            <div class="w-10 h-10 rounded-full bg-white/20 text-white font-black text-sm flex items-center justify-center shadow">3</div>
                             <div>
-                                <h4 class="font-black text-base text-slate-900 m-0">Sourate Ar-Rahman (55)</h4>
-                                <p class="text-xs text-slate-500 m-0 mt-0.5">Le Tout Miséricordieux</p>
+                                <h4 class="font-black text-base text-white m-0">Sourate Ar-Rahman (55)</h4>
+                                <p class="text-xs text-slate-300 m-0 mt-0.5">Le Tout Miséricordieux</p>
                             </div>
                         </div>
                         <span class="text-base">🔒</span>
@@ -161,9 +161,9 @@
                                 <p class="text-amber-100/70 text-[11px] font-bold uppercase">Paiement unique</p>
                                 <p class="font-black text-2xl leading-none">2 000 FCFA</p>
                             </div>
-                            <span class="text-emerald-200 text-[11px] font-black bg-emerald-500/25 border border-emerald-400/30 rounded-full px-2.5 py-1">Accès à vie</span>
+                            <span class="text-blue-200 text-[11px] font-black bg-blue-600/40 border border-blue-400/30 rounded-full px-2.5 py-1">Accès à vie</span>
                         </div>
-                        <button class="w-full flex items-center justify-center gap-2 bg-white text-amber-700 font-black text-base rounded-2xl h-14 shadow-lg cursor-pointer">
+                        <button class="w-full flex items-center justify-center gap-2 bg-white text-amber-900 font-black text-base rounded-2xl h-14 shadow-lg cursor-pointer">
                             Débloquer maintenant
                         </button>
                     </div>

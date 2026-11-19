@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" style="color-scheme: light;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lettre Zay - LE VERIDIQUE A-Z</title>
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0b132b">
+    <meta name="google" content="notranslate">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Polices d'écriture arabes -->
+    <style type="text/css">
+        @font-face {font-family:'Amiri';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Amiri Quran';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        
+        .font-arabic {
+            font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#0b132b] text-slate-100 m-0 p-0 min-h-screen flex flex-col">
+
+    <!-- EN-TÊTE -->
+    <header class="bg-[#0b132b] text-white pt-6 pb-6 px-6 shadow-md border-b border-white/10">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <button onclick="history.back()" class="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-semibold cursor-pointer bg-white/10 px-3 py-1.5 rounded-xl border border-white/15 transition-colors">
+                ← Retour
+            </button>
+            <span class="text-xs font-black uppercase tracking-wider text-amber-300">LE VERIDIQUE A-Z 🇲🇱</span>
+        </div>
+    </header>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="flex-1 max-w-4xl w-full mx-auto px-6 py-6 space-y-6">
+
+        <!-- TITRE DE LA LETTRE -->
+        <div class="text-center">
+            <span class="text-xs font-bold text-emerald-300 bg-emerald-500/15 px-3 py-1 rounded-full border border-emerald-400/30">Fiche Lettre</span>
+            <h1 class="text-3xl font-black text-white mt-2">Lettre : Zay (ز)</h1>
+            <p class="text-slate-300 text-xs mt-1">Étude de la prononciation et des formes d'écriture</p>
+        </div>
+
+        <!-- VIDÉO DE LA BOUCHE / PRONONCIATION -->
+        <div class="bg-[#1c2541] border border-white/15 rounded-3xl p-5 shadow-xl text-center">
+            <h3 class="font-black text-sm text-amber-300 mb-3 flex items-center justify-center gap-2">
+                <span>🎥</span> Point de prononciation (Makhraj)
+            </h3>
+            <div class="relative w-full aspect-video rounded-2xl overflow-hidden bg-black/40 border border-white/10 flex items-center justify-center">
+                <video controls class="w-full h-full object-cover" poster="/img/poster-zay.jpg">
+                    <source src="/videos/zay-pronunciation.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture de vidéos.
+                </video>
+            </div>
+            <p class="text-slate-300 text-xs mt-3 leading-relaxed">
+                L'air passe entre la pointe de la langue et les incisives inférieures pour produire un son [Z] vibrant.
+            </p>
+        </div>
+
+        <!-- LES 4 FORMES DE LA LETTRE (ISOLÉE, DÉBUT, MILIEU, FIN) -->
+        <div class="space-y-4">
+            <h3 class="text-base font-black text-white px-1">Formes de la lettre selon sa position</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <!-- 1. ISOLÉE -->
+                <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-black uppercase tracking-wider text-amber-300 bg-amber-400/15 px-2.5 py-1 rounded-full">Isolée</span>
+                        <span class="text-xs text-slate-400">Seule</span>
+                    </div>
+                    <div class="text-center py-4">
+                        <span lang="ar" dir="rtl" class="font-arabic text-5xl text-amber-100">ز</span>
+                    </div>
+                    <button onclick="alert('Lecture audio : Zay isolée')" class="w-full mt-2 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 transition-colors py-2 rounded-xl text-xs font-bold text-white cursor-pointer border border-white/10">
+                        🔊 Écouter
+                    </button>
+                </div>
+
+                <!-- 2. DÉBUT -->
+                <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-black uppercase tracking-wider text-sky-300 bg-sky-400/15 px-2.5 py-1 rounded-full">Début</span>
+                        <span class="text-xs text-slate-400">Ne s'attache pas à gauche</span>
+                    </div>
+                    <div class="text-center py-4">
+                        <span lang="ar" dir="rtl" class="font-arabic text-5xl text-amber-100">ز</span>
+                    </div>
+                    <button onclick="alert('Lecture audio : Zay au début')" class="w-full mt-2 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 transition-colors py-2 rounded-xl text-xs font-bold text-white cursor-pointer border border-white/10">
+                        🔊 Écouter
+                    </button>
+                </div>
+
+                <!-- 3. MILIEU -->
+                <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-black uppercase tracking-wider text-purple-300 bg-purple-400/15 px-2.5 py-1 rounded-full">Milieu</span>
+                        <span class="text-xs text-slate-400">Connectée à droite uniquement</span>
+                    </div>
+                    <div class="text-center py-4">
+                        <span lang="ar" dir="rtl" class="font-arabic text-5xl text-amber-100">ـز</span>
+                    </div>
+                    <button onclick="alert('Lecture audio : Zay au milieu')" class="w-full mt-2 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 transition-colors py-2 rounded-xl text-xs font-bold text-white cursor-pointer border border-white/10">
+                        🔊 Écouter
+                    </button>
+                </div>
+
+                <!-- 4. FIN -->
+                <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-lg flex flex-col justify-between">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-black uppercase tracking-wider text-emerald-300 bg-emerald-400/15 px-2.5 py-1 rounded-full">Fin</span>
+                        <span class="text-xs text-slate-400">Connectée à droite</span>
+                    </div>
+                    <div class="text-center py-4">
+                        <span lang="ar" dir="rtl" class="font-arabic text-5xl text-amber-100">ـز</span>
+                    </div>
+                    <button onclick="alert('Lecture audio : Zay à la fin')" class="w-full mt-2 flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 transition-colors py-2 rounded-xl text-xs font-bold text-white cursor-pointer border border-white/10">
+                        🔊 Écouter
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- BOUTON DE RETOUR -->
+        <div class="pt-4 pb-12">
+            <button onclick="window.location.href='alphabet-partie2.html'" class="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-base py-4 rounded-2xl shadow-lg cursor-pointer transition-colors border-0">
+                Retour à la liste des lettres ✓
+            </button>
+        </div>
+
+    </main>
+
+</body>
+
+</html>

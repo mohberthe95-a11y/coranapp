@@ -47,7 +47,7 @@
 
                 <!-- BOUTON RETOUR EN HAUT -->
                 <div class="mb-4 flex items-center justify-between gap-2">
-                    <button type="button" onclick="window.location.href='index.html?step=3'" class="inline-flex items-center gap-2 bg-white text-[#0b132b] px-4 py-2 rounded-xl font-bold cursor-pointer shadow-lg hover:bg-white/90 transition-all text-sm border-0">
+                    <button type="button" onclick="retourDebutant()" class="inline-flex items-center gap-2 bg-white text-[#0b132b] px-4 py-2 rounded-xl font-bold cursor-pointer shadow-lg hover:bg-white/90 transition-all text-sm border-0">
                         ← Retour
                     </button>
                     <span id="adminBadgeDebutant" class="hidden inline-flex items-center gap-1.5 bg-amber-400/15 border border-amber-400/35 text-amber-200 px-3 py-1 rounded-full text-xs font-bold">
@@ -187,6 +187,14 @@
                 return 0;
             }
             return 0;
+        };
+
+        window.retourDebutant = function () {
+            if (window.estModeAdministrateur()) {
+                window.location.href = 'admin.html';
+            } else {
+                window.location.href = 'index.html?step=3';
+            }
         };
 
         document.addEventListener("DOMContentLoaded", () => {

@@ -144,6 +144,53 @@
         }
         .form-group input:focus { border-color: var(--gold-accent); }
 
+        .auth-box {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(251, 191, 36, 0.25);
+            border-radius: 14px;
+            padding: 12px 14px;
+            margin-bottom: 15px;
+        }
+        .auth-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .auth-badge {
+            font-size: 0.72rem;
+            color: #fde68a;
+            font-weight: 600;
+        }
+        .btn-reset-auth {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 0.72rem;
+            cursor: pointer;
+            text-decoration: underline;
+            padding: 0;
+        }
+        .btn-reset-auth:hover { color: #ffffff; }
+        .remember-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            font-size: 0.76rem;
+            color: #cbd5e1;
+        }
+        .remember-row input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        .usage-info {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
         /* Bouton Enregistrer */
         .btn-enregistrer {
             width: 100%; padding: 13px;
@@ -234,6 +281,22 @@
                 <div class="form-group">
                     <label>Numéro de téléphone *</label>
                     <input type="tel" id="userNumero" placeholder="Ex: +223 70 00 00 00">
+                </div>
+
+                <div class="auth-box" id="blocAuthAdmin">
+                    <div class="auth-box-header">
+                        <span class="auth-badge">🔐 Session admin : mohberthe95@gmail.com</span>
+                        <button type="button" class="btn-reset-auth" onclick="effacerMotDePasseSession()">Effacer</button>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 6px;">
+                        <label for="adminPasswordInput">Mot de passe Firebase (non stocké en clair dans le code) *</label>
+                        <input type="password" id="adminPasswordInput" placeholder="Entre le mot de passe admin">
+                    </div>
+                    <label class="remember-row">
+                        <input type="checkbox" id="rememberAdminPass">
+                        <span>Mémoriser sur cet appareil uniquement</span>
+                    </label>
+                    <div class="usage-info" id="suiviEcritures">Écritures enregistrées sur cet appareil : 0</div>
                 </div>
 
                 <button type="button" id="btnEnregistrer" class="btn-enregistrer" onclick="enregistrerEtudiant()">Enregistrer</button>
@@ -338,11 +401,64 @@
         };
 
         const ADMIN_EMAIL = "mohberthe95@gmail.com";
-        const ADMIN_PASSWORD = "kayes2005";
+        const PASS_STORAGE_KEY = "coranAppAdminPassSession";
+        const COUNT_STORAGE_KEY = "coranAppFirestoreWritesCount";
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+
+        function mettreAJourCompteurEcritures(incrementer = false) {
+            let count = parseInt(localStorage.getItem(COUNT_STORAGE_KEY) || "0", 10);
+            if (incrementer) {
+                count += 1;
+                localStorage.setItem(COUNT_STORAGE_KEY, String(count));
+            }
+            const el = document.getElementById("suiviEcritures");
+            if (el) {
+                el.textContent = `Écritures enregistrées sur cet appareil : ${count}`;
+            }
+        }
+
+        function recupererMotDePasseActif() {
+            const inputEl = document.getElementById("adminPasswordInput");
+            const rememberEl = document.getElementById("rememberAdminPass");
+            const saisi = inputEl ? inputEl.value.trim() : "";
+
+            if (saisi) {
+                sessionStorage.setItem(PASS_STORAGE_KEY, saisi);
+                if (rememberEl && rememberEl.checked) {
+                    localStorage.setItem(PASS_STORAGE_KEY, saisi);
+                } else {
+                    localStorage.removeItem(PASS_STORAGE_KEY);
+                }
+                return saisi;
+            }
+
+            return sessionStorage.getItem(PASS_STORAGE_KEY) || localStorage.getItem(PASS_STORAGE_KEY) || "";
+        }
+
+        window.effacerMotDePasseSession = function () {
+            sessionStorage.removeItem(PASS_STORAGE_KEY);
+            localStorage.removeItem(PASS_STORAGE_KEY);
+            const inputEl = document.getElementById("adminPasswordInput");
+            const rememberEl = document.getElementById("rememberAdminPass");
+            if (inputEl) inputEl.value = "";
+            if (rememberEl) rememberEl.checked = false;
+        };
+
+        window.addEventListener("DOMContentLoaded", () => {
+            mettreAJourCompteurEcritures(false);
+            const savedPass = localStorage.getItem(PASS_STORAGE_KEY) || sessionStorage.getItem(PASS_STORAGE_KEY);
+            const inputEl = document.getElementById("adminPasswordInput");
+            const rememberEl = document.getElementById("rememberAdminPass");
+            if (savedPass && inputEl) {
+                inputEl.value = savedPass;
+                if (localStorage.getItem(PASS_STORAGE_KEY) && rememberEl) {
+                    rememberEl.checked = true;
+                }
+            }
+        });
 
         window.enregistrerEtudiant = async function () {
             const prenom = document.getElementById('userPrenom').value.trim();
@@ -357,6 +473,13 @@
                 return;
             }
 
+            const motDePasseAdmin = recupererMotDePasseActif();
+            if (!motDePasseAdmin) {
+                statut.style.color = "#f87171";
+                statut.textContent = "Entre le mot de passe administrateur pour authentifier l'écriture Firestore.";
+                return;
+            }
+
             btnEnregistrer.disabled = true;
             statut.style.color = "#fde68a";
             statut.textContent = "Connexion et enregistrement en cours...";
@@ -368,7 +491,7 @@
 
             try {
                 if (!auth.currentUser || auth.currentUser.email !== ADMIN_EMAIL) {
-                    await signInWithEmailAndPassword(auth, ADMIN_EMAIL, ADMIN_PASSWORD);
+                    await signInWithEmailAndPassword(auth, ADMIN_EMAIL, motDePasseAdmin);
                 }
 
                 const docRef = await Promise.race([
@@ -377,6 +500,7 @@
                         nom: nom,
                         numero: numero,
                         points: 0,
+                        enregistrePar: ADMIN_EMAIL,
                         dateInscription: serverTimestamp()
                     }),
                     new Promise((_, reject) =>
@@ -385,6 +509,7 @@
                 ]);
 
                 localStorage.setItem('coranAppEtudiantId', docRef.id);
+                mettreAJourCompteurEcritures(true);
 
                 statut.style.color = "#4ade80";
                 statut.textContent = "Enregistré avec succès ! Tu peux maintenant cliquer sur Continuer.";

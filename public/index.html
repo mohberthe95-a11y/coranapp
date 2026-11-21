@@ -321,9 +321,10 @@
 
     </div>
 
-    <!-- SCRIPT FIREBASE FIRESTORE + GESTION -->
+    <!-- SCRIPT FIREBASE AUTH + FIRESTORE + GESTION -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -336,7 +337,11 @@
             measurementId: "G-RZDFFFB1QG"
         };
 
+        const ADMIN_EMAIL = "mohberthe95@gmail.com";
+        const ADMIN_PASSWORD = "REMPLACE_PAR_TON_MOT_DE_PASSE";
+
         const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
         const db = getFirestore(app);
 
         window.enregistrerEtudiant = async function () {
@@ -352,9 +357,15 @@
                 return;
             }
 
+            if (ADMIN_PASSWORD === "REMPLACE_PAR_TON_MOT_DE_PASSE" || !ADMIN_PASSWORD) {
+                statut.style.color = "#f87171";
+                statut.textContent = "Remplace d'abord ADMIN_PASSWORD par ton mot de passe Firebase dans le code.";
+                return;
+            }
+
             btnEnregistrer.disabled = true;
             statut.style.color = "#fde68a";
-            statut.textContent = "Enregistrement en cours...";
+            statut.textContent = "Connexion et enregistrement en cours...";
 
             localStorage.setItem('coranAppUserPrenom', prenom);
             localStorage.setItem('coranAppUserNom', nom);
@@ -362,6 +373,10 @@
             document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${prenom} ?`;
 
             try {
+                if (!auth.currentUser || auth.currentUser.email !== ADMIN_EMAIL) {
+                    await signInWithEmailAndPassword(auth, ADMIN_EMAIL, ADMIN_PASSWORD);
+                }
+
                 const docRef = await Promise.race([
                     addDoc(collection(db, "etudiants"), {
                         prenom: prenom,
@@ -381,11 +396,11 @@
                 statut.textContent = "Enregistré avec succès ! Tu peux maintenant cliquer sur Continuer.";
                 btnContinuer.style.display = "block";
             } catch (err) {
-                console.error("Erreur Firestore :", err);
+                console.error("Erreur Firebase :", err);
                 const code = err && err.code ? ` (${err.code})` : "";
                 const msg = err && err.message ? err.message : "Erreur inconnue";
                 statut.style.color = "#f87171";
-                statut.textContent = `Erreur${code} : ${msg}. Vérifie ton VPN / serveur local ou clique sur Continuer.`;
+                statut.textContent = `Erreur${code} : ${msg}. Vérifie ton mot de passe / VPN / serveur local ou clique sur Continuer.`;
                 btnEnregistrer.disabled = false;
                 btnContinuer.style.display = "block";
             }

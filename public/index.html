@@ -323,4 +323,166 @@
 
     <!-- SCRIPT FIREBASE AUTH + FIRESTORE + GESTION -->
     <script type="module">
-        import { initializeApp } from "
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCI1EvReDKHJBJbHKWNsTCWhKR1PmdvBus",
+            authDomain: "coranapp-d990a.firebaseapp.com",
+            projectId: "coranapp-d990a",
+            storageBucket: "coranapp-d990a.firebasestorage.app",
+            messagingSenderId: "677078059889",
+            appId: "1:677078059889:web:d4c45d6ce8d04be1e304d0",
+            measurementId: "G-RZDFFFB1QG"
+        };
+
+        const ADMIN_EMAIL = "mohberthe95@gmail.com";
+        const ADMIN_PASSWORD = "kayes2005";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        window.enregistrerEtudiant = async function () {
+            const prenom = document.getElementById('userPrenom').value.trim();
+            const nom = document.getElementById('userNom').value.trim();
+            const numero = document.getElementById('userNumero').value.trim();
+            const statut = document.getElementById('statutEnregistrement');
+            const btnEnregistrer = document.getElementById('btnEnregistrer');
+            const btnContinuer = document.getElementById('btnContinuerEtape1');
+
+            if (!prenom || !nom || !numero) {
+                alert("S'il te plaît, remplis le prénom, le nom et le numéro !");
+                return;
+            }
+
+            btnEnregistrer.disabled = true;
+            statut.style.color = "#fde68a";
+            statut.textContent = "Connexion et enregistrement en cours...";
+
+            localStorage.setItem('coranAppUserPrenom', prenom);
+            localStorage.setItem('coranAppUserNom', nom);
+            localStorage.setItem('coranAppUserNumero', numero);
+            document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${prenom} ?`;
+
+            try {
+                if (!auth.currentUser || auth.currentUser.email !== ADMIN_EMAIL) {
+                    await signInWithEmailAndPassword(auth, ADMIN_EMAIL, ADMIN_PASSWORD);
+                }
+
+                const docRef = await Promise.race([
+                    addDoc(collection(db, "etudiants"), {
+                        prenom: prenom,
+                        nom: nom,
+                        numero: numero,
+                        points: 0,
+                        dateInscription: serverTimestamp()
+                    }),
+                    new Promise((_, reject) =>
+                        setTimeout(() => reject(new Error("Délai dépassé (vérifie la connexion ou le VPN)")), 10000)
+                    )
+                ]);
+
+                localStorage.setItem('coranAppEtudiantId', docRef.id);
+
+                statut.style.color = "#4ade80";
+                statut.textContent = "Enregistré avec succès ! Tu peux maintenant cliquer sur Continuer.";
+                btnContinuer.style.display = "block";
+            } catch (err) {
+                console.error("Erreur Firebase :", err);
+                const code = err && err.code ? ` (${err.code})` : "";
+                const msg = err && err.message ? err.message : "Erreur inconnue";
+                statut.style.color = "#f87171";
+                statut.textContent = `Erreur${code} : ${msg}. Vérifie ton mot de passe / VPN / serveur local ou clique sur Continuer.`;
+                btnEnregistrer.disabled = false;
+                btnContinuer.style.display = "block";
+            }
+        };
+    </script>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedPrenom = localStorage.getItem('coranAppUserPrenom');
+            const savedNom = localStorage.getItem('coranAppUserNom');
+            const savedNumero = localStorage.getItem('coranAppUserNumero');
+            const savedId = localStorage.getItem('coranAppEtudiantId');
+
+            if (savedPrenom) {
+                document.getElementById('userPrenom').value = savedPrenom;
+                document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${savedPrenom} ?`;
+            }
+            if (savedNom) {
+                document.getElementById('userNom').value = savedNom;
+            }
+            if (savedNumero) {
+                document.getElementById('userNumero').value = savedNumero;
+            }
+            if (savedId) {
+                document.getElementById('btnContinuerEtape1').style.display = "block";
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const stepParam = parseInt(params.get('step'), 10);
+            if (stepParam === 2 || stepParam === 3) {
+                changerEtape(stepParam);
+            }
+        });
+
+        function allerEtape2() {
+            const prenom = document.getElementById('userPrenom').value.trim();
+            const nom = document.getElementById('userNom').value.trim();
+
+            if (!prenom) {
+                alert("S'il te plaît, entre ton prénom !");
+                return;
+            }
+
+            localStorage.setItem('coranAppUserPrenom', prenom);
+            localStorage.setItem('coranAppUserNom', nom);
+
+            document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${prenom} ?`;
+            changerEtape(2);
+        }
+
+        function choisirObjectif(obj) {
+            localStorage.setItem('coranAppObjectif', obj);
+            changerEtape(3);
+        }
+
+        function finaliserNiveau(niveau) {
+            localStorage.setItem('coranAppUserNiveau', niveau);
+            const objectif = localStorage.getItem('coranAppObjectif');
+
+            // Redirection intelligente corrigée selon vos noms exacts de fichiers
+            if (objectif === 'sourates') {
+                if (niveau === 'debutant') {
+                    window.location.href = 'debutantcorant.html';
+                } else if (niveau === 'moyen') {
+                    window.location.href = 'Moyencorant.html';
+                } else if (niveau === 'professionnel') {
+                    window.location.href = 'professionnelcoran.html';
+                }
+            } else {
+                if (niveau === 'debutant') {
+                    window.location.href = 'debutant.html';
+                } else if (niveau === 'moyen') {
+                    window.location.href = 'moyen.html';
+                } else if (niveau === 'professionnel') {
+                    window.location.href = 'professionnel.html';
+                }
+            }
+        }
+
+        function changerEtape(num) {
+            document.querySelectorAll('.step-pane').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + num).classList.add('active');
+
+            document.getElementById('dot1').className = num >= 1 ? 'step-dot active' : 'step-dot';
+            document.getElementById('dot2').className = num >= 2 ? 'step-dot active' : 'step-dot';
+            document.getElementById('dot3').className = num >= 3 ? 'step-dot active' : 'step-dot';
+        }
+    </script>
+</body>
+
+</html>

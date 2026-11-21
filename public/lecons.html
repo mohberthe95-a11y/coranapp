@@ -32,9 +32,14 @@
     <header class="bg-[#0b132b] text-white pt-6 pb-8 px-6 shadow-md border-b border-white/10">
         <div class="max-w-4xl mx-auto">
             <!-- Bouton Retour -->
-            <button type="button" onclick="window.location.href='debutant.html'" class="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-semibold mb-4 cursor-pointer bg-white/10 px-3 py-1.5 rounded-xl border border-white/15 transition-colors">
-                ← Accueil
-            </button>
+            <div class="flex items-center justify-between gap-2 mb-4">
+                <button type="button" onclick="window.location.href='debutant.html'" class="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-semibold cursor-pointer bg-white/10 px-3 py-1.5 rounded-xl border border-white/15 transition-colors">
+                    ← Accueil
+                </button>
+                <span id="adminBadgeLecons" style="display: none;" class="hidden inline-flex items-center gap-1.5 bg-amber-400/15 border border-amber-400/35 text-amber-200 px-3 py-1 rounded-full text-xs font-bold">
+                    🛡️ Admin · 0 pt
+                </span>
+            </div>
 
             <!-- Titre & Compteur -->
             <div class="mb-5">
@@ -250,6 +255,33 @@
         </div>
 
     </main>
+
+    <!-- SCRIPT MODE ADMINISTRATEUR -->
+    <script>
+        window.estModeAdministrateur = function () {
+            return localStorage.getItem('coranAppIsAdmin') === 'true';
+        };
+
+        window.ajouterPointsEtudiant = function (_points) {
+            if (window.estModeAdministrateur()) {
+                return 0;
+            }
+            return 0;
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const badge = document.getElementById('adminBadgeLecons');
+            if (window.estModeAdministrateur()) {
+                if (badge) {
+                    badge.classList.remove('hidden');
+                    badge.style.display = 'inline-flex';
+                }
+            } else if (badge) {
+                badge.classList.add('hidden');
+                badge.style.display = 'none';
+            }
+        });
+    </script>
 
 </body>
 

@@ -285,9 +285,16 @@
 
             if (savedPrenom) {
                 document.getElementById('userPrenom').value = savedPrenom;
+                document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${savedPrenom} ?`;
             }
             if (savedNom) {
                 document.getElementById('userNom').value = savedNom;
+            }
+
+            const params = new URLSearchParams(window.location.search);
+            const stepParam = parseInt(params.get('step'), 10);
+            if (stepParam === 2 || stepParam === 3) {
+                changerEtape(stepParam);
             }
         });
 

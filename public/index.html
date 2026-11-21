@@ -338,7 +338,7 @@
         };
 
         const ADMIN_EMAIL = "mohberthe95@gmail.com";
-        const ADMIN_PASSWORD = "REMPLACE_PAR_TON_MOT_DE_PASSE";
+        const ADMIN_PASSWORD = "kayes2005";
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
@@ -354,12 +354,6 @@
 
             if (!prenom || !nom || !numero) {
                 alert("S'il te plaît, remplis le prénom, le nom et le numéro !");
-                return;
-            }
-
-            if (ADMIN_PASSWORD === "REMPLACE_PAR_TON_MOT_DE_PASSE" || !ADMIN_PASSWORD) {
-                statut.style.color = "#f87171";
-                statut.textContent = "Remplace d'abord ADMIN_PASSWORD par ton mot de passe Firebase dans le code.";
                 return;
             }
 

@@ -188,9 +188,9 @@
             </p>
         </div>
 
-        <!-- BOUTON SUIVANT (DÉBLOQUÉ APRÈS LES 10 EXERCICES) -->
+        <!-- BOUTON SUIVANT (BLOQUÉ JUSQU'À LA FIN DES 10 EXERCICES) -->
         <div class="pt-4 pb-12 flex flex-col sm:flex-row gap-3">
-            <button id="btnPartie2Partie1" type="button" disabled onclick="verifierEtPasserPartie2()" class="flex-1 bg-white/10 text-slate-400 font-black text-base py-4 rounded-2xl border border-white/10 cursor-not-allowed opacity-60 transition-all">
+            <button id="btnPartie2Partie1" type="button" disabled aria-disabled="true" onclick="verifierEtPasserPartie2(event)" class="flex-1 bg-white/10 text-slate-400 font-black text-base py-4 rounded-2xl border border-white/15 cursor-not-allowed opacity-60 pointer-events-none select-none transition-all">
                 🔒 Faire les 10 exercices pour passer à la Partie 2
             </button>
             <button type="button" onclick="window.location.href='exercice1.html'" class="sm:w-auto bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-base px-6 py-4 rounded-2xl shadow-lg cursor-pointer transition-colors border-0">
@@ -208,22 +208,22 @@
 
             if (fait) {
                 btn.disabled = false;
+                btn.setAttribute('aria-disabled', 'false');
                 btn.className = "flex-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-base py-4 rounded-2xl shadow-lg cursor-pointer transition-colors border-0";
                 btn.textContent = "Passer à la Partie 2 →";
             } else {
                 btn.disabled = true;
-                btn.className = "flex-1 bg-white/10 text-slate-400 font-black text-base py-4 rounded-2xl border border-white/10 cursor-not-allowed opacity-60 transition-all";
+                btn.setAttribute('aria-disabled', 'true');
+                btn.className = "flex-1 bg-white/10 text-slate-400 font-black text-base py-4 rounded-2xl border border-white/15 cursor-not-allowed opacity-60 pointer-events-none select-none transition-all";
                 btn.textContent = "🔒 Faire les 10 exercices pour passer à la Partie 2";
             }
         }
 
-        function verifierEtPasserPartie2() {
+        function verifierEtPasserPartie2(event) {
+            if (event) event.preventDefault();
             const fait = localStorage.getItem('nurQuranExercice1Termine') === 'true';
             if (fait) {
                 window.location.href = 'alphabet-partie2.html';
-            } else {
-                alert("Termine d'abord les 10 exercices de la Partie 1 pour passer à la Partie 2 !");
-                window.location.href = 'exercice1.html';
             }
         }
 

@@ -173,6 +173,7 @@
             margin-top: 10px;
             min-height: 18px;
             color: #fde68a;
+            word-break: break-word;
         }
 
         /* Options interactives */
@@ -355,30 +356,38 @@
             statut.style.color = "#fde68a";
             statut.textContent = "Enregistrement en cours...";
 
+            localStorage.setItem('coranAppUserPrenom', prenom);
+            localStorage.setItem('coranAppUserNom', nom);
+            localStorage.setItem('coranAppUserNumero', numero);
+            document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${prenom} ?`;
+
             try {
-                const docRef = await addDoc(collection(db, "etudiants"), {
-                    prenom: prenom,
-                    nom: nom,
-                    numero: numero,
-                    points: 0,
-                    dateInscription: serverTimestamp()
-                });
+                const docRef = await Promise.race([
+                    addDoc(collection(db, "etudiants"), {
+                        prenom: prenom,
+                        nom: nom,
+                        numero: numero,
+                        points: 0,
+                        dateInscription: serverTimestamp()
+                    }),
+                    new Promise((_, reject) =>
+                        setTimeout(() => reject(new Error("Délai dépassé (vérifie la connexion ou le VPN)")), 10000)
+                    )
+                ]);
 
-                localStorage.setItem('coranAppUserPrenom', prenom);
-                localStorage.setItem('coranAppUserNom', nom);
-                localStorage.setItem('coranAppUserNumero', numero);
                 localStorage.setItem('coranAppEtudiantId', docRef.id);
-
-                document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${prenom} ?`;
 
                 statut.style.color = "#4ade80";
                 statut.textContent = "Enregistré avec succès ! Tu peux maintenant cliquer sur Continuer.";
                 btnContinuer.style.display = "block";
             } catch (err) {
                 console.error("Erreur Firestore :", err);
+                const code = err && err.code ? ` (${err.code})` : "";
+                const msg = err && err.message ? err.message : "Erreur inconnue";
                 statut.style.color = "#f87171";
-                statut.textContent = "Erreur lors de l'enregistrement. Réessaie.";
+                statut.textContent = `Erreur${code} : ${msg}. Vérifie ton VPN / serveur local ou clique sur Continuer.`;
                 btnEnregistrer.disabled = false;
+                btnContinuer.style.display = "block";
             }
         };
     </script>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Espace Administrateur - Nūr Al-Qur'ān</title>
+    <style>
+        :root {
+            --primary-dark: #090f1d;
+            --primary-accent: #2563eb;
+            --gold-accent: #fbbf24;
+            --bg-main: #04060b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.12);
+            --shadow-lg: 0 25px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #090f1d, #04060b);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 460px;
+            text-align: center;
+        }
+
+        .app-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin: 0 0 6px 0;
+            background: linear-gradient(90deg, #fef3c7, #fbbf24, #fde68a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .app-subtitle {
+            font-size: 0.82rem;
+            color: #94a3b8;
+            margin-bottom: 18px;
+        }
+
+        .card-box {
+            background: rgba(13, 20, 38, 0.95);
+            border-radius: 24px;
+            padding: 24px 20px;
+            text-align: left;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #cbd5e1;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: rgba(15, 23, 42, 0.85);
+            color: #ffffff;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: var(--gold-accent);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-logout {
+            width: 100%;
+            padding: 12px;
+            background: rgba(239, 68, 68, 0.16);
+            color: #fca5a5;
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 14px;
+        }
+
+        .statut-msg {
+            font-size: 0.82rem;
+            margin-top: 10px;
+            min-height: 18px;
+            color: #fde68a;
+        }
+
+        .badge-admin {
+            display: inline-block;
+            background: rgba(251, 191, 36, 0.14);
+            color: #fde68a;
+            border: 1px solid rgba(251, 191, 36, 0.35);
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .nav-btn {
+            background: rgba(23, 37, 84, 0.55);
+            border: 1px solid var(--border-color);
+            color: #ffffff;
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--gold-accent);
+            background: rgba(23, 37, 84, 0.9);
+        }
+
+        .liste-etudiants {
+            margin-top: 16px;
+            max-height: 220px;
+            overflow-y: auto;
+            border-top: 1px solid var(--border-color);
+            padding-top: 12px;
+            font-size: 0.8rem;
+        }
+
+        .etudiant-item {
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.7);
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <h1 class="app-title">Espace Administrateur</h1>
+        <p class="app-subtitle">Nūr Al-Qur'ān — Accès direct sans points d'exercice</p>
+
+        <!-- Connexion Admin -->
+        <div id="loginPanel" class="card-box">
+            <div class="form-group">
+                <label for="adminCode">Code administrateur *</label>
+                <input type="password" id="adminCode" placeholder="Entre ton code admin">
+            </div>
+            <button type="button" id="btnConnexionAdmin" class="btn-primary">Se connecter</button>
+            <p id="adminStatus" class="statut-msg"></p>
+        </div>
+
+        <!-- Tableau de bord Admin -->
+        <div id="dashboardPanel" class="card-box hidden">
+            <div class="badge-admin">🛡️ Mode Administrateur actif (0 point comptabilisé)</div>
+            <p style="font-size: 0.85rem; color: #cbd5e1; margin: 0 0 10px 0;">
+                Connecté en tant que <strong>mohberthe95@gmail.com</strong>. Tu peux ouvrir n'importe quel module sans saisir de nom.
+            </p>
+
+            <div class="nav-grid">
+                <button type="button" class="nav-btn" onclick="window.location.href='debutant.html'">📖 Débutant (Lecture)</button>
+                <button type="button" class="nav-btn" onclick="window.location.href='moyen.html'">📖 Moyen (Lecture)</button>
+                <button type="button" class="nav-btn" onclick="window.location.href='professionnel.html'">📖 Pro (Lecture)</button>
+                <button type="button" class="nav-btn" onclick="window.location.href='debutantcorant.html'">🤲 Débutant (Sourates)</button>
+                <button type="button" class="nav-btn" onclick="window.location.href='Moyencorant.html'">🤲 Moyen (Sourates)</button>
+                <button type="button" class="nav-btn" onclick="window.location.href='professionnelcoran.html'">🤲 Pro (Sourates)</button>
+            </div>
+
+            <div class="liste-etudiants" id="listeEtudiants">
+                Chargement des inscrits...
+            </div>
+
+            <button type="button" id="btnDeconnexionAdmin" class="btn-logout">Déconnexion</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCI1EvReDKHJBJbHKWNsTCWhKR1PmdvBus",
+            authDomain: "coranapp-d990a.firebaseapp.com",
+            projectId: "coranapp-d990a",
+            storageBucket: "coranapp-d990a.firebasestorage.app",
+            messagingSenderId: "677078059889",
+            appId: "1:677078059889:web:d4c45d6ce8d04be1e304d0",
+            measurementId: "G-RZDFFFB1QG"
+        };
+
+        const ADMIN_EMAIL = "mohberthe95@gmail.com";
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const loginPanel = document.getElementById("loginPanel");
+        const dashboardPanel = document.getElementById("dashboardPanel");
+        const adminStatus = document.getElementById("adminStatus");
+        const listeEtudiants = document.getElementById("listeEtudiants");
+
+        async function chargerEtudiants() {
+            listeEtudiants.textContent = "Chargement des inscrits...";
+            try {
+                const q = query(collection(db, "etudiants"), orderBy("dateInscription", "desc"));
+                const snap = await getDocs(q);
+                if (snap.empty) {
+                    listeEtudiants.textContent = "Aucun étudiant enregistré pour le moment.";
+                    return;
+                }
+                listeEtudiants.innerHTML = "";
+                snap.forEach((doc) => {
+                    const d = doc.data();
+                    const item = document.createElement("div");
+                    item.className = "etudiant-item";
+                    item.innerHTML = `<span><strong>${d.prenom || ""} ${d.nom || ""}</strong> (${d.numero || ""})</span><span>${d.points ?? 0} pts</span>`;
+                    listeEtudiants.appendChild(item);
+                });
+            } catch (e) {
+                listeEtudiants.textContent = "Impossible de charger la liste : " + (e.message || e);
+            }
+        }
+
+        function activerModeAdminUI() {
+            localStorage.setItem("coranAppIsAdmin", "true");
+            loginPanel.classList.add("hidden");
+            dashboardPanel.classList.remove("hidden");
+            chargerEtudiants();
+        }
+
+        if (localStorage.getItem("coranAppIsAdmin") === "true") {
+            activerModeAdminUI();
+        }
+
+        document.getElementById("btnConnexionAdmin").addEventListener("click", async () => {
+            const code = document.getElementById("adminCode").value.trim();
+            if (!code) {
+                adminStatus.style.color = "#f87171";
+                adminStatus.textContent = "Entre ton code administrateur.";
+                return;
+            }
+            adminStatus.style.color = "#fde68a";
+            adminStatus.textContent = "Connexion en cours...";
+            try {
+                await signInWithEmailAndPassword(auth, ADMIN_EMAIL, code);
+                adminStatus.style.color = "#4ade80";
+                adminStatus.textContent = "Connecté avec succès.";
+                activerModeAdminUI();
+            } catch (err) {
+                adminStatus.style.color = "#f87171";
+                adminStatus.textContent = "Code incorrect ou erreur de connexion.";
+            }
+        });
+
+        document.getElementById("btnDeconnexionAdmin").addEventListener("click", async () => {
+            localStorage.removeItem("coranAppIsAdmin");
+            try {
+                await signOut(auth);
+            } catch (_) {}
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+
+</html>

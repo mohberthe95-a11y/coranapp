@@ -344,6 +344,70 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
+        function cleEtudiantActuel() {
+            const p = (document.getElementById('userPrenom').value || '').trim().toLowerCase();
+            const n = (document.getElementById('userNom').value || '').trim().toLowerCase();
+            const t = (document.getElementById('userNumero').value || '').trim().toLowerCase();
+            return `${p}||${n}||${t}`;
+        }
+
+        function chargerListeEnregistres() {
+            try {
+                const raw = localStorage.getItem('coranAppEtudiantsEnregistres');
+                const parsed = raw ? JSON.parse(raw) : {};
+                return parsed && typeof parsed === 'object' ? parsed : {};
+            } catch (_) {
+                return {};
+            }
+        }
+
+        function marquerCombinaisonEnregistree(docId) {
+            const p = document.getElementById('userPrenom').value.trim();
+            const n = document.getElementById('userNom').value.trim();
+            const t = document.getElementById('userNumero').value.trim();
+            if (!p || !n || !t) return;
+            const map = chargerListeEnregistres();
+            map[cleEtudiantActuel()] = docId || 'ok';
+            localStorage.setItem('coranAppEtudiantsEnregistres', JSON.stringify(map));
+        }
+
+        window.verifierEtatCombinaisonActuelle = function () {
+            const p = document.getElementById('userPrenom').value.trim();
+            const n = document.getElementById('userNom').value.trim();
+            const t = document.getElementById('userNumero').value.trim();
+            const btnEnregistrer = document.getElementById('btnEnregistrer');
+            const btnContinuer = document.getElementById('btnContinuerEtape1');
+            const statut = document.getElementById('statutEnregistrement');
+
+            if (!p || !n || !t) {
+                btnContinuer.style.display = "none";
+                btnEnregistrer.disabled = false;
+                return;
+            }
+
+            const map = chargerListeEnregistres();
+            const savedDocId = map[cleEtudiantActuel()];
+
+            if (savedDocId) {
+                localStorage.setItem('coranAppUserPrenom', p);
+                localStorage.setItem('coranAppUserNom', n);
+                localStorage.setItem('coranAppUserNumero', t);
+                if (savedDocId !== 'ok') {
+                    localStorage.setItem('coranAppEtudiantId', savedDocId);
+                }
+                document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${p} ?`;
+                btnContinuer.style.display = "block";
+                btnEnregistrer.disabled = true;
+                statut.style.color = "#4ade80";
+                statut.textContent = "Ces informations sont déjà enregistrées ! Tu peux cliquer sur Continuer.";
+            } else {
+                btnContinuer.style.display = "none";
+                btnEnregistrer.disabled = false;
+                statut.style.color = "#fde68a";
+                statut.textContent = "Clique sur Enregistrer pour valider ces informations.";
+            }
+        };
+
         window.enregistrerEtudiant = async function () {
             const prenom = document.getElementById('userPrenom').value.trim();
             const nom = document.getElementById('userNom').value.trim();
@@ -354,6 +418,23 @@
 
             if (!prenom || !nom || !numero) {
                 alert("S'il te plaît, remplis le prénom, le nom et le numéro !");
+                return;
+            }
+
+            const map = chargerListeEnregistres();
+            const existingId = map[cleEtudiantActuel()];
+            if (existingId) {
+                localStorage.setItem('coranAppUserPrenom', prenom);
+                localStorage.setItem('coranAppUserNom', nom);
+                localStorage.setItem('coranAppUserNumero', numero);
+                if (existingId !== 'ok') {
+                    localStorage.setItem('coranAppEtudiantId', existingId);
+                }
+                document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${prenom} ?`;
+                statut.style.color = "#4ade80";
+                statut.textContent = "Ces informations sont déjà enregistrées ! Tu peux cliquer sur Continuer.";
+                btnContinuer.style.display = "block";
+                btnEnregistrer.disabled = true;
                 return;
             }
 
@@ -386,6 +467,7 @@
                 ]);
 
                 localStorage.setItem('coranAppEtudiantId', docRef.id);
+                marquerCombinaisonEnregistree(docRef.id);
 
                 statut.style.color = "#4ade80";
                 statut.textContent = "Enregistré avec succès ! Tu peux maintenant cliquer sur Continuer.";
@@ -419,17 +501,16 @@
                 document.getElementById('userNumero').value = savedNumero;
             }
 
-            // Continuer reste masqué tant que l'enregistrement n'est pas effectué sur cette session
+            // Au chargement initial, Continuer reste caché tant que la personne n'a pas cliqué sur Enregistrer
             document.getElementById('btnContinuerEtape1').style.display = "none";
 
             ['userPrenom', 'userNom', 'userNumero'].forEach(id => {
                 const input = document.getElementById(id);
                 if (input) {
                     input.addEventListener('input', () => {
-                        document.getElementById('btnContinuerEtape1').style.display = "none";
-                        document.getElementById('btnEnregistrer').disabled = false;
-                        document.getElementById('statutEnregistrement').style.color = "#fde68a";
-                        document.getElementById('statutEnregistrement').textContent = "Clique sur Enregistrer pour valider ces informations.";
+                        if (typeof window.verifierEtatCombinaisonActuelle === 'function') {
+                            window.verifierEtatCombinaisonActuelle();
+                        }
                     });
                 }
             });

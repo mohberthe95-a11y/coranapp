@@ -489,6 +489,7 @@
             const savedPrenom = localStorage.getItem('coranAppUserPrenom');
             const savedNom = localStorage.getItem('coranAppUserNom');
             const savedNumero = localStorage.getItem('coranAppUserNumero');
+            const savedId = localStorage.getItem('coranAppEtudiantId');
 
             if (savedPrenom) {
                 document.getElementById('userPrenom').value = savedPrenom;
@@ -501,8 +502,15 @@
                 document.getElementById('userNumero').value = savedNumero;
             }
 
-            // Au chargement initial, Continuer reste caché tant que la personne n'a pas cliqué sur Enregistrer
-            document.getElementById('btnContinuerEtape1').style.display = "none";
+            if (savedPrenom && savedNom && savedNumero && savedId) {
+                document.getElementById('btnContinuerEtape1').style.display = "block";
+                document.getElementById('btnEnregistrer').disabled = true;
+                const statut = document.getElementById('statutEnregistrement');
+                statut.style.color = "#4ade80";
+                statut.textContent = "Enregistré avec succès ! Tu peux maintenant cliquer sur Continuer.";
+            } else {
+                document.getElementById('btnContinuerEtape1').style.display = "none";
+            }
 
             ['userPrenom', 'userNom', 'userNumero'].forEach(id => {
                 const input = document.getElementById(id);

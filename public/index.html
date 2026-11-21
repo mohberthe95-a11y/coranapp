@@ -358,6 +358,7 @@
             }
 
             btnEnregistrer.disabled = true;
+            btnContinuer.style.display = "none";
             statut.style.color = "#fde68a";
             statut.textContent = "Connexion et enregistrement en cours...";
 
@@ -394,9 +395,9 @@
                 const code = err && err.code ? ` (${err.code})` : "";
                 const msg = err && err.message ? err.message : "Erreur inconnue";
                 statut.style.color = "#f87171";
-                statut.textContent = `Erreur${code} : ${msg}. Vérifie ton mot de passe / VPN / serveur local ou clique sur Continuer.`;
+                statut.textContent = `Erreur${code} : ${msg}. Vérifie ton mot de passe / VPN / serveur local ou réessaie Enregistrer.`;
                 btnEnregistrer.disabled = false;
-                btnContinuer.style.display = "block";
+                btnContinuer.style.display = "none";
             }
         };
     </script>
@@ -406,7 +407,6 @@
             const savedPrenom = localStorage.getItem('coranAppUserPrenom');
             const savedNom = localStorage.getItem('coranAppUserNom');
             const savedNumero = localStorage.getItem('coranAppUserNumero');
-            const savedId = localStorage.getItem('coranAppEtudiantId');
 
             if (savedPrenom) {
                 document.getElementById('userPrenom').value = savedPrenom;
@@ -418,9 +418,21 @@
             if (savedNumero) {
                 document.getElementById('userNumero').value = savedNumero;
             }
-            if (savedId) {
-                document.getElementById('btnContinuerEtape1').style.display = "block";
-            }
+
+            // Continuer reste masqué tant que l'enregistrement n'est pas effectué sur cette session
+            document.getElementById('btnContinuerEtape1').style.display = "none";
+
+            ['userPrenom', 'userNom', 'userNumero'].forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.addEventListener('input', () => {
+                        document.getElementById('btnContinuerEtape1').style.display = "none";
+                        document.getElementById('btnEnregistrer').disabled = false;
+                        document.getElementById('statutEnregistrement').style.color = "#fde68a";
+                        document.getElementById('statutEnregistrement').textContent = "Clique sur Enregistrer pour valider ces informations.";
+                    });
+                }
+            });
 
             const params = new URLSearchParams(window.location.search);
             const stepParam = parseInt(params.get('step'), 10);

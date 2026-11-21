@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Certificats & Points - LE VERIDIQUE A-Z</title>
+    <title>Certificats & Points - Nūr Al-Qur'ān</title>
     <meta name="theme-color" content="#0b132b">
     <meta name="google" content="notranslate">
 
@@ -19,19 +19,41 @@
             font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;
         }
 
+        .certificat-cadre {
+            background: radial-gradient(circle at top, #fffdf7 0%, #f9f2df 70%, #f3e8c8 100%);
+            color: #0f294a;
+            border: 4px solid #c9962b;
+            box-shadow:
+                inset 0 0 0 4px #fdfaf0,
+                inset 0 0 0 6px rgba(201, 150, 43, 0.55),
+                0 20px 45px rgba(0, 0, 0, 0.45);
+            position: relative;
+        }
+
+        .coin-motif {
+            position: absolute;
+            width: 54px;
+            height: 54px;
+            border: 3px solid #c9962b;
+            background: linear-gradient(135deg, rgba(15, 41, 74, 0.12), rgba(201, 150, 43, 0.2));
+            pointer-events: none;
+        }
+        .coin-tl { top: 8px; left: 8px; border-right: none; border-bottom: none; border-top-left-radius: 14px; }
+        .coin-tr { top: 8px; right: 8px; border-left: none; border-bottom: none; border-top-right-radius: 14px; }
+        .coin-bl { bottom: 8px; left: 8px; border-right: none; border-top: none; border-bottom-left-radius: 14px; }
+        .coin-br { bottom: 8px; right: 8px; border-left: none; border-top: none; border-bottom-right-radius: 14px; }
+
         @media print {
             body {
                 background: #ffffff !important;
-                color: #0b132b !important;
+                color: #0f294a !important;
             }
             .no-print {
                 display: none !important;
             }
-            .attestation-papier {
-                border: 4px solid #d97706 !important;
+            .certificat-cadre {
                 box-shadow: none !important;
-                background: #fffbeb !important;
-                color: #0b132b !important;
+                margin: 0 !important;
             }
         }
     </style>
@@ -52,7 +74,7 @@
             </div>
 
             <h1 class="text-2xl md:text-3xl font-black tracking-tight m-0 text-white">Points & Attestation</h1>
-            <p class="text-white/70 text-sm mt-1 m-0">Suis tes points et débloque ton certificat après les 29 leçons</p>
+            <p class="text-white/70 text-sm mt-1 m-0">Consulte tes points et débloque ton attestation après les 29 leçons</p>
         </div>
     </header>
 
@@ -62,8 +84,8 @@
         <!-- TABLEAU POINTS & PROGRESSION -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 no-print">
             <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-4 text-center">
-                <p class="text-amber-300 font-black text-2xl m-0" id="pointsEleveDisplay">0</p>
-                <p class="text-slate-300 text-xs mt-1 m-0">Points accumulés</p>
+                <p class="text-amber-300 font-black text-2xl m-0" id="pointsEleveDisplay">0 pt</p>
+                <p class="text-slate-300 text-xs mt-1 m-0">Points de l'élève</p>
             </div>
             <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-4 text-center">
                 <p class="text-white font-black text-2xl m-0"><span id="leconsValideesDisplay">0</span> / 29</p>
@@ -89,24 +111,90 @@
             </p>
         </div>
 
-        <!-- APERÇU DE L'ATTESTATION -->
-        <div class="attestation-papier bg-[#1c2541] border-2 border-amber-400/50 rounded-3xl p-6 md:p-8 shadow-2xl text-center">
-            <p lang="ar" dir="rtl" class="font-arabic text-2xl text-amber-300 m-0 mb-2">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-            <p class="text-xs font-black uppercase tracking-widest text-amber-300 m-0">Attestation Officielle · Nūr Al-Qur'ān</p>
-            <h2 class="text-2xl md:text-3xl font-black text-white mt-2 mb-4 m-0">Certificat de Parcours</h2>
+        <!-- APERÇU DE L'ATTESTATION (STYLE MODÈLE SANS "LE VERIDIQUE A-Z") -->
+        <div class="certificat-cadre rounded-3xl p-6 sm:p-9 overflow-hidden">
+            <span class="coin-motif coin-tl"></span>
+            <span class="coin-motif coin-tr"></span>
+            <span class="coin-motif coin-bl"></span>
+            <span class="coin-motif coin-br"></span>
 
-            <p class="text-sm text-slate-300 m-0">Décerné à :</p>
-            <p id="nomCompletCertificat" class="text-2xl font-black text-amber-200 mt-1 mb-4 m-0">Mohamed Berthé</p>
+            <!-- Bismillah en haut -->
+            <div class="text-center mb-2">
+                <p lang="ar" dir="rtl" class="font-arabic text-2xl sm:text-3xl text-[#0f294a] m-0 leading-relaxed">
+                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+                </p>
+            </div>
 
-            <p class="text-sm text-slate-200 leading-relaxed max-w-xl mx-auto m-0">
-                Pour son assiduité dans le programme <strong>LE VERIDIQUE A-Z</strong> avec un total de
-                <strong id="pointsCertificatText">0 point</strong> et
-                <strong id="leconsCertificatText">0 / 29 leçons</strong> complétées.
-            </p>
+            <!-- Titre + Icône mosquée à droite -->
+            <div class="relative flex flex-col items-center justify-center mb-5">
+                <h2 class="text-2xl sm:text-4xl font-black tracking-wide text-[#0f294a] uppercase m-0 text-center">
+                    ATTESTATION
+                </h2>
+                <p class="text-base sm:text-xl font-bold text-[#153e75] mt-1 m-0 text-center">
+                    de suivi et d'apprentissage · Nūr Al-Qur'ān
+                </p>
 
-            <div class="mt-6 pt-4 border-t border-white/15 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-300">
-                <span>Statut : <strong id="statutAttestationText" class="text-amber-300">En cours (29 leçons requises)</strong></span>
-                <span>Date : <strong id="dateAttestationText" class="text-white">--/--/----</strong></span>
+                <!-- Motif doré central -->
+                <div class="flex items-center gap-3 w-full max-w-xs my-3">
+                    <div class="flex-1 h-[2px] bg-gradient-to-r from-transparent via-[#c9962b] to-[#c9962b]"></div>
+                    <span class="text-[#c9962b] text-lg font-bold">✦</span>
+                    <div class="flex-1 h-[2px] bg-gradient-to-l from-transparent via-[#c9962b] to-[#c9962b]"></div>
+                </div>
+
+                <!-- Mosquée décorative -->
+                <div class="hidden sm:flex items-center justify-center w-14 h-14 rounded-2xl bg-[#0f294a]/10 border border-[#c9962b]/50 text-[#0f294a] absolute right-0 top-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2a4.5 4.5 0 0 0-4.5 4.5c0 1.4.65 2.65 1.66 3.47A6.01 6.01 0 0 0 4 15.5V21h16v-5.5a6.01 6.01 0 0 0-5.16-5.53 4.48 4.48 0 0 0 1.66-3.47A4.5 4.5 0 0 0 12 2zm-2 17v-3h4v3h-4z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Corps officiel de l'attestation -->
+            <div class="space-y-3 text-sm sm:text-base leading-relaxed text-[#0f294a] px-1 sm:px-4">
+                <p class="m-0">
+                    Nous soussignés, attestons que
+                    <strong id="nomCompletCertificat" class="text-lg sm:text-xl underline decoration-[#c9962b] decoration-2 underline-offset-4">
+                        Mohamed Berthé
+                    </strong>
+                </p>
+                <p class="m-0">
+                    suit le parcours d'apprentissage de la lecture et des sourates sur
+                    <strong>Nūr Al-Qur'ān</strong> (« La lumière du Coran »).
+                </p>
+                <p class="m-0">
+                    Cette attestation est délivrée pour servir et valoir ce que de droit.
+                </p>
+
+                <div class="pt-2 space-y-1.5 font-semibold">
+                    <p class="m-0">
+                        Points obtenus :
+                        <span id="pointsCertificatText" class="font-black text-[#0f294a]">0 point</span>
+                        · Mention / Statut :
+                        <span id="mentionCertificatText" class="font-bold text-[#9a6b0c]">En cours</span>
+                    </p>
+                    <p class="m-0">
+                        Progression du programme :
+                        <span id="leconsCertificatText" class="font-black text-[#0f294a]">0 / 29 leçons</span>
+                        (<span id="statutAttestationText">Verrouillée</span>)
+                    </p>
+                </div>
+            </div>
+
+            <!-- Pied de page : Responsable / Signature / Fait à & Le -->
+            <div class="mt-8 pt-4 border-t border-[#c9962b]/40 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm text-[#0f294a] px-1 sm:px-4">
+                <div>
+                    <p class="font-bold m-0">Le responsable</p>
+                    <div class="mt-6 border-b border-[#0f294a]/70 w-36"></div>
+                </div>
+                <div class="sm:text-center">
+                    <p class="italic font-semibold m-0">Signature du responsable</p>
+                    <p class="font-bold text-[#0f294a] mt-2 m-0">Nūr Al-Qur'ān</p>
+                    <div class="mt-3 border-b border-[#0f294a]/70 w-36 sm:mx-auto"></div>
+                </div>
+                <div class="sm:text-right space-y-1">
+                    <p class="m-0">Fait à : <strong>Bamako</strong></p>
+                    <p class="m-0">Le : <strong id="dateAttestationText">--/--/----</strong></p>
+                </div>
             </div>
         </div>
 
@@ -152,6 +240,13 @@
             }
             const pts = parseInt(localStorage.getItem('coranAppUserPoints') || localStorage.getItem('coranAppPoints') || '0', 10);
             return isNaN(pts) ? 0 : Math.max(0, pts);
+        }
+
+        function getMentionDepuisPoints(points, completees) {
+            if (completees < TOTAL_LECONS) return 'En cours';
+            if (points >= 250) return 'Excellent';
+            if (points >= 150) return 'Très bien';
+            return 'Validé';
         }
 
         window.tirerAttestation = function () {
@@ -202,6 +297,7 @@
 
             document.getElementById('nomCompletCertificat').textContent = nomAffiche;
             document.getElementById('pointsCertificatText').textContent = `${points} point${points > 1 ? 's' : ''}`;
+            document.getElementById('mentionCertificatText').textContent = getMentionDepuisPoints(points, completees);
             document.getElementById('leconsCertificatText').textContent = `${completees} / ${TOTAL_LECONS} leçons`;
             document.getElementById('dateAttestationText').textContent = new Date().toLocaleDateString('fr-FR');
 
@@ -215,14 +311,14 @@
                 btnTirer.textContent = "🖨️ Tirer l'attestation (29 / 29 leçons)";
                 msgVerrou.innerHTML = "✅ Félicitations ! Toutes les <strong>29 leçons</strong> sont terminées : tu peux tirer ton attestation.";
                 statutAttest.textContent = "Débloquée";
-                statutAttest.className = "text-emerald-400 font-bold";
+                statutAttest.className = "text-emerald-700 font-bold";
             } else {
                 btnTirer.disabled = true;
                 btnTirer.className = "w-full py-4 px-6 rounded-2xl font-black text-base transition-all bg-white/15 text-white/45 border border-white/15 cursor-not-allowed";
                 btnTirer.textContent = `🔒 Tirer l'attestation (${completees} / ${TOTAL_LECONS} leçons requises)`;
                 msgVerrou.innerHTML = `🔒 Tu pourras tirer ton attestation dès que tu auras validé les <strong>${TOTAL_LECONS} leçons</strong> (encore ${restantes}).`;
                 statutAttest.textContent = `Verrouillée (${completees}/${TOTAL_LECONS})`;
-                statutAttest.className = "text-amber-300 font-bold";
+                statutAttest.className = "text-[#9a6b0c] font-bold";
             }
         });
     </script>

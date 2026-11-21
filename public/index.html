@@ -41,6 +41,33 @@
             text-align: center;
         }
 
+        .admin-top-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .admin-top-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: #fde68a;
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.28);
+            padding: 4px 10px;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .admin-top-link:hover {
+            background: rgba(251, 191, 36, 0.2);
+            border-color: var(--gold-accent);
+        }
+
         /* En-tête exact des images */
         .app-header {
             margin-bottom: 20px;
@@ -198,6 +225,11 @@
 <body>
 
     <div class="app-container">
+        <!-- BARRE ADMINISTRATEUR EN HAUT DE L'INSCRIPTION -->
+        <div class="admin-top-bar">
+            <a href="admin.html" class="admin-top-link">🛡️ Espace Administrateur</a>
+        </div>
+
         <!-- EN-TÊTE -->
         <div class="app-header">
             <div class="app-logo">📖</div>
@@ -379,6 +411,13 @@
             const btnContinuer = document.getElementById('btnContinuerEtape1');
             const statut = document.getElementById('statutEnregistrement');
 
+            if (localStorage.getItem('coranAppIsAdmin') === 'true') {
+                btnContinuer.style.display = "block";
+                statut.style.color = "#fde68a";
+                statut.textContent = "Mode administrateur actif : accès direct sans besoin d'écrire ton nom (0 point).";
+                return;
+            }
+
             if (!p || !n || !t) {
                 btnContinuer.style.display = "none";
                 btnEnregistrer.disabled = false;
@@ -486,30 +525,39 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
+            const isAdmin = localStorage.getItem('coranAppIsAdmin') === 'true';
             const savedPrenom = localStorage.getItem('coranAppUserPrenom');
             const savedNom = localStorage.getItem('coranAppUserNom');
             const savedNumero = localStorage.getItem('coranAppUserNumero');
             const savedId = localStorage.getItem('coranAppEtudiantId');
 
-            if (savedPrenom) {
-                document.getElementById('userPrenom').value = savedPrenom;
-                document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${savedPrenom} ?`;
-            }
-            if (savedNom) {
-                document.getElementById('userNom').value = savedNom;
-            }
-            if (savedNumero) {
-                document.getElementById('userNumero').value = savedNumero;
-            }
-
-            if (savedPrenom && savedNom && savedNumero && savedId) {
+            if (isAdmin) {
+                document.getElementById('titreObjectif').textContent = "Que veux-tu apprendre (Mode Admin) ?";
                 document.getElementById('btnContinuerEtape1').style.display = "block";
-                document.getElementById('btnEnregistrer').disabled = true;
                 const statut = document.getElementById('statutEnregistrement');
-                statut.style.color = "#4ade80";
-                statut.textContent = "Enregistré avec succès ! Tu peux maintenant cliquer sur Continuer.";
+                statut.style.color = "#fde68a";
+                statut.textContent = "Mode administrateur actif : tu peux cliquer sur Continuer sans écrire ton nom.";
             } else {
-                document.getElementById('btnContinuerEtape1').style.display = "none";
+                if (savedPrenom) {
+                    document.getElementById('userPrenom').value = savedPrenom;
+                    document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${savedPrenom} ?`;
+                }
+                if (savedNom) {
+                    document.getElementById('userNom').value = savedNom;
+                }
+                if (savedNumero) {
+                    document.getElementById('userNumero').value = savedNumero;
+                }
+
+                if (savedPrenom && savedNom && savedNumero && savedId) {
+                    document.getElementById('btnContinuerEtape1').style.display = "block";
+                    document.getElementById('btnEnregistrer').disabled = true;
+                    const statut = document.getElementById('statutEnregistrement');
+                    statut.style.color = "#4ade80";
+                    statut.textContent = "Enregistré avec succès ! Tu peux maintenant cliquer sur Continuer.";
+                } else {
+                    document.getElementById('btnContinuerEtape1').style.display = "none";
+                }
             }
 
             ['userPrenom', 'userNom', 'userNumero'].forEach(id => {
@@ -531,18 +579,26 @@
         });
 
         function allerEtape2() {
+            const isAdmin = localStorage.getItem('coranAppIsAdmin') === 'true';
             const prenom = document.getElementById('userPrenom').value.trim();
             const nom = document.getElementById('userNom').value.trim();
 
-            if (!prenom) {
+            if (!isAdmin && !prenom) {
                 alert("S'il te plaît, entre ton prénom !");
                 return;
             }
 
-            localStorage.setItem('coranAppUserPrenom', prenom);
-            localStorage.setItem('coranAppUserNom', nom);
+            if (prenom) {
+                localStorage.setItem('coranAppUserPrenom', prenom);
+                document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${prenom} ?`;
+            } else if (isAdmin) {
+                document.getElementById('titreObjectif').textContent = "Que veux-tu apprendre (Mode Admin) ?";
+            }
 
-            document.getElementById('titreObjectif').textContent = `Que veux-tu apprendre, ${prenom} ?`;
+            if (nom) {
+                localStorage.setItem('coranAppUserNom', nom);
+            }
+
             changerEtape(2);
         }
 

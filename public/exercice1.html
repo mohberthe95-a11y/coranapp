@@ -66,7 +66,7 @@
         <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-4 shadow-sm">
             <div class="flex items-center justify-between text-xs font-bold mb-2">
                 <span id="compteurQuestions" class="text-amber-300">Question 1 sur 10</span>
-                <span id="scoreTexte" class="text-slate-300">Réussies : 0 / 10</span>
+                <span id="scoreTexte" class="text-slate-300">Réussies : 0 / 10 · 0 pts</span>
             </div>
             <div class="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
                 <div id="barreProgression" class="h-full bg-amber-400 rounded-full transition-all duration-300" style="width: 10%;"></div>
@@ -130,80 +130,147 @@
     </main>
 
     <script>
+        const POINTS_PAR_QUESTION = 10;
+
         const questions10 = [
             {
+                lettre: "ـثـ",
+                question: "Analyse cette forme médiane : quelle lettre est-ce et comment se comporte-t-elle ?",
+                choix: [
+                    "Thā — Se lie à droite et à gauche (3 points en haut)",
+                    "Tā — Se lie uniquement à droite (2 points en haut)",
+                    "Bā — Se lie à droite et à gauche (1 point en bas)",
+                    "Khā — Ne se lie pas à gauche (1 point en haut)"
+                ],
+                correcte: 0,
+                explication: "La forme ـثـ a 3 points au-dessus et des liaisons des deux côtés : c'est Thā en position médiane."
+            },
+            {
+                lettre: "ـجـ",
+                question: "Quelle est cette forme au milieu d'un mot et quelle est sa particularité de liaison ?",
+                choix: [
+                    "Ḥā — Se lie des deux côtés mais sans point",
+                    "Jīm — Se lie à droite et à gauche avec 1 point dessous",
+                    "Khā — Ne se lie jamais à la lettre suivante",
+                    "Bā — Se lie uniquement à gauche"
+                ],
+                correcte: 1,
+                explication: "En position médiane, Jīm s'accroche à la lettre précédente (à droite) et à la lettre suivante (à gauche), avec 1 point en bas."
+            },
+            {
                 lettre: "ا",
-                question: "Quelle est cette lettre ?",
-                choix: ["Alif — Son : A / Prolongement", "Bā — Son : B", "Tā — Son : T", "Thā — Son : Th (comme \"think\")"],
-                correcte: 0
+                question: "Pourquoi la lettre Alif pose-t-elle souvent problème aux débutants dans un mot ?",
+                choix: [
+                    "Elle possède 2 points sous la base",
+                    "Elle se lie toujours aux deux lettres qui l'entourent",
+                    "Elle se lie à droite mais ne se lie jamais à la lettre suivante (à gauche)",
+                    "Elle se prononce comme un raclement de gorge"
+                ],
+                correcte: 2,
+                explication: "Alif fait partie des lettres qui ne s'attachent pas à gauche : la lettre qui vient après elle commence une nouvelle liaison."
             },
             {
-                lettre: "ب",
-                question: "Quelle est cette lettre ?",
-                choix: ["Alif — Son : A / Prolongement", "Bā — Son : B", "Jīm — Son : Dj (comme \"jazz\")", "Ḥā — Son : H soufflé (gorge)"],
-                correcte: 1
+                lettre: "ـخ",
+                question: "Identifie cette forme finale liée à la lettre précédente :",
+                choix: [
+                    "Ḥā — Forme finale sans point, son H soufflé",
+                    "Jīm — Forme initiale avec point en bas",
+                    "Tā — Forme finale avec deux points en haut",
+                    "Khā — Forme finale liée à droite, 1 point au-dessus"
+                ],
+                correcte: 3,
+                explication: "La forme ـخ montre une liaison à droite suivie de la boucle finale de Khā avec 1 point au-dessus."
             },
             {
-                lettre: "ت",
-                question: "Quelle est cette lettre ?",
-                choix: ["Thā — Son : Th (comme \"think\")", "Khā — Son : Kh (raclement)", "Tā — Son : T", "Bā — Son : B"],
-                correcte: 2
+                lettre: "ـتـ",
+                question: "Distingue cette lettre des autres formes plates liées des deux côtés :",
+                choix: [
+                    "Tā — Forme médiane avec 2 points au-dessus, son T",
+                    "Bā — Forme médiane avec 1 point en dessous, son B",
+                    "Thā — Forme médiane avec 3 points au-dessus, son Th",
+                    "Alif — Forme médiane de prolongation"
+                ],
+                correcte: 0,
+                explication: "La présence de 2 points au-dessus de la base médiane caractérise Tā (son T)."
             },
             {
-                lettre: "ث",
-                question: "Quelle est cette lettre ?",
-                choix: ["Tā — Son : T", "Bā — Son : B", "Ḥā — Son : H soufflé (gorge)", "Thā — Son : Th (comme \"think\")"],
-                correcte: 3
+                lettre: "حـ",
+                question: "Quelle est la différence cruciale entre cette forme initiale et la lettre Khā ?",
+                choix: [
+                    "Elle se prononce avec un raclement de gorge fort",
+                    "Elle n'a aucun point et produit un H soufflé de la gorge",
+                    "Elle a 1 point en bas et se prononce Dj",
+                    "Elle ne peut jamais être placée au début d'un mot"
+                ],
+                correcte: 1,
+                explication: "Ḥā (حـ) n'a pas de point : c'est un H soufflé venant de la gorge, contrairement à Khā (خـ) qui a un point au-dessus et un raclement."
             },
             {
-                lettre: "ج",
-                question: "Quelle est cette lettre ?",
-                choix: ["Jīm — Son : Dj (comme \"jazz\")", "Khā — Son : Kh (raclement)", "Ḥā — Son : H soufflé (gorge)", "Alif — Son : A / Prolongement"],
-                correcte: 0
+                lettre: "ـب",
+                question: "Observe cette lettre en fin de mot reliée à la précédente :",
+                choix: [
+                    "Tā — Son T, 2 points en haut",
+                    "Thā — Son Th, 3 points en haut",
+                    "Bā — Forme finale liée, 1 point en dessous, son B",
+                    "Jīm — Forme finale liée, son Dj"
+                ],
+                correcte: 2,
+                explication: "La forme ـب est la terminaison liée de Bā, reconnaissable à son point unique sous la ligne."
             },
             {
-                lettre: "ح",
-                question: "Quelle est cette lettre ?",
-                choix: ["Khā — Son : Kh (raclement)", "Ḥā — Son : H soufflé (gorge)", "Jīm — Son : Dj (comme \"jazz\")", "Tā — Son : T"],
-                correcte: 1
+                lettre: "ثـ",
+                question: "Quelle est la bonne prononciation associée à cette forme initiale ?",
+                choix: [
+                    "Son S sifflant très marqué",
+                    "Son T sec comme en français",
+                    "Son Dj comme dans \"jazz\"",
+                    "Son Th interdental (comme dans \"think\"), 3 points en haut"
+                ],
+                correcte: 3,
+                explication: "Thā (ثـ) a 3 points au-dessus et correspond au son \"th\" de l'anglais \"think\"."
             },
             {
-                lettre: "خ",
-                question: "Quelle est cette lettre ?",
-                choix: ["Ḥā — Son : H soufflé (gorge)", "Jīm — Son : Dj (comme \"jazz\")", "Khā — Son : Kh (raclement)", "Thā — Son : Th (comme \"think\")"],
-                correcte: 2
+                lettre: "جـ",
+                question: "Quelle lettre est représentée ici en position initiale (liée uniquement à gauche) ?",
+                choix: [
+                    "Jīm — Son Dj (comme \"jazz\"), 1 point sous la lettre",
+                    "Ḥā — Son H soufflé, sans point",
+                    "Khā — Son Kh (raclement), 1 point au-dessus",
+                    "Bā — Son B, 1 point en dessous"
+                ],
+                correcte: 0,
+                explication: "Jīm en début de mot (جـ) garde son point en bas et se relie à la lettre qui suit à gauche."
             },
             {
-                lettre: "ب",
-                question: "Quel est le son de cette lettre ?",
-                choix: ["Son : A / Prolongement", "Son : T", "Son : Kh (raclement)", "Son : B"],
-                correcte: 3
-            },
-            {
-                lettre: "ج",
-                question: "Quel est le nom de cette lettre ?",
-                choix: ["Jīm", "Ḥā", "Khā", "Alif"],
-                correcte: 0
-            },
-            {
-                lettre: "خ",
-                question: "Quel est le nom de cette lettre ?",
-                choix: ["Tā", "Khā", "Bā", "Thā"],
-                correcte: 1
+                lettre: "خـ",
+                question: "Si tu vois cette forme au début d'un mot, quelle règle s'applique ?",
+                choix: [
+                    "Elle ne peut pas se lier à la lettre suivante à gauche",
+                    "Elle se lie à la lettre suivante à gauche et se prononce Kh (raclement)",
+                    "Elle se prononce comme un A long de prolongation",
+                    "Elle a deux points en bas et se prononce T"
+                ],
+                correcte: 1,
+                explication: "Khā initial (خـ) possède 1 point au-dessus, un son de raclement (Kh) et se relie à la lettre suivante à gauche."
             }
         ];
 
         let indexActuel = 0;
         let bonnesReponses = 0;
         let questionsRepondues = 0;
+        let pointsActuels = 0;
         let dejaRepondu = false;
+
+        function mettreAJourScoreTexte() {
+            document.getElementById("scoreTexte").textContent = `Réussies : ${bonnesReponses} / ${questions10.length} · ${pointsActuels} pts`;
+        }
 
         function afficherQuestion() {
             dejaRepondu = false;
             const q = questions10[indexActuel];
 
             document.getElementById("compteurQuestions").textContent = `Question ${indexActuel + 1} sur ${questions10.length}`;
-            document.getElementById("badgeQuestion").textContent = `Question ${indexActuel + 1} sur ${questions10.length}`;
+            document.getElementById("badgeQuestion").textContent = `Question ${indexActuel + 1} sur ${questions10.length} · +${POINTS_PAR_QUESTION} pts`;
             document.getElementById("lettreArabe").textContent = q.lettre;
             document.getElementById("consigneQuestion").textContent = q.question;
             document.getElementById("barreProgression").style.width = `${((indexActuel + 1) / questions10.length) * 100}%`;
@@ -245,19 +312,20 @@
 
             if (choixIndex === q.correcte) {
                 bonnesReponses++;
+                pointsActuels += POINTS_PAR_QUESTION;
                 boutonClique.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-400 bg-emerald-500/20 text-emerald-100 font-bold text-sm cursor-default transition-all flex items-center justify-between gap-3";
                 feedbackMsg.className = "text-sm font-bold text-emerald-300 m-0";
-                feedbackMsg.textContent = "✓ Bonne réponse !";
+                feedbackMsg.textContent = `✓ Bonne réponse (+${POINTS_PAR_QUESTION} pts) ! ${q.explication}`;
             } else {
                 boutonClique.className = "w-full text-left p-4 rounded-xl border-2 border-rose-500 bg-rose-500/20 text-rose-100 font-bold text-sm cursor-default transition-all flex items-center justify-between gap-3";
                 const bonBouton = boutons[q.correcte];
                 bonBouton.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-400 bg-emerald-500/20 text-emerald-100 font-bold text-sm cursor-default transition-all flex items-center justify-between gap-3";
 
                 feedbackMsg.className = "text-sm font-bold text-rose-300 m-0";
-                feedbackMsg.textContent = `✗ Mauvaise réponse. La bonne réponse est en vert : ${q.choix[q.correcte]}`;
+                feedbackMsg.textContent = `✗ Mauvaise réponse. ${q.explication}`;
             }
 
-            document.getElementById("scoreTexte").textContent = `Réussies : ${bonnesReponses} / ${questions10.length}`;
+            mettreAJourScoreTexte();
             btnSuivant.textContent = (indexActuel === questions10.length - 1) ? "Terminer les 10 exercices ✓" : "Question suivante →";
             feedbackZone.classList.remove("hidden");
         }
@@ -272,14 +340,16 @@
         }
 
         function afficherResumeFinal() {
+            const totalMax = questions10.length * POINTS_PAR_QUESTION;
             localStorage.setItem("nurQuranExercice1Termine", "true");
+            localStorage.setItem("nurQuranPointsExercice1", String(pointsActuels));
             document.getElementById("zoneQuestion").classList.add("hidden");
             document.getElementById("zoneResume").classList.remove("hidden");
-            document.getElementById("texteResultatFinal").textContent = `Tu as obtenu ${bonnesReponses} / ${questions10.length} bonnes réponses. La Partie 2 est maintenant débloquée !`;
+            document.getElementById("texteResultatFinal").textContent = `Tu as obtenu ${bonnesReponses} / ${questions10.length} bonnes réponses (${pointsActuels} / ${totalMax} pts enregistrés). La Partie 2 est maintenant débloquée !`;
 
             const blocVerrou = document.getElementById("blocVerrou");
             blocVerrou.className = "bg-gradient-to-br from-emerald-950/70 to-[#1c2541] border border-emerald-400/40 rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4";
-            document.getElementById("texteVerrou").textContent = "10 / 10 exercices complétés ! Tu peux passer à la Partie 2.";
+            document.getElementById("texteVerrou").textContent = `10 / 10 exercices complétés (${pointsActuels} pts) ! Tu peux passer à la Partie 2.`;
 
             const btnBas = document.getElementById("btnBasPartie2");
             btnBas.disabled = false;
@@ -291,13 +361,15 @@
             indexActuel = 0;
             bonnesReponses = 0;
             questionsRepondues = 0;
+            pointsActuels = 0;
             dejaRepondu = false;
-            document.getElementById("scoreTexte").textContent = "Réussies : 0 / 10";
+            mettreAJourScoreTexte();
             document.getElementById("zoneResume").classList.add("hidden");
             document.getElementById("zoneQuestion").classList.remove("hidden");
             afficherQuestion();
         }
 
+        mettreAJourScoreTexte();
         afficherQuestion();
     </script>
 

@@ -56,7 +56,7 @@
                     <button type="button" onclick="window.location.href='alphabet-partie2.html'" class="flex-1 py-3 px-5 rounded-xl text-base font-black bg-amber-400 text-slate-950 shadow-md cursor-pointer border-0 transition-all text-center">
                         📖 Leçon
                     </button>
-                    <button type="button" onclick="window.location.href='exercice2.html'" class="flex-1 py-3 px-5 rounded-xl text-base font-black text-slate-200 hover:text-white hover:bg-white/10 cursor-pointer border-0 bg-transparent transition-all text-center">
+                    <button type="button" onclick="window.location.href='exercices2.html'" class="flex-1 py-3 px-5 rounded-xl text-base font-black text-slate-200 hover:text-white hover:bg-white/10 cursor-pointer border-0 bg-transparent transition-all text-center">
                         ✍️ Exercice
                     </button>
                 </div>
@@ -185,21 +185,14 @@
         </div>
 
         <!-- ASTUCE DE L'ASSISTANT IA -->
-        <div class="bg-gradient-to-br from-blue-950/80 to-[#1c2541] border border-blue-400/30 rounded-2xl p-5 shadow-sm">
+        <div class="bg-gradient-to-br from-blue-950/80 to-[#1c2541] border border-blue-400/30 rounded-2xl p-5 shadow-sm pb-12">
             <div class="flex items-center gap-3 mb-2">
                 <span class="text-xl">💡</span>
                 <h4 class="font-bold text-white text-base m-0">Conseil d'apprentissage</h4>
             </div>
             <p class="text-slate-300 text-xs leading-relaxed m-0">
-                Attention à bien distinguer le <em>Sīn</em> (léger) du <em>Ṣād</em> (lourd et emphatique). Clique ci-dessous pour passer à la Partie 3 !
+                Attention à bien distinguer le <em>Sīn</em> (léger) du <em>Ṣād</em> (lourd et emphatique). Clique sur « Exercice » en haut pour t'entraîner !
             </p>
-        </div>
-
-        <!-- BOUTON DE VALIDATION / SUIVANT -->
-        <div class="pt-4 pb-12 flex gap-3">
-            <button type="button" onclick="validerEtPasserPartie3()" class="flex-1 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-base py-4 rounded-2xl shadow-lg cursor-pointer transition-colors border-0">
-                Valider et passer à la Partie 3 ✓
-            </button>
         </div>
 
     </main>
@@ -221,21 +214,6 @@
             localStorage.setItem('coranAppPoints', String(total));
             return total;
         };
-
-        function validerEtPasserPartie3() {
-            if (!window.estModeAdministrateur()) {
-                try {
-                    const raw = localStorage.getItem('coranAppLeconsValidees');
-                    const validees = raw ? JSON.parse(raw) : [];
-                    const liste = Array.isArray(validees) ? validees : [];
-                    if (!liste.includes('alphabet-partie2')) {
-                        liste.push('alphabet-partie2');
-                        localStorage.setItem('coranAppLeconsValidees', JSON.stringify(liste));
-                    }
-                } catch (_) {}
-            }
-            window.location.href = 'alphabet-partie3.html';
-        }
 
         document.addEventListener("DOMContentLoaded", () => {
             const isAdmin = window.estModeAdministrateur();

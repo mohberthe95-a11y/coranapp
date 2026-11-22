@@ -81,9 +81,14 @@
         <!-- ZONE DE QUESTION (1 à 10) -->
         <div id="zoneQuestion" class="bg-[#1c2541] border border-white/15 rounded-2xl p-6 shadow-sm space-y-6">
             <div class="text-center space-y-2">
-                <span id="badgeQuestion" class="inline-block text-xs font-black uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-400/30 px-3 py-1 rounded-full">
-                    Question 1 sur 10
-                </span>
+                <div class="flex items-center justify-center gap-2 flex-wrap">
+                    <span id="badgeQuestion" class="inline-block text-xs font-black uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-400/30 px-3 py-1 rounded-full">
+                        Question 1 sur 10
+                    </span>
+                    <span id="chronoQuestion" class="inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider bg-amber-400/15 text-amber-300 border border-amber-400/35 px-3 py-1 rounded-full">
+                        ⏱️ 10s
+                    </span>
+                </div>
                 <div id="lettreArabe" lang="ar" dir="rtl" class="font-arabic text-7xl text-amber-100 py-3">
                     ا
                 </div>
@@ -165,6 +170,7 @@
         });
 
         const POINTS_PAR_QUESTION = 10;
+        const DUREE_CHRONO_SECONDES = 10;
 
         const questions10 = [
             {
@@ -294,6 +300,84 @@
         let questionsRepondues = 0;
         let pointsActuels = 0;
         let dejaRepondu = false;
+        let tempsRestant = DUREE_CHRONO_SECONDES;
+        let intervalChrono = null;
+        let timeoutAutoSuivant = null;
+
+        function nettoyerTimers() {
+            if (intervalChrono) {
+                clearInterval(intervalChrono);
+                intervalChrono = null;
+            }
+            if (timeoutAutoSuivant) {
+                clearTimeout(timeoutAutoSuivant);
+                timeoutAutoSuivant = null;
+            }
+        }
+
+        function mettreAJourAffichageChrono() {
+            const chronoEl = document.getElementById("chronoQuestion");
+            if (!chronoEl) return;
+            chronoEl.textContent = `⏱️ ${tempsRestant}s`;
+            if (tempsRestant <= 3) {
+                chronoEl.className = "inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-400/50 px-3 py-1 rounded-full animate-pulse";
+            } else {
+                chronoEl.className = "inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider bg-amber-400/15 text-amber-300 border border-amber-400/35 px-3 py-1 rounded-full";
+            }
+        }
+
+        function tempsEcouleQuestionPerdue() {
+            if (dejaRepondu) return;
+            dejaRepondu = true;
+            nettoyerTimers();
+
+            tempsRestant = 0;
+            mettreAJourAffichageChrono();
+
+            const q = questions10[indexActuel];
+            const boutons = document.querySelectorAll("#grilleChoix button");
+
+            boutons.forEach((b, idx) => {
+                b.disabled = true;
+                b.classList.remove("hover:border-amber-400/60", "hover:bg-[#0b132b]");
+                if (idx === q.correcte) {
+                    b.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-400 bg-emerald-500/20 text-emerald-100 font-bold text-sm cursor-default transition-all flex items-center justify-between gap-3";
+                }
+            });
+
+            questionsRepondues++;
+            document.getElementById("texteVerrou").textContent = `Réponds aux 10 questions (${questionsRepondues} / 10 complétées) pour débloquer la Partie 2.`;
+
+            const feedbackZone = document.getElementById("zoneFeedback");
+            const feedbackMsg = document.getElementById("messageFeedback");
+            const btnSuivant = document.getElementById("btnQuestionSuivante");
+
+            feedbackMsg.className = "text-sm font-bold text-rose-300 m-0";
+            feedbackMsg.textContent = `⌛ Temps écoulé ! Tu as perdu cette question sans sélectionner de réponse. ${q.explication}`;
+            btnSuivant.textContent = (indexActuel === questions10.length - 1) ? "Terminer les 10 exercices ✓" : "Question suivante →";
+            feedbackZone.classList.remove("hidden");
+
+            mettreAJourScoreTexte();
+
+            timeoutAutoSuivant = setTimeout(() => {
+                questionSuivante();
+            }, 1200);
+        }
+
+        function demarrerChronoQuestion() {
+            nettoyerTimers();
+            tempsRestant = DUREE_CHRONO_SECONDES;
+            mettreAJourAffichageChrono();
+
+            intervalChrono = setInterval(() => {
+                tempsRestant--;
+                if (tempsRestant <= 0) {
+                    tempsEcouleQuestionPerdue();
+                } else {
+                    mettreAJourAffichageChrono();
+                }
+            }, 1000);
+        }
 
         function mettreAJourScoreTexte() {
             const ptsAffiches = window.estModeAdministrateur() ? 0 : pointsActuels;
@@ -335,11 +419,14 @@
                 btn.onclick = () => verifierReponse(idx, btn);
                 grille.appendChild(btn);
             });
+
+            demarrerChronoQuestion();
         }
 
         function verifierReponse(choixIndex, boutonClique) {
             if (dejaRepondu) return;
             dejaRepondu = true;
+            nettoyerTimers();
 
             const q = questions10[indexActuel];
             const boutons = document.querySelectorAll("#grilleChoix button");
@@ -381,6 +468,7 @@
         }
 
         function questionSuivante() {
+            nettoyerTimers();
             if (indexActuel < questions10.length - 1) {
                 indexActuel++;
                 afficherQuestion();
@@ -390,6 +478,7 @@
         }
 
         function afficherResumeFinal() {
+            nettoyerTimers();
             const isAdmin = window.estModeAdministrateur();
             const totalMax = questions10.length * POINTS_PAR_QUESTION;
             const pointsFinaux = isAdmin ? 0 : pointsActuels;
@@ -424,6 +513,7 @@
             if (!window.estModeAdministrateur() && localStorage.getItem("nurQuranExercice1Termine") === "true") {
                 return;
             }
+            nettoyerTimers();
             indexActuel = 0;
             bonnesReponses = 0;
             questionsRepondues = 0;

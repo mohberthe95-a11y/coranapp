@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="fr" class="light" style="color-scheme: light;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Exercice 2 : L'Alphabet Arabe (2/4) - Nūr Al-Qur'ān</title>
+    
+    <!-- PWA Configuration -->
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#0b132b">
+    <meta name="google" content="notranslate">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Polices d'écriture arabes -->
+    <style type="text/css">
+        @font-face {font-family:'Amiri';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Amiri Quran';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);font-display:swap;}
+        @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);font-display:swap;}
+        
+        .font-arabic {
+            font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#0b132b] text-slate-100 m-0 p-0 min-h-screen flex flex-col">
+
+    <!-- EN-TÊTE -->
+    <header class="bg-[#0b132b] text-white pt-6 pb-8 px-6 shadow-md border-b border-white/10">
+        <div class="max-w-4xl mx-auto">
+            <!-- Bouton Retour -->
+            <div class="flex items-center justify-between gap-2 mb-4">
+                <button type="button" onclick="window.location.href='alphabet-partie2.html'" class="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-semibold cursor-pointer bg-white/10 px-3 py-1.5 rounded-xl border border-white/15 transition-colors">
+                    ← Retour à la leçon
+                </button>
+                <span id="adminBadgeExercice2" style="display: none;" class="hidden inline-flex items-center gap-1.5 bg-amber-400/15 border border-amber-400/35 text-amber-200 px-3 py-1 rounded-full text-xs font-bold">
+                    🛡️ Admin · 0 pt
+                </span>
+            </div>
+
+            <!-- Titre & Badge -->
+            <div class="flex items-center justify-between gap-4 flex-wrap">
+                <div>
+                    <span class="text-amber-300 text-xs font-black uppercase tracking-wider bg-amber-400/15 px-2.5 py-1 rounded-full border border-amber-400/30">Leçon 1 sur 29 · Nūr Al-Qur'ān</span>
+                    <h1 class="text-2xl md:text-3xl font-black tracking-tight mt-2 m-0 text-white">Exercices — Alphabet Arabe (Partie 2 / 4)</h1>
+                </div>
+                <span class="text-xs font-bold text-emerald-300 bg-emerald-500/15 px-3 py-1.5 rounded-full border border-emerald-400/30">10 exercices obligatoires</span>
+            </div>
+
+            <!-- GROS ONGLETS LEÇON / EXERCICE BIEN VISIBLES ET CENTRÉS AU MILIEU -->
+            <div class="mt-6 flex justify-center items-center w-full">
+                <div class="inline-flex items-center justify-center gap-3 bg-[#1c2541] p-2 rounded-2xl border border-amber-400/25 shadow-lg w-full max-w-md">
+                    <button type="button" onclick="window.location.href='alphabet-partie2.html'" class="flex-1 py-3 px-5 rounded-xl text-base font-black text-slate-200 hover:text-white hover:bg-white/10 cursor-pointer border-0 bg-transparent transition-all text-center">
+                        📖 Leçon
+                    </button>
+                    <button type="button" onclick="window.location.href='exercices2.html'" class="flex-1 py-3 px-5 rounded-xl text-base font-black bg-amber-400 text-slate-950 shadow-md cursor-pointer border-0 transition-all text-center">
+                        ✍️ Exercice
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="flex-1 max-w-4xl w-full mx-auto px-6 py-8 space-y-6">
+
+        <!-- BARRE DE PROGRESSION DES 10 EXERCICES -->
+        <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-4 shadow-sm">
+            <div class="flex items-center justify-between text-xs font-bold mb-2">
+                <span id="compteurQuestions" class="text-amber-300">Question 1 sur 10</span>
+                <span id="scoreTexte" class="text-slate-300">Réussies : 0 / 10 · 0 pts</span>
+            </div>
+            <div class="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
+                <div id="barreProgression" class="h-full bg-amber-400 rounded-full transition-all duration-300" style="width: 10%;"></div>
+            </div>
+        </div>
+
+        <!-- ZONE DE QUESTION (1 à 10) -->
+        <div id="zoneQuestion" class="bg-[#1c2541] border border-white/15 rounded-2xl p-6 shadow-sm space-y-6">
+            <div class="text-center space-y-2">
+                <div class="flex items-center justify-center gap-2 flex-wrap">
+                    <span id="badgeQuestion" class="inline-block text-xs font-black uppercase tracking-wider bg-blue-500/15 text-blue-300 border border-blue-400/30 px-3 py-1 rounded-full">
+                        Question 1 sur 10
+                    </span>
+                    <span id="chronoQuestion" class="inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider bg-amber-400/15 text-amber-300 border border-amber-400/35 px-3 py-1 rounded-full">
+                        ⏱️ 10s
+                    </span>
+                </div>
+                <div id="lettreArabe" lang="ar" dir="rtl" class="font-arabic text-7xl text-amber-100 py-3">
+                    د
+                </div>
+                <p id="consigneQuestion" class="text-sm font-bold text-slate-200 m-0">
+                    Quelle est cette lettre ?
+                </p>
+            </div>
+
+            <!-- 4 CHOIX DE RÉPONSES -->
+            <div id="grilleChoix" class="grid grid-cols-1 md:grid-cols-2 gap-3.5"></div>
+
+            <!-- FEEDBACK VISUEL ET BOUTON SUIVANT -->
+            <div id="zoneFeedback" class="hidden pt-2 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10">
+                <p id="messageFeedback" class="text-sm font-bold m-0"></p>
+                <button id="btnQuestionSuivante" type="button" onclick="questionSuivante()" class="w-full sm:w-auto bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm px-6 py-3 rounded-xl cursor-pointer border-0 transition-colors">
+                    Question suivante →
+                </button>
+            </div>
+        </div>
+
+        <!-- RÉSUMÉ FINAL APRÈS LES 10 EXERCICES -->
+        <div id="zoneResume" class="hidden bg-[#1c2541] border border-emerald-400/40 rounded-2xl p-6 shadow-sm text-center space-y-4">
+            <div class="text-4xl">🎉</div>
+            <h2 class="text-xl font-black text-white m-0">Les 10 exercices de la Partie 2 sont terminés !</h2>
+            <p id="texteResultatFinal" class="text-sm text-slate-300 m-0"></p>
+            <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                <button id="btnRefaireExercices" type="button" onclick="recommencerExercices()" class="flex-1 bg-white/10 hover:bg-white/15 text-white font-bold text-sm py-3.5 rounded-xl border border-white/15 cursor-pointer transition-colors">
+                    Refaire les 10 exercices
+                </button>
+                <button id="btnPasserPartie3" type="button" onclick="window.location.href='alphabet-partie3.html'" class="flex-1 bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-sm py-3.5 rounded-xl cursor-pointer border-0 transition-colors">
+                    Passer à la Partie 3 ✓
+                </button>
+            </div>
+        </div>
+
+        <!-- BLOC DE SÉCURITÉ / VERROU TANT QUE LES 10 NE SONT PAS FINIS -->
+        <div id="blocVerrou" class="bg-gradient-to-br from-blue-950/80 to-[#1c2541] border border-blue-400/30 rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <h4 class="font-bold text-white text-sm m-0">🔒 Passage à la Partie 3 verrouillé</h4>
+                <p id="texteVerrou" class="text-slate-300 text-xs mt-1 m-0">
+                    Réponds aux 10 questions (0 / 10 complétées) pour débloquer la Partie 3.
+                </p>
+            </div>
+            <button id="btnBasPartie3" type="button" disabled onclick="window.location.href='alphabet-partie3.html'" class="w-full sm:w-auto bg-white/10 text-slate-400 font-black text-xs px-5 py-3 rounded-xl border border-white/10 cursor-not-allowed opacity-60 transition-all">
+                Partie 3 (10/10 requis)
+            </button>
+        </div>
+
+    </main>
+
+    <script>
+        window.estModeAdministrateur = function () {
+            return localStorage.getItem('coranAppIsAdmin') === 'true';
+        };
+
+        window.ajouterPointsEtudiant = function (points) {
+            if (window.estModeAdministrateur()) {
+                return 0;
+            }
+            const ajout = parseInt(points || '0', 10) || 0;
+            const actuel = parseInt(localStorage.getItem('coranAppUserPoints') || localStorage.getItem('coranAppPoints') || '0', 10) || 0;
+            const total = Math.max(0, actuel + ajout);
+            localStorage.setItem('coranAppUserPoints', String(total));
+            localStorage.setItem('coranAppPoints', String(total));
+            return total;
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const badge = document.getElementById('adminBadgeExercice2');
+            if (window.estModeAdministrateur()) {
+                if (badge) {
+                    badge.classList.remove('hidden');
+                    badge.style.display = 'inline-flex';
+                }
+            } else if (badge) {
+                badge.classList.add('hidden');
+                badge.style.display = 'none';
+            }
+        });
+
+        const POINTS_PAR_QUESTION = 10;
+        const DUREE_CHRONO_SECONDES = 10;
+
+        const questions10 = [
+            {
+                lettre: "ذ",
+                question: "Identifie cette lettre et sa prononciation :",
+                choix: [
+                    "Dhāl — Son Dh interdental (comme \"that\"), 1 point au-dessus",
+                    "Dāl — Son D clair et léger, sans point",
+                    "Zay — Son Z vibrant, 1 point au-dessus",
+                    "Rā — Son R roulé, sans point"
+                ],
+                correcte: 0,
+                explication: "Dhāl (ذ) ressemble à Dāl mais possède 1 point au-dessus et se prononce comme le « th » sonore de \"that\"."
+            },
+            {
+                lettre: "ـز",
+                question: "Quelle est cette forme finale et quelle règle de liaison suit-elle ?",
+                choix: [
+                    "Rā — Forme finale sans point, son R roulé",
+                    "Zay — Forme finale liée à droite, ne se lie jamais à gauche",
+                    "Sīn — Forme finale avec dents, 1 point en haut",
+                    "Ṣād — Forme finale emphatique, 1 point au-dessus"
+                ],
+                correcte: 1,
+                explication: "Zay (ز) se lie à la lettre précédente à droite (ـز) mais ne s'attache jamais à la lettre suivante à gauche."
+            },
+            {
+                lettre: "د",
+                question: "Pourquoi Dāl ne s'attache-t-il pas à la lettre qui suit à gauche ?",
+                choix: [
+                    "Il possède un point sous la ligne",
+                    "C'est une lettre emphatique lourde",
+                    "Dāl fait partie des lettres qui ne se lient pas à gauche (vers la lettre suivante)",
+                    "Il se prononce comme un Ch"
+                ],
+                correcte: 2,
+                explication: "Comme Alif, Dāl (د) se connecte uniquement à la lettre précédente (à droite) et jamais à celle qui suit (à gauche)."
+            },
+            {
+                lettre: "صـ",
+                question: "Quelle est la particularité phonétique de cette forme initiale ?",
+                choix: [
+                    "Sīn — Son S léger et sifflant",
+                    "Shīn — Son Ch doux, 3 points en haut",
+                    "Zay — Son Z vibrant, 1 point au-dessus",
+                    "Ṣād — Son S emphatique et lourd, sans point"
+                ],
+                correcte: 3,
+                explication: "Ṣād (صـ) produit un [S] emphatique et lourd en élevant l'arrière de la langue, sans point."
+            },
+            {
+                lettre: "سـ",
+                question: "Distingue cette forme initiale de Ṣād et Shīn :",
+                choix: [
+                    "Sīn — Son S léger et sifflant, sans point",
+                    "Shīn — Son Ch (comme \"chat\"), 3 points au-dessus",
+                    "Ṣād — Son S emphatique et lourd",
+                    "Rā — Son R roulé"
+                ],
+                correcte: 0,
+                explication: "Sīn (سـ) n'a pas de point et se prononce avec un son [S] léger et clair."
+            },
+            {
+                lettre: "شـ",
+                question: "Comment se lit cette forme initiale et combien a-t-elle de points ?",
+                choix: [
+                    "Sīn — Son S léger, aucun point",
+                    "Shīn — Son Ch (comme \"chat\"), 3 points au-dessus",
+                    "Ṣād — Son S lourd, 1 point en bas",
+                    "Dhāl — Son Dh, 1 point en haut"
+                ],
+                correcte: 1,
+                explication: "Shīn (شـ) garde la base de Sīn mais ajoute 3 points au-dessus et se prononce [Ch]."
+            },
+            {
+                lettre: "ـر",
+                question: "Identifie cette forme liée à droite :",
+                choix: [
+                    "Zay — 1 point au-dessus, son Z",
+                    "Dhāl — 1 point au-dessus, son Dh",
+                    "Rā — Sans point, son R roulé, ne se lie pas à gauche",
+                    "Dāl — Sans point, son D"
+                ],
+                correcte: 2,
+                explication: "La forme ـر correspond à Rā liée à droite : elle n'a pas de point et ne se lie pas à gauche."
+            },
+            {
+                lettre: "ـصـ",
+                question: "Quelle lettre est représentée ici en position médiane ?",
+                choix: [
+                    "Sīn — Forme médiane légère",
+                    "Shīn — Forme médiane avec 3 points",
+                    "Dāl — Forme médiane non liée à gauche",
+                    "Ṣād — Forme médiane liée des deux côtés, son S emphatique"
+                ],
+                correcte: 3,
+                explication: "La forme ـصـ montre Ṣād reliée à droite et à gauche, avec son [S] emphatique."
+            },
+            {
+                lettre: "ـذ",
+                question: "Observe cette lettre en fin de mot reliée à droite :",
+                choix: [
+                    "Dhāl — Forme finale liée à droite, 1 point au-dessus, son Dh",
+                    "Dāl — Forme finale liée à droite, sans point, son D",
+                    "Zay — Forme finale liée à droite, son Z",
+                    "Rā — Forme finale liée à droite, son R"
+                ],
+                correcte: 0,
+                explication: "La forme ـذ est Dhāl reliée à droite : 1 point au-dessus et son [Dh] (comme \"that\")."
+            },
+            {
+                lettre: "ـشـ",
+                question: "Si tu vois cette forme au milieu d'un mot, quelle est la bonne lecture ?",
+                choix: [
+                    "Sīn médian — Son S léger",
+                    "Shīn médian — Son Ch (comme \"chat\"), 3 points au-dessus",
+                    "Ṣād médian — Son S emphatique",
+                    "Zay médian — Son Z"
+                ],
+                correcte: 1,
+                explication: "La forme ـشـ est Shīn en position médiane, liée des deux côtés avec 3 points au-dessus."
+            }
+        ];
+
+        let indexActuel = 0;
+        let bonnesReponses = 0;
+        let questionsRepondues = 0;
+        let pointsActuels = 0;
+        let dejaRepondu = false;
+        let tempsRestant = DUREE_CHRONO_SECONDES;
+        let intervalChrono = null;
+        let timeoutAutoSuivant = null;
+
+        function nettoyerTimers() {
+            if (intervalChrono) {
+                clearInterval(intervalChrono);
+                intervalChrono = null;
+            }
+            if (timeoutAutoSuivant) {
+                clearTimeout(timeoutAutoSuivant);
+                timeoutAutoSuivant = null;
+            }
+        }
+
+        function mettreAJourAffichageChrono() {
+            const chronoEl = document.getElementById("chronoQuestion");
+            if (!chronoEl) return;
+            chronoEl.textContent = `⏱️ ${tempsRestant}s`;
+            if (tempsRestant <= 3) {
+                chronoEl.className = "inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-400/50 px-3 py-1 rounded-full animate-pulse";
+            } else {
+                chronoEl.className = "inline-flex items-center gap-1 text-xs font-black uppercase tracking-wider bg-amber-400/15 text-amber-300 border border-amber-400/35 px-3 py-1 rounded-full";
+            }
+        }
+
+        function tempsEcouleQuestionPerdue() {
+            if (dejaRepondu) return;
+            dejaRepondu = true;
+            nettoyerTimers();
+
+            tempsRestant = 0;
+            mettreAJourAffichageChrono();
+
+            const q = questions10[indexActuel];
+            const boutons = document.querySelectorAll("#grilleChoix button");
+
+            boutons.forEach((b, idx) => {
+                b.disabled = true;
+                b.classList.remove("hover:border-amber-400/60", "hover:bg-[#0b132b]");
+                if (idx === q.correcte) {
+                    b.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-400 bg-emerald-500/20 text-emerald-100 font-bold text-sm cursor-default transition-all flex items-center justify-between gap-3";
+                }
+            });
+
+            questionsRepondues++;
+            document.getElementById("texteVerrou").textContent = `Réponds aux 10 questions (${questionsRepondues} / 10 complétées) pour débloquer la Partie 3.`;
+
+            const feedbackZone = document.getElementById("zoneFeedback");
+            const feedbackMsg = document.getElementById("messageFeedback");
+            const btnSuivant = document.getElementById("btnQuestionSuivante");
+
+            feedbackMsg.className = "text-sm font-bold text-rose-300 m-0";
+            feedbackMsg.textContent = `⌛ Temps écoulé ! Tu as perdu cette question sans sélectionner de réponse. ${q.explication}`;
+            btnSuivant.textContent = (indexActuel === questions10.length - 1) ? "Terminer les 10 exercices ✓" : "Question suivante →";
+            feedbackZone.classList.remove("hidden");
+
+            mettreAJourScoreTexte();
+
+            timeoutAutoSuivant = setTimeout(() => {
+                questionSuivante();
+            }, 1200);
+        }
+
+        function demarrerChronoQuestion() {
+            nettoyerTimers();
+            tempsRestant = DUREE_CHRONO_SECONDES;
+            mettreAJourAffichageChrono();
+
+            intervalChrono = setInterval(() => {
+                tempsRestant--;
+                if (tempsRestant <= 0) {
+                    tempsEcouleQuestionPerdue();
+                } else {
+                    mettreAJourAffichageChrono();
+                }
+            }, 1000);
+        }
+
+        function mettreAJourScoreTexte() {
+            const ptsAffiches = window.estModeAdministrateur() ? 0 : pointsActuels;
+            document.getElementById("scoreTexte").textContent = `Réussies : ${bonnesReponses} / ${questions10.length} · ${ptsAffiches} pts`;
+        }
+
+        function appliquerVerrouDefinitifEleve(pointsEnregistres) {
+            const btnRefaire = document.getElementById("btnRefaireExercices");
+            if (!window.estModeAdministrateur() && btnRefaire) {
+                btnRefaire.disabled = true;
+                btnRefaire.className = "hidden";
+            }
+            document.getElementById("texteResultatFinal").textContent =
+                `Exercice terminé et clôturé : ${bonnesReponses} / ${questions10.length} bonnes réponses (${pointsEnregistres} pts). Tu ne peux plus refaire cet exercice. La Partie 3 est débloquée !`;
+        }
+
+        function afficherQuestion() {
+            dejaRepondu = false;
+            const q = questions10[indexActuel];
+            const ptsQuestion = window.estModeAdministrateur() ? 0 : POINTS_PAR_QUESTION;
+
+            document.getElementById("compteurQuestions").textContent = `Question ${indexActuel + 1} sur ${questions10.length}`;
+            document.getElementById("badgeQuestion").textContent = `Question ${indexActuel + 1} sur ${questions10.length} · +${ptsQuestion} pts`;
+            document.getElementById("lettreArabe").textContent = q.lettre;
+            document.getElementById("consigneQuestion").textContent = q.question;
+            document.getElementById("barreProgression").style.width = `${((indexActuel + 1) / questions10.length) * 100}%`;
+
+            document.getElementById("zoneFeedback").classList.add("hidden");
+            document.getElementById("messageFeedback").textContent = "";
+
+            const grille = document.getElementById("grilleChoix");
+            grille.innerHTML = "";
+
+            q.choix.forEach((texteChoix, idx) => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "w-full text-left p-4 rounded-xl border border-white/15 bg-[#0b132b]/70 hover:border-amber-400/60 hover:bg-[#0b132b] text-white font-semibold text-sm cursor-pointer transition-all flex items-center justify-between gap-3";
+                btn.innerHTML = `<span>${texteChoix}</span><span class="text-xs font-black text-amber-300">${["A", "B", "C", "D"][idx]}</span>`;
+                btn.onclick = () => verifierReponse(idx, btn);
+                grille.appendChild(btn);
+            });
+
+            demarrerChronoQuestion();
+        }
+
+        function verifierReponse(choixIndex, boutonClique) {
+            if (dejaRepondu) return;
+            dejaRepondu = true;
+            nettoyerTimers();
+
+            const q = questions10[indexActuel];
+            const boutons = document.querySelectorAll("#grilleChoix button");
+            const isAdmin = window.estModeAdministrateur();
+
+            boutons.forEach((b) => {
+                b.disabled = true;
+                b.classList.remove("hover:border-amber-400/60", "hover:bg-[#0b132b]");
+            });
+
+            questionsRepondues++;
+            document.getElementById("texteVerrou").textContent = `Réponds aux 10 questions (${questionsRepondues} / 10 complétées) pour débloquer la Partie 3.`;
+
+            const feedbackZone = document.getElementById("zoneFeedback");
+            const feedbackMsg = document.getElementById("messageFeedback");
+            const btnSuivant = document.getElementById("btnQuestionSuivante");
+
+            if (choixIndex === q.correcte) {
+                bonnesReponses++;
+                if (!isAdmin) {
+                    pointsActuels += POINTS_PAR_QUESTION;
+                }
+                boutonClique.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-400 bg-emerald-500/20 text-emerald-100 font-bold text-sm cursor-default transition-all flex items-center justify-between gap-3";
+                feedbackMsg.className = "text-sm font-bold text-emerald-300 m-0";
+                const gainTexte = isAdmin ? "0 pt (Mode Admin)" : `+${POINTS_PAR_QUESTION} pts`;
+                feedbackMsg.textContent = `✓ Bonne réponse (${gainTexte}) ! ${q.explication}`;
+            } else {
+                boutonClique.className = "w-full text-left p-4 rounded-xl border-2 border-rose-500 bg-rose-500/20 text-rose-100 font-bold text-sm cursor-default transition-all flex items-center justify-between gap-3";
+                const bonBouton = boutons[q.correcte];
+                bonBouton.className = "w-full text-left p-4 rounded-xl border-2 border-emerald-400 bg-emerald-500/20 text-emerald-100 font-bold text-sm cursor-default transition-all flex items-center justify-between gap-3";
+
+                feedbackMsg.className = "text-sm font-bold text-rose-300 m-0";
+                feedbackMsg.textContent = `✗ Mauvaise réponse. ${q.explication}`;
+            }
+
+            mettreAJourScoreTexte();
+            btnSuivant.textContent = (indexActuel === questions10.length - 1) ? "Terminer les 10 exercices ✓" : "Question suivante →";
+            feedbackZone.classList.remove("hidden");
+        }
+
+        function questionSuivante() {
+            nettoyerTimers();
+            if (indexActuel < questions10.length - 1) {
+                indexActuel++;
+                afficherQuestion();
+            } else {
+                afficherResumeFinal();
+            }
+        }
+
+        function afficherResumeFinal() {
+            nettoyerTimers();
+            const isAdmin = window.estModeAdministrateur();
+            const totalMax = questions10.length * POINTS_PAR_QUESTION;
+            const pointsFinaux = isAdmin ? 0 : pointsActuels;
+
+            if (!isAdmin) {
+                localStorage.setItem("nurQuranExercice2Termine", "true");
+                localStorage.setItem("nurQuranPointsExercice2", String(pointsFinaux));
+                localStorage.setItem("nurQuranBonnesExercice2", String(bonnesReponses));
+                window.ajouterPointsEtudiant(pointsFinaux);
+            }
+
+            questionsRepondues = questions10.length;
+            document.getElementById("compteurQuestions").textContent = `Terminé (${questions10.length} / ${questions10.length})`;
+            document.getElementById("barreProgression").style.width = "100%";
+            mettreAJourScoreTexte();
+
+            document.getElementById("zoneQuestion").classList.add("hidden");
+            document.getElementById("zoneResume").classList.remove("hidden");
+            appliquerVerrouDefinitifEleve(pointsFinaux);
+
+            const blocVerrou = document.getElementById("blocVerrou");
+            blocVerrou.className = "bg-gradient-to-br from-emerald-950/70 to-[#1c2541] border border-emerald-400/40 rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4";
+            document.getElementById("texteVerrou").textContent = `10 / 10 exercices complétés (${pointsFinaux} pts) ! Tu peux passer à la Partie 3.`;
+
+            const btnBas = document.getElementById("btnBasPartie3");
+            btnBas.disabled = false;
+            btnBas.className = "w-full sm:w-auto bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs px-5 py-3 rounded-xl cursor-pointer border-0 transition-colors";
+            btnBas.textContent = "Passer à la Partie 3 ✓";
+        }
+
+        function recommencerExercices() {
+            if (!window.estModeAdministrateur() && localStorage.getItem("nurQuranExercice2Termine") === "true") {
+                return;
+            }
+            nettoyerTimers();
+            indexActuel = 0;
+            bonnesReponses = 0;
+            questionsRepondues = 0;
+            pointsActuels = 0;
+            dejaRepondu = false;
+            mettreAJourScoreTexte();
+            document.getElementById("zoneResume").classList.add("hidden");
+            document.getElementById("zoneQuestion").classList.remove("hidden");
+            afficherQuestion();
+        }
+
+        (function initialiserExercice2() {
+            const isAdmin = window.estModeAdministrateur();
+            const dejaTermine = localStorage.getItem("nurQuranExercice2Termine") === "true";
+
+            if (!isAdmin && dejaTermine) {
+                const savedPts = parseInt(localStorage.getItem("nurQuranPointsExercice2") || "0", 10) || 0;
+                const savedBonnes = parseInt(localStorage.getItem("nurQuranBonnesExercice2") || "0", 10) || 0;
+                bonnesReponses = savedBonnes;
+                pointsActuels = savedPts;
+                questionsRepondues = questions10.length;
+
+                document.getElementById("compteurQuestions").textContent = `Terminé (${questions10.length} / ${questions10.length})`;
+                document.getElementById("barreProgression").style.width = "100%";
+                mettreAJourScoreTexte();
+
+                document.getElementById("zoneQuestion").classList.add("hidden");
+                document.getElementById("zoneResume").classList.remove("hidden");
+                appliquerVerrouDefinitifEleve(savedPts);
+
+                const blocVerrou = document.getElementById("blocVerrou");
+                blocVerrou.className = "bg-gradient-to-br from-emerald-950/70 to-[#1c2541] border border-emerald-400/40 rounded-2xl p-5 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4";
+                document.getElementById("texteVerrou").textContent = `10 / 10 exercices complétés (${savedPts} pts) ! Tu peux passer à la Partie 3.`;
+
+                const btnBas = document.getElementById("btnBasPartie3");
+                btnBas.disabled = false;
+                btnBas.className = "w-full sm:w-auto bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs px-5 py-3 rounded-xl cursor-pointer border-0 transition-colors";
+                btnBas.textContent = "Passer à la Partie 3 ✓";
+                return;
+            }
+
+            mettreAJourScoreTexte();
+            afficherQuestion();
+        })();
+    </script>
+
+</body>
+
+</html>

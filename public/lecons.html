@@ -123,10 +123,10 @@
         <!-- GRILLE NIVEAU 1 -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <!-- Leçon 1 -->
-            <div onclick="window.location.href='alphabet-partie1.html'" class="bg-[#1c2541] border-2 border-amber-400/50 hover:border-amber-400 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between min-h-[155px]">
+            <div id="carteLecon1Alphabet" onclick="gererClicLecon1Alphabet()" class="bg-[#1c2541] border-2 border-amber-400/50 hover:border-amber-400 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between min-h-[155px]">
                 <div class="flex items-center justify-between">
                     <span class="w-7 h-7 rounded-full bg-amber-400 text-slate-950 font-black text-xs flex items-center justify-center">1</span>
-                    <span class="text-[10px] font-bold text-amber-300 bg-amber-400/15 px-2 py-0.5 rounded-full border border-amber-400/30">Gratuit</span>
+                    <span id="badgeStatutLecon1" class="text-[10px] font-bold text-amber-300 bg-amber-400/15 px-2 py-0.5 rounded-full border border-amber-400/30">Gratuit</span>
                 </div>
                 <div class="my-auto text-center py-2">
                     <p lang="ar" dir="rtl" class="font-arabic text-3xl text-white m-0">ا ب</p>
@@ -269,9 +269,37 @@
             return 0;
         };
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const badge = document.getElementById('adminBadgeLecons');
+        function estAlphabetTermineEtNoteEleve() {
             if (window.estModeAdministrateur()) {
+                return false;
+            }
+            if (localStorage.getItem('nurQuranExercice4Termine') === 'true') {
+                return true;
+            }
+            try {
+                const raw = localStorage.getItem('coranAppLeconsCompletees');
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (Array.isArray(parsed) && parsed.includes('alphabet-partie1')) {
+                        return true;
+                    }
+                }
+            } catch (_) {}
+            return false;
+        }
+
+        function gererClicLecon1Alphabet() {
+            if (estAlphabetTermineEtNoteEleve()) {
+                alert('Leçon est déjà fait !');
+                return;
+            }
+            window.location.href = 'alphabet-partie1.html';
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const isAdmin = window.estModeAdministrateur();
+            const badge = document.getElementById('adminBadgeLecons');
+            if (isAdmin) {
                 if (badge) {
                     badge.classList.remove('hidden');
                     badge.style.display = 'inline-flex';
@@ -279,6 +307,30 @@
             } else if (badge) {
                 badge.classList.add('hidden');
                 badge.style.display = 'none';
+            }
+
+            if (!isAdmin && localStorage.getItem('nurQuranExercice4Termine') === 'true') {
+                try {
+                    const rawComp = localStorage.getItem('coranAppLeconsCompletees');
+                    const parsedComp = rawComp ? JSON.parse(rawComp) : [];
+                    const listeComp = Array.isArray(parsedComp) ? parsedComp : [];
+                    if (!listeComp.includes('alphabet-partie1')) {
+                        listeComp.push('alphabet-partie1');
+                        localStorage.setItem('coranAppLeconsCompletees', JSON.stringify(listeComp));
+                    }
+                } catch (_) {}
+            }
+
+            const carteLecon1 = document.getElementById('carteLecon1Alphabet');
+            const badgeLecon1 = document.getElementById('badgeStatutLecon1');
+            if (estAlphabetTermineEtNoteEleve()) {
+                if (carteLecon1) {
+                    carteLecon1.className = "bg-[#1c2541]/75 border border-emerald-400/40 rounded-2xl p-4 shadow-sm transition-all cursor-not-allowed opacity-80 flex flex-col justify-between min-h-[155px]";
+                }
+                if (badgeLecon1) {
+                    badgeLecon1.className = "text-[10px] font-bold text-emerald-300 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-400/30";
+                    badgeLecon1.textContent = "Terminée 🔒";
+                }
             }
 
             let completees = 0;

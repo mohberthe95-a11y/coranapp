@@ -27,167 +27,241 @@
         @font-face {font-family:'Amiri Quran';font-style:normal;font-weight:400;src:url(/cf-fonts/s/amiri-quran/5.2.10/arabic/400/normal.woff2);font-display:swap;}
         @font-face {font-family:'Scheherazade New';font-style:normal;font-weight:400;src:url(/cf-fonts/s/scheherazade-new/5.2.8/arabic/400/normal.woff2);font-display:swap;}
         
-        .bg-primary { background-color: #0b132b; }
+        .bg-primary {
+            background:
+                radial-gradient(ellipse 85% 55% at 15% 8%, rgba(16, 185, 129, 0.16) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 60% at 88% 18%, rgba(245, 158, 11, 0.15) 0%, transparent 62%),
+                linear-gradient(165deg, #091326 0%, #0d1c36 52%, #060c18 100%);
+        }
+
+        .glass-card {
+            background: linear-gradient(150deg, rgba(20, 35, 62, 0.84) 0%, rgba(10, 19, 36, 0.92) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        @keyframes driftOrb {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(18px, -14px) scale(1.06); }
+        }
+
+        @keyframes shineSweep {
+            0% { transform: translateX(-140%) skewX(-18deg); }
+            100% { transform: translateX(240%) skewX(-18deg); }
+        }
+
+        .animate-float-slow {
+            animation: floatSlow 5.5s ease-in-out infinite;
+        }
+
+        .animate-drift-orb {
+            animation: driftOrb 9s ease-in-out infinite;
+        }
+
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+            transform: translateX(-140%) skewX(-18deg);
+            transition: none;
+            pointer-events: none;
+        }
+
+        .shine-effect:hover::after {
+            animation: shineSweep 0.85s ease forwards;
+        }
+
+        .shape-arch {
+            border-radius: 36px 36px 24px 24px;
+        }
+
+        .shape-pill-card {
+            border-radius: 28px 18px 28px 18px;
+        }
     </style>
 </head>
 
-<body class="bg-[#0b132b] text-white m-0 p-0">
+<body class="bg-[#091326] text-white m-0 p-0 antialiased selection:bg-emerald-400/30 selection:text-emerald-200">
 
     <div id="root">
         <div class="min-h-screen bg-primary relative overflow-hidden flex flex-col">
             
             <!-- Éléments de fond décoratifs -->
-            <div class="absolute top-0 right-0 w-72 h-72 rounded-full bg-white/5 blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none"></div>
-            <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-white/5 blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
-            <div class="absolute inset-0 opacity-[0.035] pointer-events-none" style="background-image: radial-gradient(circle, white 1.5px, transparent 1.5px); background-size: 36px 36px;"></div>
+            <div class="absolute top-0 right-0 w-80 h-80 rounded-full bg-emerald-400/10 blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none animate-drift-orb"></div>
+            <div class="absolute top-1/3 left-0 w-72 h-72 rounded-full bg-amber-400/10 blur-3xl -translate-x-1/2 pointer-events-none animate-drift-orb" style="animation-delay: -3s;"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-teal-500/10 blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none animate-drift-orb" style="animation-delay: -6s;"></div>
+            <div class="absolute inset-0 opacity-[0.045] pointer-events-none" style="background-image: radial-gradient(circle, rgba(255,255,255,0.85) 1.25px, transparent 1.25px); background-size: 32px 32px;"></div>
 
-            <div class="relative flex-1 max-w-md md:max-w-lg lg:max-w-xl mx-auto w-full px-6 py-6 flex flex-col">
+            <div class="relative flex-1 max-w-md md:max-w-lg lg:max-w-xl mx-auto w-full px-5 sm:px-6 py-6 flex flex-col">
 
                 <!-- BARRE DU HAUT AVEC BOUTON RETOUR ET TITRE -->
-                <div class="flex items-center justify-between mb-6">
-                    <button onclick="history.back()" class="inline-flex items-center gap-2 bg-white text-[#0b132b] px-4 py-2 rounded-xl font-bold cursor-pointer shadow-lg hover:bg-white/90 transition-all text-sm border-0">
+                <div class="flex items-center justify-between mb-6 gap-2">
+                    <button onclick="history.back()" class="shine-effect inline-flex items-center gap-2 bg-gradient-to-r from-emerald-50 to-white text-[#091326] px-4 py-2 rounded-2xl font-bold cursor-pointer shadow-lg shadow-black/25 hover:from-white hover:to-amber-50 hover:-translate-y-0.5 active:scale-95 transition-all duration-200 text-sm border border-emerald-200/70">
                         ← Retour
                     </button>
-                    <span class="text-xs font-black uppercase tracking-wider text-amber-300">LE VERIDIQUE A-Z 🇲🇱</span>
+                    <span class="text-xs font-black uppercase tracking-wider text-amber-300 bg-amber-400/10 border border-amber-300/25 px-3 py-1.5 rounded-full">LE VERIDIQUE A-Z 🇲🇱</span>
                 </div>
 
                 <!-- EN-TÊTE ET SALUTATION -->
-                <div class="text-center mb-8">
-                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-white/15 border-2 border-white/25 mb-6 shadow-md">
+                <div class="text-center mb-8 glass-card border border-emerald-300/20 shape-arch px-5 py-7 shadow-2xl shadow-black/35 relative overflow-hidden">
+                    <div class="w-24 h-24 rounded-full border border-amber-300/20 absolute -top-8 -right-8 pointer-events-none"></div>
+                    <div class="w-20 h-20 rounded-full border border-emerald-300/20 absolute -bottom-6 -left-6 pointer-events-none"></div>
+
+                    <div class="animate-float-slow inline-flex items-center justify-center w-20 h-20 rounded-[26px] bg-gradient-to-br from-emerald-400/25 via-teal-400/15 to-amber-400/20 border border-emerald-300/40 mb-5 shadow-lg shadow-emerald-950/50">
                         <span class="text-3xl">🤲</span>
                     </div>
-                    <p lang="ar" translate="no" class="text-white/90 text-2xl mb-4 leading-loose tracking-wide notranslate" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif; direction: rtl;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-                    <h1 class="text-3xl md:text-4xl font-black text-white leading-tight mb-2">As-salāmu 'alaykum, <span id="dashUserPrenom">Apprenant</span> !</h1>
-                    <p class="text-amber-300 text-sm font-bold uppercase tracking-wider">Objectif : <strong>Mémorisation Sourates (Débutant)</strong></p>
+                    <p lang="ar" translate="no" class="text-amber-100/95 text-2xl sm:text-[26px] mb-3 leading-loose tracking-wide notranslate drop-shadow-sm" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif; direction: rtl;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                    <h1 class="text-3xl sm:text-4xl font-black text-white leading-tight tracking-tight mb-2.5">As-salāmu 'alaykum, <span id="dashUserPrenom" class="text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-300 to-emerald-200">Apprenant</span> !</h1>
+                    <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/20 to-amber-400/20 border border-amber-300/35 shadow-inner">
+                        <p class="text-amber-200 text-xs sm:text-sm font-bold uppercase tracking-wider m-0">Objectif : <strong>Mémorisation Sourates (Débutant)</strong></p>
+                    </div>
                 </div>
 
                 <!-- GRILLE DES FONCTIONNALITÉS RAPIDES -->
-                <div class="grid grid-cols-2 gap-3 mb-6">
-                    <div onclick="alert('Assistant IA')" class="bg-white/10 border border-white/15 hover:bg-white/15 transition-all rounded-2xl p-4 flex flex-col gap-2 cursor-pointer shadow-lg">
-                        <div class="w-10 h-10 rounded-xl bg-amber-400/20 flex items-center justify-center text-xl">🤖</div>
+                <div class="grid grid-cols-2 gap-3.5 mb-6">
+                    <div onclick="alert('Assistant IA')" class="shine-effect glass-card border border-emerald-300/20 hover:border-amber-300/50 hover:-translate-y-1 active:scale-98 transition-all duration-200 rounded-[24px_14px_24px_14px] p-4 flex flex-col gap-2.5 cursor-pointer shadow-lg shadow-black/25">
+                        <div class="w-11 h-11 rounded-2xl bg-amber-400/20 border border-amber-300/30 flex items-center justify-center text-xl shadow-inner">🤖</div>
                         <div class="font-black text-sm text-white">Assistant IA</div>
                     </div>
-                    <div onclick="alert('Récitation')" class="bg-white/10 border border-white/15 hover:bg-white/15 transition-all rounded-2xl p-4 flex flex-col gap-2 cursor-pointer shadow-lg">
-                        <div class="w-10 h-10 rounded-xl bg-amber-400/20 flex items-center justify-center text-xl">🎧</div>
+                    <div onclick="alert('Récitation')" class="shine-effect glass-card border border-emerald-300/20 hover:border-emerald-300/50 hover:-translate-y-1 active:scale-98 transition-all duration-200 rounded-[14px_24px_14px_24px] p-4 flex flex-col gap-2.5 cursor-pointer shadow-lg shadow-black/25">
+                        <div class="w-11 h-11 rounded-2xl bg-emerald-400/20 border border-emerald-300/30 flex items-center justify-center text-xl shadow-inner">🎧</div>
                         <div class="font-black text-sm text-white">Écoute audio</div>
                     </div>
                 </div>
 
                 <!-- CARTE SOURATE / AYAH -->
-                <div class="relative rounded-3xl overflow-hidden mb-6 shadow-xl border border-white/10 bg-[#1c2541]">
-                    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/80"></div>
-                    <div class="relative p-6">
-                        <div class="flex items-center justify-between mb-3">
+                <div class="relative shape-pill-card overflow-hidden mb-6 shadow-2xl shadow-black/40 border border-emerald-300/25 glass-card hover:border-amber-300/45 hover:-translate-y-0.5 transition-all duration-300">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-amber-400/10 pointer-events-none"></div>
+                    <div class="relative p-5 sm:p-6">
+                        <div class="flex items-center justify-between mb-4 pb-2.5 border-b border-white/10">
                             <div class="flex items-center gap-2">
-                                <span class="text-amber-300 text-xs font-black uppercase tracking-wider">Sourate Al-Fatiha</span>
+                                <span class="text-amber-300 text-xs font-black uppercase tracking-widest">Sourate Al-Fatiha</span>
                             </div>
-                            <span class="text-white/70 text-[10px] font-bold bg-black/30 rounded-full px-2.5 py-0.5">Verset 1-2</span>
+                            <span class="text-emerald-100/90 text-[11px] font-bold bg-emerald-500/15 border border-emerald-300/25 rounded-full px-3 py-0.5">Verset 1-2</span>
                         </div>
-                        <p lang="ar" translate="no" class="text-xl leading-[2.2] text-amber-100 font-bold mb-3 text-right notranslate" dir="rtl" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</p>
-                        <p class="text-white/90 text-sm leading-relaxed mb-4 italic">« Au nom d'Allah, le Tout Miséricordieux... Louange à Allah, Seigneur de l'univers. »</p>
-                        <div class="flex items-center gap-2">
-                            <button onclick="alert('Écouter la sourate...')" class="flex items-center gap-1.5 rounded-full px-4 py-2 bg-white/15 hover:bg-white/25 transition-colors text-xs font-bold text-white cursor-pointer">🔊 Écouter</button>
-                            <button onclick="alert('Récépissé de mémorisation')" class="flex items-center gap-1.5 rounded-full px-4 py-2 bg-amber-400 hover:bg-amber-300 transition-colors text-xs font-black text-slate-950 shadow-lg cursor-pointer">✅ Marquer appris</button>
+                        <p lang="ar" translate="no" class="text-xl sm:text-2xl leading-[2.25] text-amber-100 font-bold mb-3.5 text-right notranslate" dir="rtl" style="font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ</p>
+                        <p class="text-slate-200 text-sm leading-relaxed mb-4 italic pl-3 border-l-2 border-emerald-400/60">« Au nom d'Allah, le Tout Miséricordieux... Louange à Allah, Seigneur de l'univers. »</p>
+                        <div class="flex flex-wrap items-center gap-2.5 pt-1">
+                            <button onclick="alert('Écouter la sourate...')" class="shine-effect flex items-center gap-1.5 rounded-full px-4 py-2 bg-white/10 border border-white/15 hover:bg-white/20 hover:-translate-y-0.5 transition-all text-xs font-bold text-white cursor-pointer">🔊 Écouter</button>
+                            <button onclick="alert('Récépissé de mémorisation')" class="shine-effect flex items-center gap-1.5 rounded-full px-4 py-2 bg-gradient-to-r from-amber-400 to-amber-300 hover:from-amber-300 hover:to-amber-200 hover:-translate-y-0.5 transition-all text-xs font-black text-slate-950 shadow-md cursor-pointer">✅ Marquer appris</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- TITRE SECTION SOURATES -->
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="font-black text-lg text-white">Sourates Courtes (Juz Amma)</h3>
-                    <span class="text-xs font-bold text-emerald-300 bg-emerald-500/15 px-3 py-1 rounded-full border border-emerald-400/30">Niveau Débutant</span>
+                <div class="flex items-center justify-between mb-4 gap-2">
+                    <h3 class="font-black text-lg text-white m-0">Sourates Courtes (Juz Amma)</h3>
+                    <span class="text-xs font-bold text-emerald-200 bg-emerald-500/20 px-3 py-1 rounded-full border border-emerald-300/35">Niveau Débutant</span>
                 </div>
 
                 <!-- LISTE DES SOURATES -->
                 <div class="space-y-3 mb-6">
-                    <div class="bg-[#1c2541] text-white rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-[#253259] transition-all border border-white/15">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-black text-sm flex items-center justify-center shadow">1</div>
+                    <div class="shine-effect glass-card text-white rounded-3xl p-4 shadow-lg shadow-black/25 flex items-center justify-between cursor-pointer hover:border-emerald-300/50 hover:-translate-y-0.5 transition-all duration-200 border border-emerald-300/20">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-black text-sm flex items-center justify-center shadow-md flex-shrink-0">1</div>
                             <div>
                                 <h4 class="font-black text-base text-white m-0">Sourate Al-Fatiha (1)</h4>
                                 <p class="text-xs text-slate-300 m-0 mt-0.5">L'ouverture du Coran (7 versets)</p>
                             </div>
                         </div>
-                        <span class="text-xs font-bold text-emerald-300 bg-emerald-500/20 px-2.5 py-1 rounded-full border border-emerald-400/30">Gratuit</span>
+                        <span class="text-xs font-bold text-emerald-200 bg-emerald-500/20 px-3 py-1 rounded-full border border-emerald-300/30 flex-shrink-0">Gratuit</span>
                     </div>
 
-                    <div class="bg-[#1c2541] text-white rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-[#253259] transition-all border border-white/15">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-emerald-600 text-white font-black text-sm flex items-center justify-center shadow">2</div>
+                    <div class="shine-effect glass-card text-white rounded-3xl p-4 shadow-lg shadow-black/25 flex items-center justify-between cursor-pointer hover:border-emerald-300/50 hover:-translate-y-0.5 transition-all duration-200 border border-emerald-300/20">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-black text-sm flex items-center justify-center shadow-md flex-shrink-0">2</div>
                             <div>
                                 <h4 class="font-black text-base text-white m-0">Sourate An-Nas (114)</h4>
                                 <p class="text-xs text-slate-300 m-0 mt-0.5">Les Hommes</p>
                             </div>
                         </div>
-                        <span class="text-xs font-bold text-emerald-300 bg-emerald-500/20 px-2.5 py-1 rounded-full border border-emerald-400/30">Gratuit</span>
+                        <span class="text-xs font-bold text-emerald-200 bg-emerald-500/20 px-3 py-1 rounded-full border border-emerald-300/30 flex-shrink-0">Gratuit</span>
                     </div>
 
-                    <div class="bg-[#1c2541]/80 text-white rounded-2xl p-4 shadow-lg flex items-center justify-between cursor-pointer hover:bg-[#1c2541] transition-all border border-dashed border-white/25 opacity-85">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-white/20 text-white font-black text-sm flex items-center justify-center shadow">3</div>
+                    <div class="shine-effect glass-card text-white rounded-3xl p-4 shadow-lg shadow-black/20 flex items-center justify-between cursor-pointer hover:border-amber-300/40 hover:-translate-y-0.5 transition-all duration-200 border border-dashed border-amber-300/30 opacity-90">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-2xl bg-white/15 border border-white/15 text-amber-200 font-black text-sm flex items-center justify-center shadow flex-shrink-0">3</div>
                             <div>
                                 <h4 class="font-black text-base text-white m-0">Sourate Al-Falaq (113)</h4>
                                 <p class="text-xs text-slate-300 m-0 mt-0.5">L'aube naissante</p>
                             </div>
                         </div>
-                        <span class="text-base">🔒</span>
+                        <span class="text-base flex-shrink-0">🔒</span>
                     </div>
                 </div>
 
                 <!-- CARTE SADAQA / PARTAGE -->
-                <div class="bg-white/10 border border-white/15 rounded-3xl p-6 shadow-xl mb-6 text-center">
+                <div class="glass-card border border-emerald-300/20 shape-arch p-6 shadow-2xl shadow-black/30 mb-6 text-center relative overflow-hidden">
+                    <div class="w-20 h-20 rounded-full border border-emerald-300/15 absolute -top-6 -right-6 pointer-events-none"></div>
                     <h4 class="font-black text-base text-white mb-2">Partage cette app 🤲</h4>
-                    <p class="text-xs text-white/70 mb-4 leading-relaxed">Aide tes proches à mémoriser le Coran.</p>
-                    <button onclick="window.open('https://wa.me/?text=Viens%20m%C3%A9moriser%20le%20Coran%20!%20')" class="w-full bg-[#25D366] hover:bg-[#1ebe5a] text-white font-black text-sm py-3.5 rounded-xl shadow cursor-pointer transition-all">💬 Partager sur WhatsApp</button>
+                    <p class="text-xs sm:text-sm text-slate-300 mb-4 leading-relaxed">Aide tes proches à mémoriser le Coran.</p>
+                    <button onclick="window.open('https://wa.me/?text=Viens%20m%C3%A9moriser%20le%20Coran%20!%20')" class="shine-effect w-full bg-gradient-to-r from-[#25D366] via-[#20bd5a] to-[#128C7E] hover:brightness-105 hover:-translate-y-0.5 active:scale-98 text-white font-black text-sm py-3.5 rounded-2xl shadow-lg cursor-pointer transition-all duration-200">💬 Partager sur WhatsApp</button>
                 </div>
 
                 <!-- CARTE OFFRE PREMIUM (2000 FCFA) -->
-                <div class="mb-4">
-                    <div class="relative rounded-3xl overflow-hidden border border-amber-400/40 shadow-2xl bg-gradient-to-br from-amber-900 via-amber-700 to-amber-600 p-6 text-white">
-                        <div class="inline-flex items-center gap-1.5 bg-white/15 border border-white/25 rounded-full px-3 py-1 mb-4">
-                            <span class="text-amber-100 text-[11px] font-black uppercase tracking-wider">Offre Premium</span>
-                        </div>
-                        <div class="flex items-start gap-3 mb-4">
-                            <div class="w-14 h-14 rounded-2xl bg-amber-300/25 border-2 border-amber-200/40 flex items-center justify-center flex-shrink-0">
-                                ⭐
+                <div class="mb-6">
+                    <div class="relative rounded-[34px] overflow-hidden border border-amber-300/45 shadow-2xl shadow-amber-950/50 bg-gradient-to-br from-[#0f2e2b] via-[#1b4332] to-[#7c470b] p-6 text-white transition-transform duration-300 hover:-translate-y-0.5">
+                        <div class="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-amber-300/20 blur-2xl pointer-events-none animate-drift-orb"></div>
+                        <div class="relative">
+                            <div class="inline-flex items-center gap-1.5 bg-amber-300/20 border border-amber-200/35 rounded-full px-3.5 py-1 mb-4">
+                                <span class="text-amber-100 text-[11px] font-black uppercase tracking-widest">Offre Premium</span>
                             </div>
-                            <div>
-                                <h3 class="font-black text-xl leading-tight">Passe à la version Premium</h3>
-                                <p class="text-amber-100/85 text-sm mt-1">Débloque tout le programme et accélère ton apprentissage.</p>
+                            <div class="flex items-start gap-3.5 mb-5">
+                                <div class="animate-float-slow w-14 h-14 rounded-[22px] bg-amber-300/20 border border-amber-200/45 flex items-center justify-center flex-shrink-0 shadow-inner text-2xl">
+                                    ⭐
+                                </div>
+                                <div>
+                                    <h3 class="font-black text-xl leading-tight tracking-tight text-white">Passe à la version Premium</h3>
+                                    <p class="text-amber-100/90 text-sm mt-1 leading-relaxed">Débloque tout le programme et accélère ton apprentissage.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex items-center justify-between gap-3 bg-black/20 rounded-2xl px-4 py-3 mb-4">
-                            <div>
-                                <p class="text-amber-100/70 text-[11px] font-bold uppercase">Paiement unique</p>
-                                <p class="font-black text-2xl leading-none">2 000 FCFA</p>
+                            <div class="flex items-center justify-between gap-3 bg-black/30 border border-white/10 rounded-3xl px-4 py-3.5 mb-5">
+                                <div>
+                                    <p class="text-amber-200/80 text-[10px] font-extrabold uppercase tracking-wider m-0">Paiement unique</p>
+                                    <p class="font-black text-2xl leading-tight text-white mt-0.5 m-0">2 000 FCFA</p>
+                                </div>
+                                <span class="text-emerald-100 text-[11px] font-black bg-emerald-500/25 border border-emerald-300/35 rounded-full px-3 py-1">Accès à vie</span>
                             </div>
-                            <span class="text-blue-200 text-[11px] font-black bg-blue-600/40 border border-blue-400/30 rounded-full px-2.5 py-1">Accès à vie</span>
+                            <button class="shine-effect w-full flex items-center justify-center gap-2 bg-gradient-to-r from-white via-amber-50 to-emerald-50 hover:brightness-105 text-[#0f2e2b] font-black text-base rounded-3xl h-14 shadow-xl shadow-black/25 hover:-translate-y-0.5 active:scale-98 transition-all cursor-pointer border border-white">
+                                Débloquer maintenant
+                            </button>
                         </div>
-                        <button class="w-full flex items-center justify-center gap-2 bg-white text-amber-900 font-black text-base rounded-2xl h-14 shadow-lg cursor-pointer">
-                            Débloquer maintenant
-                        </button>
                     </div>
                 </div>
 
                 <!-- STATISTIQUES DES LEÇONS -->
                 <div class="grid grid-cols-3 gap-3 mb-8">
-                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
-                        <p class="text-white font-black text-2xl">29</p>
-                        <p class="text-white/60 text-xs mt-0.5">Leçons</p>
+                    <div class="glass-card border border-amber-300/20 hover:border-amber-300/50 hover:-translate-y-1 transition-all duration-200 rounded-[26px_16px_26px_16px] p-4 text-center shadow-lg shadow-black/25">
+                        <p class="text-amber-200 font-black text-2xl m-0">29</p>
+                        <p class="text-slate-300 text-xs font-semibold mt-1 m-0">Leçons</p>
                     </div>
-                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
-                        <p class="text-white font-black text-2xl">0</p>
-                        <p class="text-white/60 text-xs mt-0.5">Terminées</p>
+                    <div class="glass-card border border-emerald-300/20 hover:border-emerald-300/50 hover:-translate-y-1 transition-all duration-200 rounded-[16px_26px_16px_26px] p-4 text-center shadow-lg shadow-black/25">
+                        <p class="text-emerald-300 font-black text-2xl m-0">0</p>
+                        <p class="text-slate-300 text-xs font-semibold mt-1 m-0">Terminées</p>
                     </div>
-                    <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
-                        <p class="text-white font-black text-2xl">6</p>
-                        <p class="text-white/60 text-xs mt-0.5">Gratuites</p>
+                    <div class="glass-card border border-teal-300/20 hover:border-teal-300/50 hover:-translate-y-1 transition-all duration-200 rounded-[26px_16px_26px_16px] p-4 text-center shadow-lg shadow-black/25">
+                        <p class="text-teal-300 font-black text-2xl m-0">6</p>
+                        <p class="text-slate-300 text-xs font-semibold mt-1 m-0">Gratuites</p>
                     </div>
                 </div>
 
                 <!-- BOUTON CHAÎNE WHATSAPP -->
-                <div class="mt-auto pt-6 border-t border-white/15 text-center">
-                    <a href="https://whatsapp.com/channel/0029Vb6e1diBvvsfUwa7hy1w" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 bg-[#25D366] text-white font-bold text-lg rounded-xl px-6 py-4 shadow-lg hover:bg-[#1ebe5a] transition-colors w-full cursor-pointer">
+                <div class="mt-auto pt-6 border-t border-white/10 text-center pb-2">
+                    <a href="https://whatsapp.com/channel/0029Vb6e1diBvvsfUwa7hy1w" target="_blank" rel="noopener noreferrer" class="shine-effect inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#25D366] via-[#20bd5a] to-[#128C7E] text-white font-extrabold text-base sm:text-lg rounded-3xl px-6 py-4 shadow-xl shadow-emerald-950/45 hover:brightness-105 hover:-translate-y-0.5 active:scale-98 transition-all duration-200 w-full cursor-pointer">
                         Rejoindre notre chaîne WhatsApp
                     </a>
                 </div>

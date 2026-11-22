@@ -8,7 +8,7 @@
     
     <!-- PWA Configuration -->
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0b132b">
+    <meta name="theme-color" content="#091326">
     <meta name="google" content="notranslate">
     
     <!-- Tailwind CSS -->
@@ -23,20 +23,83 @@
         .font-arabic {
             font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;
         }
+
+        .bg-page {
+            background:
+                radial-gradient(ellipse 85% 55% at 15% 6%, rgba(16, 185, 129, 0.16) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 60% at 88% 14%, rgba(245, 158, 11, 0.15) 0%, transparent 62%),
+                linear-gradient(165deg, #091326 0%, #0d1c36 52%, #060c18 100%);
+        }
+
+        .glass-panel {
+            background: linear-gradient(150deg, rgba(20, 35, 62, 0.85) 0%, rgba(10, 19, 36, 0.94) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(2deg); }
+        }
+
+        @keyframes driftOrb {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(18px, -14px) scale(1.06); }
+        }
+
+        @keyframes shineSweep {
+            0% { transform: translateX(-140%) skewX(-18deg); }
+            100% { transform: translateX(240%) skewX(-18deg); }
+        }
+
+        .animate-float-slow {
+            animation: floatSlow 5.5s ease-in-out infinite;
+        }
+
+        .animate-drift-orb {
+            animation: driftOrb 9s ease-in-out infinite;
+        }
+
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+            transform: translateX(-140%) skewX(-18deg);
+            pointer-events: none;
+        }
+
+        .shine-effect:hover::after {
+            animation: shineSweep 0.85s ease forwards;
+        }
     </style>
 </head>
 
-<body class="bg-[#0b132b] text-slate-100 m-0 p-0 min-h-screen flex flex-col">
+<body class="bg-page text-slate-100 m-0 p-0 min-h-screen flex flex-col relative overflow-x-hidden antialiased selection:bg-emerald-400/30 selection:text-emerald-200">
+
+    <!-- Orbes lumineux décoratifs -->
+    <div class="fixed top-0 right-0 w-80 h-80 rounded-full bg-emerald-400/10 blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none animate-drift-orb z-0"></div>
+    <div class="fixed top-1/2 left-0 w-72 h-72 rounded-full bg-amber-400/10 blur-3xl -translate-x-1/2 pointer-events-none animate-drift-orb z-0" style="animation-delay: -4s;"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 rounded-full bg-teal-500/10 blur-3xl translate-y-1/3 pointer-events-none animate-drift-orb z-0" style="animation-delay: -7s;"></div>
+    <div class="fixed inset-0 opacity-[0.04] pointer-events-none z-0" style="background-image: radial-gradient(circle, rgba(255,255,255,0.85) 1.2px, transparent 1.2px); background-size: 32px 32px;"></div>
 
     <!-- EN-TÊTE -->
-    <header class="bg-[#0b132b] text-white pt-6 pb-8 px-6 shadow-md border-b border-white/10">
+    <header class="relative z-10 glass-panel text-white pt-6 pb-8 px-5 sm:px-6 shadow-2xl shadow-black/35 border-b border-emerald-300/15 rounded-b-[32px]">
         <div class="max-w-4xl mx-auto">
             <!-- Bouton Retour -->
-            <div class="flex items-center justify-between gap-2 mb-4">
-                <button type="button" onclick="window.location.href='alphabet-partie3.html'" class="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-semibold cursor-pointer bg-white/10 px-3 py-1.5 rounded-xl border border-white/15 transition-colors">
+            <div class="flex items-center justify-between gap-2 mb-5">
+                <button type="button" onclick="window.location.href='alphabet-partie3.html'" class="shine-effect inline-flex items-center gap-2 text-[#091326] hover:brightness-105 hover:-translate-y-0.5 active:scale-95 text-sm font-extrabold cursor-pointer bg-gradient-to-r from-emerald-50 to-white px-4 py-2 rounded-2xl border border-emerald-200/70 shadow-md transition-all duration-200">
                     ← Retour à la partie 3
                 </button>
-                <span id="adminBadgeAlpha4" style="display: none;" class="hidden inline-flex items-center gap-1.5 bg-amber-400/15 border border-amber-400/35 text-amber-200 px-3 py-1 rounded-full text-xs font-bold">
+                <span id="adminBadgeAlpha4" style="display: none;" class="hidden inline-flex items-center gap-1.5 bg-amber-400/15 border border-amber-400/40 text-amber-200 px-3.5 py-1.5 rounded-full text-xs font-extrabold tracking-wide shadow-sm">
                     🛡️ Admin · 0 pt
                 </span>
             </div>
@@ -44,19 +107,19 @@
             <!-- Titre & Badge -->
             <div class="flex items-center justify-between gap-4 flex-wrap">
                 <div>
-                    <span class="text-amber-300 text-xs font-black uppercase tracking-wider bg-amber-400/15 px-2.5 py-1 rounded-full border border-amber-400/30">Leçon 1 sur 29 · Nūr Al-Qur'ān</span>
-                    <h1 class="text-2xl md:text-3xl font-black tracking-tight mt-2 m-0 text-white">L'Alphabet Arabe (Partie 4 / 4)</h1>
+                    <span class="inline-flex items-center text-amber-200 text-xs font-black uppercase tracking-wider bg-gradient-to-r from-amber-400/20 to-emerald-500/15 px-3 py-1 rounded-full border border-amber-300/35">Leçon 1 sur 29 · Nūr Al-Qur'ān</span>
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight mt-2.5 m-0 text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-emerald-200">L'Alphabet Arabe (Partie 4 / 4)</h1>
                 </div>
-                <span class="text-xs font-bold text-emerald-300 bg-emerald-500/15 px-3 py-1.5 rounded-full border border-emerald-400/30">Lettres 22 à 28 sur 28</span>
+                <span class="text-xs font-extrabold text-emerald-200 bg-emerald-500/20 px-3.5 py-1.5 rounded-full border border-emerald-300/35 shadow-sm">Lettres 22 à 28 sur 28</span>
             </div>
 
             <!-- GROS ONGLETS LEÇON / EXERCICE BIEN VISIBLES ET CENTRÉS AU MILIEU -->
             <div class="mt-6 flex justify-center items-center w-full">
-                <div class="inline-flex items-center justify-center gap-3 bg-[#1c2541] p-2 rounded-2xl border border-amber-400/25 shadow-lg w-full max-w-md">
-                    <button type="button" onclick="window.location.href='alphabet-partie4.html'" class="flex-1 py-3 px-5 rounded-xl text-base font-black bg-amber-400 text-slate-950 shadow-md cursor-pointer border-0 transition-all text-center">
+                <div class="inline-flex items-center justify-center gap-2.5 bg-[#091326]/85 p-2 rounded-[22px] border border-amber-300/30 shadow-xl w-full max-w-md backdrop-blur-md">
+                    <button type="button" onclick="window.location.href='alphabet-partie4.html'" class="shine-effect flex-1 py-3 px-5 rounded-2xl text-sm sm:text-base font-black bg-gradient-to-r from-amber-300 via-amber-400 to-emerald-300 text-slate-950 shadow-lg cursor-pointer border border-amber-100/70 transition-all duration-200 text-center hover:brightness-105 active:scale-98">
                         📖 Leçon
                     </button>
-                    <button type="button" onclick="window.location.href='exercice4.html'" class="flex-1 py-3 px-5 rounded-xl text-base font-black text-slate-200 hover:text-white hover:bg-white/10 cursor-pointer border-0 bg-transparent transition-all text-center">
+                    <button type="button" onclick="window.location.href='exercice4.html'" class="shine-effect flex-1 py-3 px-5 rounded-2xl text-sm sm:text-base font-extrabold text-slate-200 hover:text-white hover:bg-white/10 cursor-pointer border border-transparent hover:border-white/15 bg-transparent transition-all duration-200 text-center active:scale-98">
                         ✍️ Exercice
                     </button>
                 </div>
@@ -65,12 +128,14 @@
     </header>
 
     <!-- CONTENU PRINCIPAL -->
-    <main class="flex-1 max-w-4xl w-full mx-auto px-6 py-8 space-y-6">
+    <main class="relative z-10 flex-1 max-w-4xl w-full mx-auto px-5 sm:px-6 py-7 space-y-6">
 
         <!-- INTRODUCTION DU COURS -->
-        <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-6 shadow-sm">
-            <h2 class="text-lg font-black text-white mb-2 flex items-center gap-2">
-                <span>📖</span> Dernière ligne droite !
+        <div class="glass-panel border border-emerald-300/25 rounded-[28px_20px_28px_20px] p-6 shadow-xl shadow-black/30 relative overflow-hidden">
+            <div class="w-24 h-24 rounded-full border border-amber-300/15 absolute -top-8 -right-8 pointer-events-none"></div>
+            <h2 class="text-lg sm:text-xl font-black text-white mb-2.5 flex items-center gap-2.5">
+                <span class="animate-float-slow inline-flex items-center justify-center w-9 h-9 rounded-2xl bg-emerald-500/20 border border-emerald-300/35 text-lg">📖</span>
+                Dernière ligne droite !
             </h2>
             <p class="text-slate-300 text-sm leading-relaxed m-0">
                 Félicitations pour ton parcours ! Voici la dernière étape de l'alphabet avec les lettres de <strong class="text-amber-300">Kāf à Yā</strong>.
@@ -79,105 +144,108 @@
 
         <!-- SECTION DES LETTRES (22 à 28) -->
         <div class="space-y-4">
-            <h3 class="text-base font-black text-white px-1">Groupe 4 : De Kāf à Yā</h3>
+            <div class="flex items-center justify-between px-1">
+                <h3 class="text-base sm:text-lg font-black text-white m-0">Groupe 4 : De Kāf à Yā</h3>
+                <span class="text-[11px] font-bold text-amber-200/90 bg-amber-400/10 border border-amber-300/25 px-3 py-1 rounded-full">7 lettres interactives</span>
+            </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 
                 <!-- Lettre 22 : Kāf (Cliquable vers kaf.html) -->
                 <a href="kaf.html" class="block group">
-                    <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-sm flex items-center justify-between group-hover:border-amber-400/50 group-hover:bg-[#253259] transition-all">
+                    <div class="shine-effect glass-panel border border-emerald-300/20 rounded-[26px_16px_26px_16px] p-5 shadow-lg shadow-black/25 flex items-center justify-between group-hover:border-amber-300/60 group-hover:-translate-y-1 active:scale-99 transition-all duration-200">
                         <div class="flex items-center gap-4">
-                            <span class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/30 text-amber-300 font-black text-sm flex items-center justify-center">22</span>
+                            <span class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-300/25 to-emerald-400/15 border border-amber-300/35 text-amber-200 font-black text-sm flex items-center justify-center shadow-inner flex-shrink-0">22</span>
                             <div>
-                                <p class="text-xs text-slate-400 m-0">Nom : Kāf</p>
-                                <p class="text-xs font-semibold text-slate-300 m-0 mt-0.5">Son : K</p>
+                                <p class="text-xs text-slate-400 font-semibold m-0">Nom : Kāf</p>
+                                <p class="text-xs sm:text-sm font-bold text-slate-100 m-0 mt-0.5">Son : K</p>
                             </div>
                         </div>
-                        <span lang="ar" dir="rtl" class="font-arabic text-4xl text-amber-100">ك</span>
+                        <span lang="ar" dir="rtl" class="font-arabic text-4xl sm:text-5xl text-amber-100 group-hover:scale-110 transition-transform duration-200">ك</span>
                     </div>
                 </a>
 
                 <!-- Lettre 23 : Lām (Cliquable vers lam.html) -->
                 <a href="lam.html" class="block group">
-                    <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-sm flex items-center justify-between group-hover:border-amber-400/50 group-hover:bg-[#253259] transition-all">
+                    <div class="shine-effect glass-panel border border-emerald-300/20 rounded-[16px_26px_16px_26px] p-5 shadow-lg shadow-black/25 flex items-center justify-between group-hover:border-amber-300/60 group-hover:-translate-y-1 active:scale-99 transition-all duration-200">
                         <div class="flex items-center gap-4">
-                            <span class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/30 text-amber-300 font-black text-sm flex items-center justify-center">23</span>
+                            <span class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-300/25 to-emerald-400/15 border border-amber-300/35 text-amber-200 font-black text-sm flex items-center justify-center shadow-inner flex-shrink-0">23</span>
                             <div>
-                                <p class="text-xs text-slate-400 m-0">Nom : Lām</p>
-                                <p class="text-xs font-semibold text-slate-300 m-0 mt-0.5">Son : L</p>
+                                <p class="text-xs text-slate-400 font-semibold m-0">Nom : Lām</p>
+                                <p class="text-xs sm:text-sm font-bold text-slate-100 m-0 mt-0.5">Son : L</p>
                             </div>
                         </div>
-                        <span lang="ar" dir="rtl" class="font-arabic text-4xl text-amber-100">ل</span>
+                        <span lang="ar" dir="rtl" class="font-arabic text-4xl sm:text-5xl text-amber-100 group-hover:scale-110 transition-transform duration-200">ل</span>
                     </div>
                 </a>
 
                 <!-- Lettre 24 : Mīm (Cliquable vers mim.html) -->
                 <a href="mim.html" class="block group">
-                    <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-sm flex items-center justify-between group-hover:border-amber-400/50 group-hover:bg-[#253259] transition-all">
+                    <div class="shine-effect glass-panel border border-emerald-300/20 rounded-[26px_16px_26px_16px] p-5 shadow-lg shadow-black/25 flex items-center justify-between group-hover:border-amber-300/60 group-hover:-translate-y-1 active:scale-99 transition-all duration-200">
                         <div class="flex items-center gap-4">
-                            <span class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/30 text-amber-300 font-black text-sm flex items-center justify-center">24</span>
+                            <span class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-300/25 to-emerald-400/15 border border-amber-300/35 text-amber-200 font-black text-sm flex items-center justify-center shadow-inner flex-shrink-0">24</span>
                             <div>
-                                <p class="text-xs text-slate-400 m-0">Nom : Mīm</p>
-                                <p class="text-xs font-semibold text-slate-300 m-0 mt-0.5">Son : M</p>
+                                <p class="text-xs text-slate-400 font-semibold m-0">Nom : Mīm</p>
+                                <p class="text-xs sm:text-sm font-bold text-slate-100 m-0 mt-0.5">Son : M</p>
                             </div>
                         </div>
-                        <span lang="ar" dir="rtl" class="font-arabic text-4xl text-amber-100">م</span>
+                        <span lang="ar" dir="rtl" class="font-arabic text-4xl sm:text-5xl text-amber-100 group-hover:scale-110 transition-transform duration-200">م</span>
                     </div>
                 </a>
 
                 <!-- Lettre 25 : Nūn (Cliquable vers nun.html) -->
                 <a href="nun.html" class="block group">
-                    <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-sm flex items-center justify-between group-hover:border-amber-400/50 group-hover:bg-[#253259] transition-all">
+                    <div class="shine-effect glass-panel border border-emerald-300/20 rounded-[16px_26px_16px_26px] p-5 shadow-lg shadow-black/25 flex items-center justify-between group-hover:border-amber-300/60 group-hover:-translate-y-1 active:scale-99 transition-all duration-200">
                         <div class="flex items-center gap-4">
-                            <span class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/30 text-amber-300 font-black text-sm flex items-center justify-center">25</span>
+                            <span class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-300/25 to-emerald-400/15 border border-amber-300/35 text-amber-200 font-black text-sm flex items-center justify-center shadow-inner flex-shrink-0">25</span>
                             <div>
-                                <p class="text-xs text-slate-400 m-0">Nom : Nūn</p>
-                                <p class="text-xs font-semibold text-slate-300 m-0 mt-0.5">Son : N</p>
+                                <p class="text-xs text-slate-400 font-semibold m-0">Nom : Nūn</p>
+                                <p class="text-xs sm:text-sm font-bold text-slate-100 m-0 mt-0.5">Son : N</p>
                             </div>
                         </div>
-                        <span lang="ar" dir="rtl" class="font-arabic text-4xl text-amber-100">ن</span>
+                        <span lang="ar" dir="rtl" class="font-arabic text-4xl sm:text-5xl text-amber-100 group-hover:scale-110 transition-transform duration-200">ن</span>
                     </div>
                 </a>
 
                 <!-- Lettre 26 : Hā (Cliquable vers ha-normal.html) -->
                 <a href="ha-normal.html" class="block group">
-                    <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-sm flex items-center justify-between group-hover:border-amber-400/50 group-hover:bg-[#253259] transition-all">
+                    <div class="shine-effect glass-panel border border-emerald-300/20 rounded-[26px_16px_26px_16px] p-5 shadow-lg shadow-black/25 flex items-center justify-between group-hover:border-amber-300/60 group-hover:-translate-y-1 active:scale-99 transition-all duration-200">
                         <div class="flex items-center gap-4">
-                            <span class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/30 text-amber-300 font-black text-sm flex items-center justify-center">26</span>
+                            <span class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-300/25 to-emerald-400/15 border border-amber-300/35 text-amber-200 font-black text-sm flex items-center justify-center shadow-inner flex-shrink-0">26</span>
                             <div>
-                                <p class="text-xs text-slate-400 m-0">Nom : Hā</p>
-                                <p class="text-xs font-semibold text-slate-300 m-0 mt-0.5">Son : H normal</p>
+                                <p class="text-xs text-slate-400 font-semibold m-0">Nom : Hā</p>
+                                <p class="text-xs sm:text-sm font-bold text-slate-100 m-0 mt-0.5">Son : H normal</p>
                             </div>
                         </div>
-                        <span lang="ar" dir="rtl" class="font-arabic text-4xl text-amber-100">هـ</span>
+                        <span lang="ar" dir="rtl" class="font-arabic text-4xl sm:text-5xl text-amber-100 group-hover:scale-110 transition-transform duration-200">هـ</span>
                     </div>
                 </a>
 
                 <!-- Lettre 27 : Wāw (Cliquable vers waw.html) -->
                 <a href="waw.html" class="block group">
-                    <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-sm flex items-center justify-between group-hover:border-amber-400/50 group-hover:bg-[#253259] transition-all">
+                    <div class="shine-effect glass-panel border border-emerald-300/20 rounded-[16px_26px_16px_26px] p-5 shadow-lg shadow-black/25 flex items-center justify-between group-hover:border-amber-300/60 group-hover:-translate-y-1 active:scale-99 transition-all duration-200">
                         <div class="flex items-center gap-4">
-                            <span class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/30 text-amber-300 font-black text-sm flex items-center justify-center">27</span>
+                            <span class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-300/25 to-emerald-400/15 border border-amber-300/35 text-amber-200 font-black text-sm flex items-center justify-center shadow-inner flex-shrink-0">27</span>
                             <div>
-                                <p class="text-xs text-slate-400 m-0">Nom : Wāw</p>
-                                <p class="text-xs font-semibold text-slate-300 m-0 mt-0.5">Son : W / Prolongement Ô</p>
+                                <p class="text-xs text-slate-400 font-semibold m-0">Nom : Wāw</p>
+                                <p class="text-xs sm:text-sm font-bold text-slate-100 m-0 mt-0.5">Son : W / Prolongement Ô</p>
                             </div>
                         </div>
-                        <span lang="ar" dir="rtl" class="font-arabic text-4xl text-amber-100">و</span>
+                        <span lang="ar" dir="rtl" class="font-arabic text-4xl sm:text-5xl text-amber-100 group-hover:scale-110 transition-transform duration-200">و</span>
                     </div>
                 </a>
 
                 <!-- Lettre 28 : Yā (Cliquable vers ya.html) -->
                 <a href="ya.html" class="block group">
-                    <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-sm flex items-center justify-between group-hover:border-amber-400/50 group-hover:bg-[#253259] transition-all">
+                    <div class="shine-effect glass-panel border border-emerald-300/20 rounded-[26px_16px_26px_16px] p-5 shadow-lg shadow-black/25 flex items-center justify-between group-hover:border-amber-300/60 group-hover:-translate-y-1 active:scale-99 transition-all duration-200">
                         <div class="flex items-center gap-4">
-                            <span class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-400/30 text-amber-300 font-black text-sm flex items-center justify-center">28</span>
+                            <span class="w-11 h-11 rounded-2xl bg-gradient-to-br from-amber-300/25 to-emerald-400/15 border border-amber-300/35 text-amber-200 font-black text-sm flex items-center justify-center shadow-inner flex-shrink-0">28</span>
                             <div>
-                                <p class="text-xs text-slate-400 m-0">Nom : Yā</p>
-                                <p class="text-xs font-semibold text-slate-300 m-0 mt-0.5">Son : Y / Prolongement Î</p>
+                                <p class="text-xs text-slate-400 font-semibold m-0">Nom : Yā</p>
+                                <p class="text-xs sm:text-sm font-bold text-slate-100 m-0 mt-0.5">Son : Y / Prolongement Î</p>
                             </div>
                         </div>
-                        <span lang="ar" dir="rtl" class="font-arabic text-4xl text-amber-100">ي</span>
+                        <span lang="ar" dir="rtl" class="font-arabic text-4xl sm:text-5xl text-amber-100 group-hover:scale-110 transition-transform duration-200">ي</span>
                     </div>
                 </a>
 
@@ -185,12 +253,12 @@
         </div>
 
         <!-- ASTUCE DE L'ASSISTANT IA -->
-        <div class="bg-gradient-to-br from-blue-950/80 to-[#1c2541] border border-blue-400/30 rounded-2xl p-5 shadow-sm pb-12">
-            <div class="flex items-center gap-3 mb-2">
-                <span class="text-xl">🎉</span>
-                <h4 class="font-bold text-white text-base m-0">Alphabet complété !</h4>
+        <div class="glass-panel bg-gradient-to-br from-emerald-950/75 via-[#102542]/90 to-[#091326] border border-emerald-300/30 rounded-[28px_20px_28px_20px] p-6 shadow-xl shadow-black/30 mb-8">
+            <div class="flex items-center gap-3 mb-2.5">
+                <span class="w-9 h-9 rounded-2xl bg-amber-300/15 border border-amber-300/35 flex items-center justify-center text-lg">🎉</span>
+                <h4 class="font-black text-amber-200 text-base m-0">Alphabet complété !</h4>
             </div>
-            <p class="text-slate-300 text-xs leading-relaxed m-0">
+            <p class="text-slate-200 text-xs sm:text-sm leading-relaxed m-0 pl-3 border-l-2 border-emerald-400/60">
                 Tu as découvert l'ensemble des 28 lettres de l'alphabet arabe. Félicitations pour ton effort constant !
             </p>
         </div>

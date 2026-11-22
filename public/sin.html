@@ -30,11 +30,16 @@
 
     <!-- EN-TÊTE -->
     <header class="bg-[#0b132b] text-white pt-6 pb-6 px-6 shadow-md border-b border-white/10">
-        <div class="max-w-4xl mx-auto flex items-center justify-between">
+        <div class="max-w-4xl mx-auto flex items-center justify-between gap-2">
             <button onclick="history.back()" class="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-semibold cursor-pointer bg-white/10 px-3 py-1.5 rounded-xl border border-white/15 transition-colors">
                 ← Retour
             </button>
-            <span class="text-xs font-black uppercase tracking-wider text-amber-300">LE VERIDIQUE A-Z 🇲🇱</span>
+            <div class="flex items-center gap-2">
+                <span id="adminBadgeLettreSin" style="display: none;" class="hidden inline-flex items-center gap-1.5 bg-amber-400/15 border border-amber-400/35 text-amber-200 px-3 py-1 rounded-full text-xs font-bold">
+                    🛡️ Admin · 0 pt
+                </span>
+                <span class="text-xs font-black uppercase tracking-wider text-amber-300">LE VERIDIQUE A-Z 🇲🇱</span>
+            </div>
         </div>
     </header>
 
@@ -137,6 +142,53 @@
         </div>
 
     </main>
+
+    <!-- SCRIPT MODE ADMINISTRATEUR & POINTS -->
+    <script>
+        window.estModeAdministrateur = function () {
+            return localStorage.getItem('coranAppIsAdmin') === 'true';
+        };
+
+        window.ajouterPointsEtudiant = function (points) {
+            if (window.estModeAdministrateur()) {
+                return 0;
+            }
+            const ajout = parseInt(points || '0', 10) || 0;
+            const actuel = parseInt(localStorage.getItem('coranAppUserPoints') || localStorage.getItem('coranAppPoints') || '0', 10) || 0;
+            const total = Math.max(0, actuel + ajout);
+            localStorage.setItem('coranAppUserPoints', String(total));
+            localStorage.setItem('coranAppPoints', String(total));
+            return total;
+        };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const isAdmin = window.estModeAdministrateur();
+            const badge = document.getElementById('adminBadgeLettreSin');
+
+            if (isAdmin) {
+                if (badge) {
+                    badge.classList.remove('hidden');
+                    badge.style.display = 'inline-flex';
+                }
+                return;
+            }
+
+            if (badge) {
+                badge.classList.add('hidden');
+                badge.style.display = 'none';
+            }
+
+            try {
+                const raw = localStorage.getItem('coranAppLettresEtudiees');
+                const lettres = raw ? JSON.parse(raw) : [];
+                const liste = Array.isArray(lettres) ? lettres : [];
+                if (!liste.includes('sin')) {
+                    liste.push('sin');
+                    localStorage.setItem('coranAppLettresEtudiees', JSON.stringify(liste));
+                }
+            } catch (_) {}
+        });
+    </script>
 
 </body>
 

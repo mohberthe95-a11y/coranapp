@@ -8,7 +8,7 @@
     
     <!-- PWA Configuration -->
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="theme-color" content="#0b132b">
+    <meta name="theme-color" content="#091326">
     <meta name="google" content="notranslate">
     
     <!-- Tailwind CSS -->
@@ -23,234 +23,305 @@
         .font-arabic {
             font-family: 'Amiri Quran', 'Scheherazade New', Amiri, serif;
         }
+
+        .bg-page {
+            background:
+                radial-gradient(ellipse 85% 55% at 15% 6%, rgba(16, 185, 129, 0.16) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 60% at 88% 14%, rgba(245, 158, 11, 0.15) 0%, transparent 62%),
+                linear-gradient(165deg, #091326 0%, #0d1c36 52%, #060c18 100%);
+        }
+
+        .glass-panel {
+            background: linear-gradient(150deg, rgba(20, 35, 62, 0.85) 0%, rgba(10, 19, 36, 0.94) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(2deg); }
+        }
+
+        @keyframes driftOrb {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            50% { transform: translate(18px, -14px) scale(1.06); }
+        }
+
+        @keyframes shineSweep {
+            0% { transform: translateX(-140%) skewX(-18deg); }
+            100% { transform: translateX(240%) skewX(-18deg); }
+        }
+
+        .animate-float-slow {
+            animation: floatSlow 5.5s ease-in-out infinite;
+        }
+
+        .animate-drift-orb {
+            animation: driftOrb 9s ease-in-out infinite;
+        }
+
+        .shine-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+            transform: translateX(-140%) skewX(-18deg);
+            pointer-events: none;
+        }
+
+        .shine-effect:hover::after {
+            animation: shineSweep 0.85s ease forwards;
+        }
     </style>
 </head>
 
-<body class="bg-[#0b132b] text-slate-100 m-0 p-0 min-h-screen flex flex-col">
+<body class="bg-page text-slate-100 m-0 p-0 min-h-screen flex flex-col relative overflow-x-hidden antialiased selection:bg-emerald-400/30 selection:text-emerald-200">
+
+    <!-- Orbes lumineux décoratifs -->
+    <div class="fixed top-0 right-0 w-80 h-80 rounded-full bg-emerald-400/10 blur-3xl -translate-y-1/3 translate-x-1/3 pointer-events-none animate-drift-orb z-0"></div>
+    <div class="fixed top-1/2 left-0 w-72 h-72 rounded-full bg-amber-400/10 blur-3xl -translate-x-1/2 pointer-events-none animate-drift-orb z-0" style="animation-delay: -4s;"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 rounded-full bg-teal-500/10 blur-3xl translate-y-1/3 pointer-events-none animate-drift-orb z-0" style="animation-delay: -7s;"></div>
+    <div class="fixed inset-0 opacity-[0.04] pointer-events-none z-0" style="background-image: radial-gradient(circle, rgba(255,255,255,0.85) 1.2px, transparent 1.2px); background-size: 32px 32px;"></div>
 
     <!-- EN-TÊTE SOMBRE (SANS LES BOUTONS WHATSAPP ET VOCAL) -->
-    <header class="bg-[#0b132b] text-white pt-6 pb-8 px-6 shadow-md border-b border-white/10">
+    <header class="relative z-10 glass-panel text-white pt-6 pb-8 px-5 sm:px-6 shadow-2xl shadow-black/35 border-b border-emerald-300/15 rounded-b-[32px]">
         <div class="max-w-4xl mx-auto">
             <!-- Bouton Retour -->
-            <div class="flex items-center justify-between gap-2 mb-4">
-                <button type="button" onclick="window.location.href='debutant.html'" class="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm font-semibold cursor-pointer bg-white/10 px-3 py-1.5 rounded-xl border border-white/15 transition-colors">
+            <div class="flex items-center justify-between gap-2 mb-5">
+                <button type="button" onclick="window.location.href='debutant.html'" class="shine-effect inline-flex items-center gap-2 text-[#091326] hover:brightness-105 hover:-translate-y-0.5 active:scale-95 text-sm font-extrabold cursor-pointer bg-gradient-to-r from-emerald-50 to-white px-4 py-2 rounded-2xl border border-emerald-200/70 shadow-md transition-all duration-200">
                     ← Accueil
                 </button>
-                <span id="adminBadgeLecons" style="display: none;" class="hidden inline-flex items-center gap-1.5 bg-amber-400/15 border border-amber-400/35 text-amber-200 px-3 py-1 rounded-full text-xs font-bold">
+                <span id="adminBadgeLecons" style="display: none;" class="hidden inline-flex items-center gap-1.5 bg-amber-400/15 border border-amber-400/40 text-amber-200 px-3.5 py-1.5 rounded-full text-xs font-extrabold tracking-wide shadow-sm">
                     🛡️ Admin · 0 pt
                 </span>
             </div>
 
             <!-- Titre & Compteur -->
-            <div class="mb-5">
-                <h1 class="text-2xl md:text-3xl font-black tracking-tight m-0 text-white">Mes Leçons</h1>
-                <p class="text-white/75 text-sm mt-1 m-0"><span id="completedCount">0</span> / 29 leçons complétées</p>
+            <div class="mb-5 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+                <div>
+                    <h1 class="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight m-0 text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-emerald-200">Mes Leçons</h1>
+                    <p class="text-slate-300 text-sm mt-1.5 m-0 font-medium"><span id="completedCount" class="text-amber-300 font-black">0</span> / 29 leçons complétées</p>
+                </div>
+                <div class="inline-flex items-center gap-2 self-start sm:self-auto bg-emerald-500/15 border border-emerald-300/30 px-3.5 py-1.5 rounded-full">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="text-emerald-200 text-xs font-extrabold tracking-wide">Parcours progressif</span>
+                </div>
             </div>
 
             <!-- Barre de progression globale -->
             <div>
-                <div class="w-full h-2.5 bg-white/15 rounded-full overflow-hidden">
-                    <div id="globalProgressBar" class="h-full bg-amber-400 rounded-full transition-all duration-500" style="width: 0%;"></div>
+                <div class="w-full h-3 bg-white/10 border border-white/10 rounded-full overflow-hidden p-0.5 shadow-inner">
+                    <div id="globalProgressBar" class="h-full bg-gradient-to-r from-emerald-400 via-amber-300 to-amber-400 rounded-full transition-all duration-500" style="width: 0%;"></div>
                 </div>
-                <div class="flex justify-end mt-1.5">
-                    <span id="globalProgressText" class="text-amber-300 text-xs font-black">0%</span>
+                <div class="flex justify-end mt-2">
+                    <span id="globalProgressText" class="text-amber-200 text-xs font-black bg-amber-400/15 border border-amber-300/30 px-2.5 py-0.5 rounded-full">0%</span>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- BANNIÈRE OFFRE PREMIUM (2 000 FCFA) -->
-    <div class="bg-[#1c2541] border-b border-amber-400/30 px-6 py-3.5 shadow-sm">
-        <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
-            <div class="flex items-center gap-2.5">
-                <span class="text-amber-400 text-lg">★</span>
-                <p class="text-sm font-bold text-white m-0">Débloque toutes les leçons + audio complet</p>
+    <div class="relative z-10 max-w-4xl w-full mx-auto px-5 sm:px-6 pt-5">
+        <div class="shine-effect bg-gradient-to-r from-[#0f2e2b]/95 via-[#1b4332]/95 to-[#7c470b]/95 border border-amber-300/40 rounded-[24px] px-5 py-4 shadow-xl shadow-black/30 backdrop-blur-md">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5">
+                <div class="flex items-center gap-3">
+                    <div class="animate-float-slow w-10 h-10 rounded-2xl bg-amber-300/20 border border-amber-200/40 flex items-center justify-center text-amber-300 text-lg flex-shrink-0">★</div>
+                    <p class="text-sm font-extrabold text-white m-0 leading-snug">Débloque toutes les leçons + audio complet</p>
+                </div>
+                <button type="button" onclick="alert('Ouverture du paiement Premium (2 000 FCFA)')" class="shine-effect bg-gradient-to-r from-amber-300 via-amber-400 to-emerald-300 hover:brightness-105 hover:-translate-y-0.5 active:scale-95 text-slate-950 font-black text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-lg cursor-pointer transition-all duration-200 flex-shrink-0 border border-amber-100/70 self-end sm:self-auto">
+                    2 000 FCFA
+                </button>
             </div>
-            <button type="button" onclick="alert('Ouverture du paiement Premium (2 000 FCFA)')" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs px-4 py-2 rounded-full shadow cursor-pointer transition-colors flex-shrink-0 border-0">
-                2 000 FCFA
-            </button>
         </div>
     </div>
 
     <!-- CONTENU PRINCIPAL -->
-    <main class="flex-1 max-w-4xl w-full mx-auto px-6 py-6 space-y-6">
+    <main class="relative z-10 flex-1 max-w-4xl w-full mx-auto px-5 sm:px-6 py-6 space-y-6">
 
         <!-- CARTE CERTIFICAT -->
-        <div onclick="window.location.href='certificats.html'" class="bg-[#1c2541]/90 backdrop-blur-sm border border-white/15 rounded-2xl p-5 shadow-sm hover:border-amber-400/50 transition-all cursor-pointer">
-            <div class="flex items-center justify-between gap-4 mb-3">
+        <div onclick="window.location.href='certificats.html'" class="shine-effect glass-panel border border-emerald-300/25 rounded-[28px_18px_28px_18px] p-5 sm:p-6 shadow-2xl shadow-black/35 hover:border-amber-300/55 hover:-translate-y-1 transition-all duration-300 cursor-pointer group">
+            <div class="flex items-center justify-between gap-4 mb-4">
                 <div class="flex items-center gap-3.5">
-                    <div class="w-11 h-11 rounded-xl bg-blue-500/15 border border-blue-400/30 flex items-center justify-center text-blue-300 flex-shrink-0">
+                    <div class="animate-float-slow w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-400/20 to-amber-400/20 border border-amber-300/35 flex items-center justify-center text-amber-200 flex-shrink-0 shadow-inner">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="8" r="6"></circle>
                             <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
                         </svg>
                     </div>
                     <div>
-                        <h2 class="font-bold text-base text-white m-0">Obtenez votre certificat</h2>
-                        <p id="certificatSousTitreLecons" class="text-xs text-slate-300 m-0 mt-0.5">Encore 29 leçons pour décrocher votre attestation</p>
+                        <h2 class="font-black text-base sm:text-lg text-white m-0 group-hover:text-amber-200 transition-colors">Obtenez votre certificat</h2>
+                        <p id="certificatSousTitreLecons" class="text-xs sm:text-sm text-slate-300 m-0 mt-0.5">Encore 29 leçons pour décrocher votre attestation</p>
                     </div>
                 </div>
-                <span class="text-slate-400 font-bold text-lg">›</span>
+                <span class="w-8 h-8 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-amber-200 font-black text-lg group-hover:translate-x-1 transition-transform flex-shrink-0">›</span>
             </div>
             
             <div class="flex items-center gap-3">
-                <div class="flex-1 h-1.5 bg-white/15 rounded-full overflow-hidden">
-                    <div id="certificatBarreLecons" class="h-full bg-amber-400 rounded-full" style="width: 0%;"></div>
+                <div class="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div id="certificatBarreLecons" class="h-full bg-gradient-to-r from-amber-300 to-emerald-400 rounded-full transition-all duration-500" style="width: 0%;"></div>
                 </div>
-                <span id="certificatPourcentageLecons" class="text-[11px] font-bold text-slate-400">0%</span>
+                <span id="certificatPourcentageLecons" class="text-xs font-black text-amber-200">0%</span>
             </div>
         </div>
 
         <!-- ================= NIVEAU 1 : DÉBUTANT ================= -->
-        <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-sm flex items-center justify-between gap-4">
+        <div class="glass-panel border border-emerald-300/25 rounded-[28px_20px_28px_20px] p-5 shadow-xl shadow-black/30 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3.5">
-                <div class="w-11 h-11 rounded-xl bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center text-xl flex-shrink-0">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-300/35 flex items-center justify-center text-xl flex-shrink-0 shadow-inner">
                     🌱
                 </div>
                 <div>
                     <div class="flex items-center gap-2 flex-wrap">
-                        <span class="bg-emerald-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+                        <span class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-0.5 rounded-full shadow-sm">
                             Niveau 1
                         </span>
-                        <h3 class="font-black text-base text-white m-0">Débutant</h3>
+                        <h3 class="font-black text-base sm:text-lg text-white m-0">Débutant</h3>
                     </div>
                     <p class="text-xs text-slate-300 m-0 mt-1">Alphabet, voyelles et chiffres de base · 0/10 terminées</p>
                 </div>
             </div>
-            <span class="text-xs font-black text-emerald-400">0%</span>
+            <span class="text-xs sm:text-sm font-black text-emerald-300 bg-emerald-500/15 border border-emerald-300/30 px-3 py-1 rounded-full flex-shrink-0">0%</span>
         </div>
 
         <!-- GRILLE NIVEAU 1 -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <!-- Leçon 1 -->
-            <div id="carteLecon1Alphabet" onclick="gererClicLecon1Alphabet()" class="bg-[#1c2541] border-2 border-amber-400/50 hover:border-amber-400 rounded-2xl p-4 shadow-sm hover:shadow-md transition-all cursor-pointer flex flex-col justify-between min-h-[155px]">
+            <div id="carteLecon1Alphabet" onclick="gererClicLecon1Alphabet()" class="shine-effect glass-panel border-2 border-amber-300/60 hover:border-amber-300 hover:-translate-y-1.5 active:scale-98 rounded-[24px_16px_24px_16px] p-4 shadow-xl shadow-black/30 transition-all duration-200 cursor-pointer flex flex-col justify-between min-h-[160px] group">
                 <div class="flex items-center justify-between">
-                    <span class="w-7 h-7 rounded-full bg-amber-400 text-slate-950 font-black text-xs flex items-center justify-center">1</span>
-                    <span id="badgeStatutLecon1" class="text-[10px] font-bold text-amber-300 bg-amber-400/15 px-2 py-0.5 rounded-full border border-amber-400/30">Gratuit</span>
+                    <span class="w-7 h-7 rounded-xl bg-gradient-to-br from-amber-300 to-amber-400 text-slate-950 font-black text-xs flex items-center justify-center shadow">1</span>
+                    <span id="badgeStatutLecon1" class="text-[10px] font-extrabold text-amber-200 bg-amber-400/20 px-2.5 py-0.5 rounded-full border border-amber-300/35">Gratuit</span>
                 </div>
                 <div class="my-auto text-center py-2">
-                    <p lang="ar" dir="rtl" class="font-arabic text-3xl text-white m-0">ا ب</p>
-                    <p class="text-xs font-bold text-slate-200 mt-2 m-0">L'alphabet (1/2)</p>
+                    <p lang="ar" dir="rtl" class="font-arabic text-3xl sm:text-4xl text-amber-100 m-0 group-hover:scale-105 transition-transform">ا ب</p>
+                    <p class="text-xs font-extrabold text-slate-100 mt-2 m-0">L'alphabet (1/2)</p>
                 </div>
             </div>
             <!-- Astuce IA -->
-            <div onclick="alert('Conseil IA')" class="bg-gradient-to-br from-blue-950/80 to-slate-900 border border-blue-400/30 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between text-blue-300">
+            <div onclick="alert('Conseil IA')" class="shine-effect bg-gradient-to-br from-emerald-950/90 via-[#102542]/95 to-[#091326] border border-emerald-300/35 hover:border-amber-300/50 hover:-translate-y-1.5 active:scale-98 rounded-[16px_24px_16px_24px] p-4 shadow-xl shadow-black/30 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer">
+                <div class="flex items-center justify-between text-emerald-300">
                     <span class="text-lg">✨</span>
-                    <span class="text-[10px] font-black uppercase tracking-wider text-blue-300">Conseil</span>
+                    <span class="text-[10px] font-black uppercase tracking-wider text-emerald-200 bg-emerald-500/20 px-2 py-0.5 rounded-full">Conseil</span>
                 </div>
                 <div class="my-auto text-center px-1">
-                    <p class="text-xs font-bold text-blue-100 leading-snug m-0">Méthode de prononciation Makharij</p>
+                    <p class="text-xs font-bold text-emerald-50 leading-snug m-0">Méthode de prononciation Makharij</p>
                 </div>
-                <div class="flex justify-end text-amber-400 text-sm">✦</div>
+                <div class="flex justify-end text-amber-300 text-sm">✦</div>
             </div>
             <!-- Leçon 2 -->
-            <div onclick="alert('Leçon 2')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">2</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-300 m-0">كِتَاب</p><p class="text-xs font-semibold text-slate-300 mt-2 m-0">Les voyelles courtes</p></div>
+            <div onclick="alert('Leçon 2')" class="shine-effect glass-panel border border-white/15 hover:border-emerald-300/40 hover:-translate-y-1 active:scale-98 rounded-[24px_16px_24px_16px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-slate-200 font-black text-xs flex items-center justify-center">2</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-amber-100/80 m-0">كِتَاب</p><p class="text-xs font-bold text-slate-200 mt-2 m-0">Les voyelles courtes</p></div>
             </div>
             <!-- Leçon 3 -->
-            <div onclick="alert('Leçon 3')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">3</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-300 m-0">بَ تَ ثَ</p><p class="text-xs font-semibold text-slate-300 mt-2 m-0">La Fatha ( ـَ )</p></div>
+            <div onclick="alert('Leçon 3')" class="shine-effect glass-panel border border-white/15 hover:border-emerald-300/40 hover:-translate-y-1 active:scale-98 rounded-[16px_24px_16px_24px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-slate-200 font-black text-xs flex items-center justify-center">3</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-amber-100/80 m-0">بَ تَ ثَ</p><p class="text-xs font-bold text-slate-200 mt-2 m-0">La Fatha ( ـَ )</p></div>
             </div>
             <!-- Leçon 4 -->
-            <div onclick="alert('Leçon 4')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">4</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-300 m-0">بِ تِ ثِ</p><p class="text-xs font-semibold text-slate-300 mt-2 m-0">La Kasra ( ـِ )</p></div>
+            <div onclick="alert('Leçon 4')" class="shine-effect glass-panel border border-white/15 hover:border-emerald-300/40 hover:-translate-y-1 active:scale-98 rounded-[24px_16px_24px_16px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-slate-200 font-black text-xs flex items-center justify-center">4</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-amber-100/80 m-0">بِ تِ ثِ</p><p class="text-xs font-bold text-slate-200 mt-2 m-0">La Kasra ( ـِ )</p></div>
             </div>
             <!-- Leçon 5 -->
-            <div onclick="alert('Leçon 5')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">5</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-300 m-0">بُ تُ ثُ</p><p class="text-xs font-semibold text-slate-300 mt-2 m-0">La Damma ( ـُ )</p></div>
+            <div onclick="alert('Leçon 5')" class="shine-effect glass-panel border border-white/15 hover:border-emerald-300/40 hover:-translate-y-1 active:scale-98 rounded-[16px_24px_16px_24px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-slate-200 font-black text-xs flex items-center justify-center">5</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-amber-100/80 m-0">بُ تُ ثُ</p><p class="text-xs font-bold text-slate-200 mt-2 m-0">La Damma ( ـُ )</p></div>
             </div>
             <!-- Leçon 6 -->
-            <div onclick="alert('Leçon 6')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">6</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-300 m-0">بًا بٍ بٌ</p><p class="text-xs font-semibold text-slate-300 mt-2 m-0">Le Tanwin</p></div>
+            <div onclick="alert('Leçon 6')" class="shine-effect glass-panel border border-white/15 hover:border-emerald-300/40 hover:-translate-y-1 active:scale-98 rounded-[24px_16px_24px_16px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-slate-200 font-black text-xs flex items-center justify-center">6</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-amber-100/80 m-0">بًا بٍ بٌ</p><p class="text-xs font-bold text-slate-200 mt-2 m-0">Le Tanwin</p></div>
             </div>
             <!-- Leçon 7 -->
-            <div onclick="alert('Leçon 7')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">7</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-slate-300 m-0">أَبْ أَتْ</p><p class="text-xs font-semibold text-slate-300 mt-2 m-0">Le Soukoun ( ـْ )</p></div>
+            <div onclick="alert('Leçon 7')" class="shine-effect glass-panel border border-white/15 hover:border-emerald-300/40 hover:-translate-y-1 active:scale-98 rounded-[16px_24px_16px_24px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-slate-200 font-black text-xs flex items-center justify-center">7</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p lang="ar" dir="rtl" class="font-arabic text-3xl text-amber-100/80 m-0">أَبْ أَتْ</p><p class="text-xs font-bold text-slate-200 mt-2 m-0">Le Soukoun ( ـْ )</p></div>
             </div>
         </div>
 
         <!-- ================= NIVEAU 2 : INTERMÉDIAIRE ================= -->
-        <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-sm flex items-center justify-between gap-4 mt-8">
+        <div class="glass-panel border border-amber-300/25 rounded-[28px_20px_28px_20px] p-5 shadow-xl shadow-black/30 flex items-center justify-between gap-4 mt-8">
             <div class="flex items-center gap-3.5">
-                <div class="w-11 h-11 rounded-xl bg-amber-500/15 border border-amber-400/30 flex items-center justify-center text-xl flex-shrink-0">
+                <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-300/35 flex items-center justify-center text-xl flex-shrink-0 shadow-inner">
                     🌿
                 </div>
                 <div>
                     <div class="flex items-center gap-2 flex-wrap">
-                        <span class="bg-amber-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+                        <span class="bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-0.5 rounded-full shadow-sm">
                             Niveau 2
                         </span>
-                        <h3 class="font-black text-base text-white m-0">Intermédiaire</h3>
+                        <h3 class="font-black text-base sm:text-lg text-white m-0">Intermédiaire</h3>
                     </div>
                     <p class="text-xs text-slate-300 m-0 mt-1">Règles de Tajweed et fluidité · 0/12 terminées</p>
                 </div>
             </div>
-            <span class="text-xs font-black text-amber-400">0%</span>
+            <span class="text-xs sm:text-sm font-black text-amber-300 bg-amber-400/15 border border-amber-300/30 px-3 py-1 rounded-full flex-shrink-0">0%</span>
         </div>
 
         <!-- GRILLE NIVEAU 2 -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div onclick="alert('Leçon 8')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">8</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p class="text-xs font-semibold text-slate-200 m-0">Les lettres lunaires et solaires</p></div>
+            <div onclick="alert('Leçon 8')" class="shine-effect glass-panel border border-white/15 hover:border-amber-300/45 hover:-translate-y-1 active:scale-98 rounded-[24px_16px_24px_16px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-amber-200 font-black text-xs flex items-center justify-center">8</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p class="text-xs font-bold text-slate-100 m-0 leading-relaxed">Les lettres lunaires et solaires</p></div>
             </div>
-            <div onclick="alert('Leçon 9')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">9</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p class="text-xs font-semibold text-slate-200 m-0">Règles du Mim Sakinah</p></div>
+            <div onclick="alert('Leçon 9')" class="shine-effect glass-panel border border-white/15 hover:border-amber-300/45 hover:-translate-y-1 active:scale-98 rounded-[16px_24px_16px_24px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-amber-200 font-black text-xs flex items-center justify-center">9</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p class="text-xs font-bold text-slate-100 m-0 leading-relaxed">Règles du Mim Sakinah</p></div>
             </div>
-            <div onclick="alert('Leçon 10')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">10</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p class="text-xs font-semibold text-slate-200 m-0">Idgham & Iqlab</p></div>
+            <div onclick="alert('Leçon 10')" class="shine-effect glass-panel border border-white/15 hover:border-amber-300/45 hover:-translate-y-1 active:scale-98 rounded-[24px_16px_24px_16px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-amber-200 font-black text-xs flex items-center justify-center">10</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p class="text-xs font-bold text-slate-100 m-0 leading-relaxed">Idgham & Iqlab</p></div>
             </div>
-            <div onclick="alert('Leçon 11')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">11</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p class="text-xs font-semibold text-slate-200 m-0">Makharij avancé</p></div>
+            <div onclick="alert('Leçon 11')" class="shine-effect glass-panel border border-white/15 hover:border-amber-300/45 hover:-translate-y-1 active:scale-98 rounded-[16px_24px_16px_24px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-amber-200 font-black text-xs flex items-center justify-center">11</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p class="text-xs font-bold text-slate-100 m-0 leading-relaxed">Makharij avancé</p></div>
             </div>
         </div>
 
         <!-- ================= NIVEAU 3 : AVANCÉ / PROFESSIONNEL ================= -->
-        <div class="bg-[#1c2541] border border-white/15 rounded-2xl p-5 shadow-sm flex items-center justify-between gap-4 mt-8">
+        <div class="glass-panel border border-teal-300/25 rounded-[28px_20px_28px_20px] p-5 shadow-xl shadow-black/30 flex items-center justify-between gap-4 mt-8">
             <div class="flex items-center gap-3.5">
-                <div class="w-11 h-11 rounded-xl bg-purple-500/15 border border-purple-400/30 flex items-center justify-center text-xl flex-shrink-0">
+                <div class="w-12 h-12 rounded-2xl bg-teal-500/20 border border-teal-300/35 flex items-center justify-center text-xl flex-shrink-0 shadow-inner">
                     🌳
                 </div>
                 <div>
                     <div class="flex items-center gap-2 flex-wrap">
-                        <span class="bg-purple-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+                        <span class="bg-gradient-to-r from-teal-500 to-emerald-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-0.5 rounded-full shadow-sm">
                             Niveau 3
                         </span>
-                        <h3 class="font-black text-base text-white m-0">Professionnel (Avancé)</h3>
+                        <h3 class="font-black text-base sm:text-lg text-white m-0">Professionnel (Avancé)</h3>
                     </div>
                     <p class="text-xs text-slate-300 m-0 mt-1">Maîtrise complète et Hifz · 0/7 terminées</p>
                 </div>
             </div>
-            <span class="text-xs font-black text-purple-400">0%</span>
+            <span class="text-xs sm:text-sm font-black text-teal-300 bg-teal-500/15 border border-teal-300/30 px-3 py-1 rounded-full flex-shrink-0">0%</span>
         </div>
 
         <!-- GRILLE NIVEAU 3 -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pb-12">
-            <div onclick="alert('Leçon 23')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">23</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p class="text-xs font-semibold text-slate-200 m-0">Maîtrise du Qalqalah</p></div>
+            <div onclick="alert('Leçon 23')" class="shine-effect glass-panel border border-white/15 hover:border-emerald-300/45 hover:-translate-y-1 active:scale-98 rounded-[24px_16px_24px_16px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-emerald-200 font-black text-xs flex items-center justify-center">23</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p class="text-xs font-bold text-slate-100 m-0 leading-relaxed">Maîtrise du Qalqalah</p></div>
             </div>
-            <div onclick="alert('Leçon 24')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">24</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p class="text-xs font-semibold text-slate-200 m-0">Les types de Madd</p></div>
+            <div onclick="alert('Leçon 24')" class="shine-effect glass-panel border border-white/15 hover:border-emerald-300/45 hover:-translate-y-1 active:scale-98 rounded-[16px_24px_16px_24px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-emerald-200 font-black text-xs flex items-center justify-center">24</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p class="text-xs font-bold text-slate-100 m-0 leading-relaxed">Les types de Madd</p></div>
             </div>
-            <div onclick="alert('Leçon 25')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">25</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p class="text-xs font-semibold text-slate-200 m-0">Pauses et Reprises (Waqf)</p></div>
+            <div onclick="alert('Leçon 25')" class="shine-effect glass-panel border border-white/15 hover:border-emerald-300/45 hover:-translate-y-1 active:scale-98 rounded-[24px_16px_24px_16px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-emerald-200 font-black text-xs flex items-center justify-center">25</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p class="text-xs font-bold text-slate-100 m-0 leading-relaxed">Pauses et Reprises (Waqf)</p></div>
             </div>
-            <div onclick="alert('Leçon 29')" class="bg-[#1c2541]/75 border border-white/10 rounded-2xl p-4 shadow-sm flex flex-col justify-between min-h-[155px] cursor-pointer">
-                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-full bg-white/10 text-slate-300 font-black text-xs flex items-center justify-center">29</span><span>🔒</span></div>
-                <div class="my-auto text-center py-2"><p class="text-xs font-semibold text-slate-200 m-0">Certificat & Récitation finale</p></div>
+            <div onclick="alert('Leçon 29')" class="shine-effect glass-panel border border-white/15 hover:border-amber-300/50 hover:-translate-y-1 active:scale-98 rounded-[16px_24px_16px_24px] p-4 shadow-lg shadow-black/25 transition-all duration-200 flex flex-col justify-between min-h-[160px] cursor-pointer opacity-90">
+                <div class="flex items-center justify-between"><span class="w-7 h-7 rounded-xl bg-white/10 border border-white/10 text-amber-200 font-black text-xs flex items-center justify-center">29</span><span>🔒</span></div>
+                <div class="my-auto text-center py-2"><p class="text-xs font-bold text-slate-100 m-0 leading-relaxed">Certificat & Récitation finale</p></div>
             </div>
         </div>
 
@@ -325,10 +396,10 @@
             const badgeLecon1 = document.getElementById('badgeStatutLecon1');
             if (estAlphabetTermineEtNoteEleve()) {
                 if (carteLecon1) {
-                    carteLecon1.className = "bg-[#1c2541]/75 border border-emerald-400/40 rounded-2xl p-4 shadow-sm transition-all cursor-not-allowed opacity-80 flex flex-col justify-between min-h-[155px]";
+                    carteLecon1.className = "glass-panel border border-emerald-400/45 rounded-[24px_16px_24px_16px] p-4 shadow-lg transition-all cursor-not-allowed opacity-80 flex flex-col justify-between min-h-[160px]";
                 }
                 if (badgeLecon1) {
-                    badgeLecon1.className = "text-[10px] font-bold text-emerald-300 bg-emerald-500/15 px-2 py-0.5 rounded-full border border-emerald-400/30";
+                    badgeLecon1.className = "text-[10px] font-bold text-emerald-200 bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-300/35";
                     badgeLecon1.textContent = "Terminée 🔒";
                 }
             }
